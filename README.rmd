@@ -54,6 +54,6 @@ organPlot <- data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver
  ```
 
 
-```{r, eval=TRUE, organPlot, fig.width = 5, dpi = 200}
+```{r, eval=TRUE, organPlot, fig.width = 5, dpi = 100}
 gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="colour")
  ```
