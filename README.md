@@ -26,6 +26,7 @@ This package requires `ggplot2` and `ggpolypath`
 library(ggplot2)
 library(ggpolypath)
 library(gganatogram)
+library(dplyr)
 ```
 
 In order to use the function gganatogram, you need to have a data frame with organ, colour, and value if you want to.
@@ -36,10 +37,39 @@ organPlot <- data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver
  colour = c("red", "red", "purple", "purple", "orange", "orange", "orange"), 
  value = c(10, 5, 1, 8, 2, 5, 5), 
  stringsAsFactors=F)
+
+ head(organPlot)
+#>       organ           type colour value
+#> 1     heart    circulation    red    10
+#> 2 leukocyte    circulation    red     5
+#> 3     nerve nervous system purple     1
+#> 4     brain nervous system purple     8
+#> 5     liver      digestion orange     2
+#> 6   stomach      digestion orange     5
 ```
+
+Using the function gganatogram with the filling the oorgans based on colour.
 
 ``` r
 gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="colour")
 ```
 
 ![](figure/organPlot-1.png)
+
+Of course, we can use the ggplot themes and functions to adjust the plots
+
+``` r
+gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + theme_void()
+```
+
+![](figure/organPlotvoid-1.png)
+
+We can also skip plotting the outline of the graph
+
+``` r
+organPlot %>%
+    dplyr::filter(type %in% c('circulation', 'nervous system')) %>%
+gganatogram(outline=F, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + theme_void()
+```
+
+![](figure/organPlotSubset-1.png)
