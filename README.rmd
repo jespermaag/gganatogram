@@ -34,9 +34,9 @@ devtools::install_github("jespermaag/gganatogram")
 
 ## Usage
 
-This package requires `ggplot2` and ‘ggpolypath’
+This package requires `ggplot2` and `ggpolypath`
 
-```{r,eval=FALSE}
+```{r,eval=TRUE}
 library(ggplot2)
 library(ggpolypath)
 library(gganatogram)
@@ -45,7 +45,7 @@ library(gganatogram)
 In order to use the function gganatogram, you need to have a data frame with
 organ, colour, and value if you want to.
 
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 organPlot <- data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver", "stomach", "colon"), 
  type = c("circulation", "circulation",  "nervous system", "nervous system", "digestion", "digestion", "digestion"), 
  colour = c("red", "red", "purple", "purple", "orange", "orange", "orange"), 
@@ -54,3 +54,6 @@ organPlot <- data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver
  ```
 
 
+```{r, eval=TRUE, organPlot, fig.width = 5, dpi = 200}
+gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="colour")
+ ```

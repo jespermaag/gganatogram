@@ -20,7 +20,7 @@ devtools::install_github("jespermaag/gganatogram")
 Usage
 -----
 
-This package requires `ggplot2` and ‘ggpolypath’
+This package requires `ggplot2` and `ggpolypath`
 
 ``` r
 library(ggplot2)
@@ -37,3 +37,9 @@ organPlot <- data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver
  value = c(10, 5, 1, 8, 2, 5, 5), 
  stringsAsFactors=F)
 ```
+
+``` r
+gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="colour")
+```
+
+![](figure/organPlot-1.png)
