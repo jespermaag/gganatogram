@@ -63,12 +63,23 @@ gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male',
 
 Of course, we can use the ggplot themes and functions to adjust the plots
 ```{r, eval=TRUE, organPlotvoid, fig.width = 3, dpi = 100}
-gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + theme_void()
+gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + 
+theme_void()
  ```
 
 We can also skip plotting the outline of the graph
 ```{r, eval=TRUE, organPlotSubset, fig.width = 3, dpi = 100}
 organPlot %>%
     dplyr::filter(type %in% c('circulation', 'nervous system')) %>%
-gganatogram(outline=F, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + theme_void()
+gganatogram(outline=F, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + 
+theme_void()
+ ```
+
+
+We can fill the tissues based on the values given to each organ
+Of course, we can use the ggplot themes and functions to adjust the plots
+```{r, eval=TRUE, organPlotValue, fig.width = 3, dpi = 100}
+gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="value") + 
+theme_void() +
+scale_fill_gradient(low = "white", high = "red")
  ```
