@@ -67,9 +67,19 @@ theme_void()
 
 ![](figure/organPlotvoid-1.svg)
 
-We can also plot all tissues available using
+We can also plot all tissues available using hgMale\_key
 
 ``` r
+dput(hgMale_key$organ)
+#> c("bone marrow", "frontal cortex", "prefrontal cortex", "gastroesophageal junction", 
+#> "caecum", "ileum", "rectum", "nose", "tongue", "penis", "nasal pharynx", 
+#> "spinal cord", "throat", "diaphragm", "liver", "stomach", "spleen", 
+#> "duodenum", "gall bladder", "pancreas", "colon", "small intestine", 
+#> "appendix", "urinary bladder", "bone", "cartilage", "esophagus", 
+#> "skin", "brain", "heart", "lymph_node", "skeletal_muscle", "leukocyte", 
+#> "temporal_lobe", "atrial_appendage", "coronary_artery", "hippocampus", 
+#> "vas_deferens", "seminal_vesicle", "epididymis", "tonsil", "lung", 
+#> "trachea", "bronchus", "nerve", "kidney")
 gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") +theme_void()
 ```
 

@@ -71,8 +71,9 @@ gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male',
 theme_void()
 ```
 
-We can also plot all tissues available using 
+We can also plot all tissues available using hgMale_key
 ```{r, eval=TRUE, organPlotAll, fig.width = 3, dpi = 100}
+dput(hgMale_key$organ)
 gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") +theme_void()
  ```
 
