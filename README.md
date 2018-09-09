@@ -5,10 +5,7 @@
 gganatogram
 -----------
 
-Create anatogram images for different organisms.
-For now only human male is available.
-This package uses the tissue coordinates from the figure in ArrayExpress Expression Atlas.
-<https://www.ebi.ac.uk/gxa/home>
+Create anatogram images for different organisms. <br/> For now only human male is available. <br/> This package uses the tissue coordinates from the figure in ArrayExpress Expression Atlas. <br/> <https://www.ebi.ac.uk/gxa/home> <br/> <https://github.com/ebi-gene-expression-group/anatomogram>
 
 Install
 -------
@@ -51,7 +48,7 @@ organPlot <- data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver
 #> 6   stomach      digestion orange     5
 ```
 
-Using the function gganatogram with the filling the oorgans based on colour.
+Using the function gganatogram with the filling the organs based on colour.
 
 ``` r
 gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="colour")
@@ -67,6 +64,14 @@ theme_void()
 ```
 
 ![](figure/organPlotvoid-1.png)
+
+We can also plot all tissues available using
+
+``` r
+gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") +theme_void()
+```
+
+![](figure/organPlotAll-1.png)
 
 We can also skip plotting the outline of the graph
 

@@ -18,10 +18,11 @@ knitr::opts_chunk$set(
 
 ## gganatogram
 
-Create anatogram images for different organisms.  
-For now only human male is available.  
-This package uses the tissue coordinates from the figure in ArrayExpress Expression Atlas.  
-https://www.ebi.ac.uk/gxa/home  
+Create anatogram images for different organisms.  <br/>
+For now only human male is available.  <br/>
+This package uses the tissue coordinates from the figure in ArrayExpress Expression Atlas.  <br/>
+https://www.ebi.ac.uk/gxa/home  <br/>
+https://github.com/ebi-gene-expression-group/anatomogram
 
 ## Install
 
@@ -56,7 +57,7 @@ organPlot <- data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver
  head(organPlot)
  ```
 
-Using the function gganatogram with the filling the oorgans based on colour.
+Using the function gganatogram with the filling the organs based on colour.
 ```{r, eval=TRUE, organPlot, fig.width = 3, dpi = 100}
 gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="colour")
  ```
@@ -65,7 +66,14 @@ Of course, we can use the ggplot themes and functions to adjust the plots
 ```{r, eval=TRUE, organPlotvoid, fig.width = 3, dpi = 100}
 gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + 
 theme_void()
+```
+
+We can also plot all tissues available using 
+```{r, eval=TRUE, organPlotAll, fig.width = 3, dpi = 100}
+gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") +theme_void()
  ```
+
+
 
 We can also skip plotting the outline of the graph
 ```{r, eval=TRUE, organPlotSubset, fig.width = 3, dpi = 100}
