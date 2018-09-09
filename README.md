@@ -56,7 +56,7 @@ Using the function gganatogram with the filling the organs based on colour.
 gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="colour")
 ```
 
-![](figure/organPlot-1.png)
+![](figure/organPlot-1.svg)
 
 Of course, we can use the ggplot themes and functions to adjust the plots
 
@@ -65,7 +65,7 @@ gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male',
 theme_void()
 ```
 
-![](figure/organPlotvoid-1.png)
+![](figure/organPlotvoid-1.svg)
 
 We can also plot all tissues available using
 
@@ -73,7 +73,7 @@ We can also plot all tissues available using
 gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") +theme_void()
 ```
 
-![](figure/organPlotAll-1.png)
+![](figure/organPlotAll-1.svg)
 
 We can also skip plotting the outline of the graph
 
@@ -84,7 +84,7 @@ gganatogram(outline=F, fillOutline='#a6bddb', organism='human', sex='male', fill
 theme_void()
 ```
 
-![](figure/organPlotSubset-1.png)
+![](figure/organPlotSubset-1.svg)
 
 We can fill the tissues based on the values given to each organ
 
@@ -94,7 +94,7 @@ theme_void() +
 scale_fill_gradient(low = "white", high = "red")
 ```
 
-![](figure/organPlotValue-1.png)
+![](figure/organPlotValue-1.svg)
 
 We can also use facet\_wrap to compare groups.
 First create add two data frames together with different values and the conditions in the type column
@@ -119,4 +119,4 @@ facet_wrap(~type) +
 scale_fill_gradient(low = "white", high = "red") 
 ```
 
-![](figure/Condition-1.png)
+![](figure/Condition-1.svg)

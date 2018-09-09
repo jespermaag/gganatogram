@@ -12,6 +12,7 @@ output:
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
+  dev='svg',
   fig.path = "figure/"
 )
 ```
