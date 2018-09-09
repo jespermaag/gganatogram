@@ -79,10 +79,10 @@ gganatogram <- function(data = NULL, outline = TRUE, fillOutline='lightgray', or
     } else if (outline == FALSE) {
         p <- ggplot2::ggplot(anatogram[['human_male_outline']], ggplot2::aes(x=x, y = -y))
     }
-    for (organ in data$organ){ 
-        mapOrgans <-  anatogram[names(anatogram) %in% organ]
+    for (Norgan in 1:nrow(data)){ 
+        mapOrgans <-  anatogram[names(anatogram) %in% data[Norgan,]$organ]
         mapOrgans <- lapply(mapOrgans, function(x) {
-            dataOrgan <- data[data$organ %in% organ,]
+            dataOrgan <- data[Norgan,]
             x$value <- dataOrgan[match(x$id, dataOrgan$organ),]$value
             x$type <- dataOrgan[match(x$id, dataOrgan$organ),]$type
             x 
@@ -90,7 +90,7 @@ gganatogram <- function(data = NULL, outline = TRUE, fillOutline='lightgray', or
         for (i in 1:length(mapOrgans)) {
         
             if (fill == 'colour') { 
-                organColour <- data[data$organ %in% organ,]$colour
+                organColour <- data[Norgan,]$colour
                 p <- p + ggpolypath::geom_polypath(data=mapOrgans[[i]][complete.cases(mapOrgans[[i]]),],  fill=organColour, colour="black", size=0.2) 
 
             } else if (fill == 'value') { 

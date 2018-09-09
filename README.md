@@ -76,7 +76,7 @@ theme_void()
 
 ![](figure/organPlotSubset-1.png)
 
-We can fill the tissues based on the values given to each organ Of course, we can use the ggplot themes and functions to adjust the plots
+We can fill the tissues based on the values given to each organ
 
 ``` r
 gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="value") + 
@@ -85,3 +85,27 @@ scale_fill_gradient(low = "white", high = "red")
 ```
 
 ![](figure/organPlotValue-1.png)
+
+We can also use facet\_wrap to compare groups
+
+``` r
+compareGroups <- rbind(data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver", "stomach", "colon"), 
+  colour = c("red", "red", "purple", "purple", "orange", "orange", "orange"), 
+ value = c(10, 5, 1, 8, 2, 5, 5), 
+ type = rep('Normal', 7), 
+ stringsAsFactors=F),
+ data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver", "stomach", "colon"), 
+  colour = c("red", "red", "purple", "purple", "orange", "orange", "orange"), 
+ value = c(5, 5, 10, 8, 2, 5, 5), 
+ type = rep('Cancer', 7), 
+ stringsAsFactors=F))
+
+
+
+gganatogram(data=compareGroups, fillOutline='#a6bddb', organism='human', sex='male', fill="value") + 
+theme_void() +
+facet_wrap(~type) +
+scale_fill_gradient(low = "white", high = "red") 
+```
+
+![](figure/Condition-1.png)
