@@ -5,7 +5,9 @@
 gganatogram
 -----------
 
-Create anatogram images for different organisms. <br/> For now only human male is available. <br/> This package uses the tissue coordinates from the figure in ArrayExpress Expression Atlas. <br/> <https://www.ebi.ac.uk/gxa/home> <br/> <https://github.com/ebi-gene-expression-group/anatomogram>
+Create anatogram images for different organisms. <br/> For now only human male is available. <br/> This package uses the tissue coordinates from the figure in ArrayExpress Expression Atlas. <br/> <https://www.ebi.ac.uk/gxa/home> <br/> <https://github.com/ebi-gene-expression-group/anatomogram> <br/>
+
+More plot examples can be found at <https://jespermaag.github.io/blog/2018/gganatogram/>
 
 Install
 -------
