@@ -18,10 +18,10 @@ knitr::opts_chunk$set(
 
 ## gganatogram
 
-Create anatogram images for different organisms. 
-For now only human male is available.
-This package uses the tissue coordinates from the figure in ArrayExpress Expression Atlas.
-https://www.ebi.ac.uk/gxa/home
+Create anatogram images for different organisms.  
+For now only human male is available.  
+This package uses the tissue coordinates from the figure in ArrayExpress Expression Atlas.  
+https://www.ebi.ac.uk/gxa/home  
 
 ## Install
 
@@ -83,7 +83,7 @@ theme_void() +
 scale_fill_gradient(low = "white", high = "red")
  ```
 
- We can also use facet_wrap to compare groups.
+ We can also use facet_wrap to compare groups.  
  First create add two data frames together with different values and the conditions in the type column
 ```{r, eval=TRUE}
 compareGroups <- rbind(data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver", "stomach", "colon"), 

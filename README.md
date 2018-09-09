@@ -5,7 +5,10 @@
 gganatogram
 -----------
 
-Create anatogram images for different organisms. For now only human male is available. This package uses the tissue coordinates from the figure in ArrayExpress Expression Atlas. <https://www.ebi.ac.uk/gxa/home>
+Create anatogram images for different organisms.
+For now only human male is available.
+This package uses the tissue coordinates from the figure in ArrayExpress Expression Atlas.
+<https://www.ebi.ac.uk/gxa/home>
 
 Install
 -------
@@ -86,7 +89,8 @@ scale_fill_gradient(low = "white", high = "red")
 
 ![](figure/organPlotValue-1.png)
 
-We can also use facet\_wrap to compare groups. First create add two data frames together with different values and the conditions in the type column
+We can also use facet\_wrap to compare groups.
+First create add two data frames together with different values and the conditions in the type column
 
 ``` r
 compareGroups <- rbind(data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver", "stomach", "colon"), 
