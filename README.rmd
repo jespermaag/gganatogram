@@ -83,8 +83,9 @@ theme_void() +
 scale_fill_gradient(low = "white", high = "red")
  ```
 
- We can also use facet_wrap to compare groups
-```{r, eval=TRUE, Condition, fig.width = 6, dpi = 100}
+ We can also use facet_wrap to compare groups.
+ First create add two data frames together with different values and the conditions in the type column
+```{r, eval=TRUE}
 compareGroups <- rbind(data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver", "stomach", "colon"), 
   colour = c("red", "red", "purple", "purple", "orange", "orange", "orange"), 
  value = c(10, 5, 1, 8, 2, 5, 5), 
@@ -95,9 +96,9 @@ compareGroups <- rbind(data.frame(organ = c("heart", "leukocyte", "nerve", "brai
  value = c(5, 5, 10, 8, 2, 5, 5), 
  type = rep('Cancer', 7), 
  stringsAsFactors=F))
+```
 
-
-
+```{r, eval=TRUE, Condition, fig.width = 6, dpi = 100}
 gganatogram(data=compareGroups, fillOutline='#a6bddb', organism='human', sex='male', fill="value") + 
 theme_void() +
 facet_wrap(~type) +
