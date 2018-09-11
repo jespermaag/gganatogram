@@ -5,22 +5,38 @@
 \title{gganatogram}
 \usage{
 gganatogram(data = NULL, outline = TRUE, fillOutline = "lightgray",
-  organism = "human", sex = "male", fill = "colour")
+  organism = "human", sex = "male", fill = "colour",
+  anatogram = NULL)
 }
 \arguments{
-\item{data}{The main data frame consisting of what organs to plot, colours, and values. Default is NULL}
+\item{data}{The main data frame consisting of what organs to plot,
+colours, and values. Default is NULL}
+
+\item{outline}{logical indicating if the outline of the organism
+should be plotted}
 
 \item{fillOutline}{Fill colour of outline. Default is #a6bddb}
 
-\item{organism.}{Species to plot. Default is human.}
+\item{organism}{The organism to be plotted.  Currently,
+only \code{human} is accepted.}
+
+\item{sex}{Sex of the organism}
+
+\item{fill}{How to fill}
+
+\item{anatogram}{A list, similar to \code{\link{hgMale_list}}
+that will create the outline and has the corresponding organ
+\code{data.frame}s in that list}
 }
 \description{
 This function plots anatograms of specified tissues, species, and sex .
 }
 \examples{
 
+library(ggplot2)
 #First lets just plot the outline. Only male human is possible now
-gganatogram(fillOutline='#a6bddb', organism='human', sex='male', fill="colour")
+gganatogram(fillOutline='#a6bddb', organism='human',
+sex='male', fill="colour")
 
 
 #To add organs, create a data frame with specified tissues
@@ -34,45 +50,52 @@ organPlot <- data.frame(organ = c("heart", "leukocyte", "nerve", "brain",
  colour = c("red", "red", "purple", "purple", "orange",
      "orange", "orange"),
  value = c(10, 5, 1, 8, 2, 5, 5),
- stringsAsFactors=F)
+ stringsAsFactors=FALSE)
 
 
-gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="colour")
+gganatogram(data=organPlot, fillOutline='#a6bddb',
+ organism='human', sex='male', fill="colour")
 
 
 #We can also remove the outline
-gganatogram(data=organPlot, outline=FALSE, fillOutline='#a6bddb', organism='human', sex='male', fill="colour")
+oplot = gganatogram(data=organPlot, outline=FALSE, fillOutline='#a6bddb',
+organism='human', sex='male', fill="colour")
+oplot
 
+oplot + facet_wrap(~type)
 
+library(dplyr)
 organPlot \%>\%
      dplyr::filter(type \%in\% 'circulation') \%>\%
- gganatogram(fillOutline='#a6bddb', organism='human', sex='male', fill="colour")
+ gganatogram(fillOutline='#a6bddb', organism='human',
+ sex='male', fill="colour")
 
 organPlot \%>\%
      dplyr::filter(type \%in\% c('circulation', 'nervous system')) \%>\%
- gganatogram(fillOutline='#a6bddb', organism='human', sex='male', fill="value") +
+ gganatogram(fillOutline='#a6bddb', organism='human',
+ sex='male', fill="value") +
  theme_void() +
  scale_fill_gradient(low = "white", high = "red")
 
-gganatogram(data=oraganPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") +
-facet_wrap(~type)
 
 #Use hgMale_key to find all tissues to plot
 hgMale_key = gganatogram::hgMale_key
 head(hgMale_key)
-gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + theme_void()
+all_tissues = gganatogram(data=hgMale_key, fillOutline='#a6bddb',
+organism='human', sex='male', fill="colour")
+all_tissues + theme_void()
+
+all_tissues + theme_void() + facet_wrap(~type, ncol=3)
 
 
-gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + theme_void() + facet_wrap(~type, ncol=3)
+col_fill = gganatogram(data=hgMale_key, fillOutline='#a6bddb',
+organism='human', sex='male', fill="colour")
+col_fill
+val_fill = gganatogram(data=hgMale_key, fillOutline='#a6bddb',
+organism='human', sex='male', fill="value")
+val_fill
 
-
-gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="colour")
-
-
-gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="value")
-
-
-gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") +facet_wrap(~type, ncol=3) +void()
+col_fill +facet_wrap(~type, ncol=3) + theme_void()
 
 
 }

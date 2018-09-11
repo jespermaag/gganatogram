@@ -1,16 +1,32 @@
 #' gganatogram
 #'
 #' This function plots anatograms of specified tissues, species, and sex .
-#' @param data The main data frame consisting of what organs to plot, colours, and values. Default is NULL
+#'
+#' @param data The main data frame consisting of what organs to plot,
+#'  colours, and values. Default is NULL
+#' @param outline logical indicating if the outline of the organism
+#' should be plotted
+#' @param organism The organism to be plotted.  Currently,
+#' only \code{human} is accepted.
+#' @param sex Sex of the organism
+#' @param fill How to fill
 #' @param fillOutline Fill colour of outline. Default is #a6bddb
-#' @param organism. Species to plot. Default is human.
+#' @param anatogram A list, similar to \code{\link{hgMale_list}}
+#' that will create the outline and has the corresponding organ
+#' \code{data.frame}s in that list
 #'
 #' @keywords anatogram tissues organs
 #' @export
+#'
+#' @importFrom stats complete.cases
+#' @import ggplot2
+#' @import ggpolypath
 #' @examples
 #'
+#' library(ggplot2)
 #' #First lets just plot the outline. Only male human is possible now
-#' gganatogram(fillOutline='#a6bddb', organism='human', sex='male', fill="colour")
+#' gganatogram(fillOutline='#a6bddb', organism='human',
+#' sex='male', fill="colour")
 #'
 #'
 #' #To add organs, create a data frame with specified tissues
@@ -24,82 +40,157 @@
 #'  colour = c("red", "red", "purple", "purple", "orange",
 #'      "orange", "orange"),
 #'  value = c(10, 5, 1, 8, 2, 5, 5),
-#'  stringsAsFactors=F)
+#'  stringsAsFactors=FALSE)
 #'
 #'
-#' gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="colour")
+#' gganatogram(data=organPlot, fillOutline='#a6bddb',
+#'  organism='human', sex='male', fill="colour")
 #'
 #'
 #' #We can also remove the outline
-#' gganatogram(data=organPlot, outline=FALSE, fillOutline='#a6bddb', organism='human', sex='male', fill="colour")
+#' oplot = gganatogram(data=organPlot, outline=FALSE, fillOutline='#a6bddb',
+#' organism='human', sex='male', fill="colour")
+#' oplot
 #'
+#' oplot + facet_wrap(~type)
 #'
+#' library(dplyr)
 #' organPlot %>%
 #'      dplyr::filter(type %in% 'circulation') %>%
-#'  gganatogram(fillOutline='#a6bddb', organism='human', sex='male', fill="colour")
+#'  gganatogram(fillOutline='#a6bddb', organism='human',
+#'  sex='male', fill="colour")
 #'
 #' organPlot %>%
 #'      dplyr::filter(type %in% c('circulation', 'nervous system')) %>%
-#'  gganatogram(fillOutline='#a6bddb', organism='human', sex='male', fill="value") +
+#'  gganatogram(fillOutline='#a6bddb', organism='human',
+#'  sex='male', fill="value") +
 #'  theme_void() +
 #'  scale_fill_gradient(low = "white", high = "red")
 #'
-#' gganatogram(data=oraganPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") +
-#' facet_wrap(~type)
 #'
 #' #Use hgMale_key to find all tissues to plot
 #' hgMale_key = gganatogram::hgMale_key
 #' head(hgMale_key)
-#' gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + theme_void()
+#' all_tissues = gganatogram(data=hgMale_key, fillOutline='#a6bddb',
+#' organism='human', sex='male', fill="colour")
+#' all_tissues + theme_void()
+#'
+#' all_tissues + theme_void() + facet_wrap(~type, ncol=3)
 #'
 #'
-#' gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + theme_void() + facet_wrap(~type, ncol=3)
+#' col_fill = gganatogram(data=hgMale_key, fillOutline='#a6bddb',
+#' organism='human', sex='male', fill="colour")
+#' col_fill
+#' val_fill = gganatogram(data=hgMale_key, fillOutline='#a6bddb',
+#' organism='human', sex='male', fill="value")
+#' val_fill
+#'
+#' col_fill +facet_wrap(~type, ncol=3) + theme_void()
 #'
 #'
-#' gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="colour")
-#'
-#'
-#' gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="value")
-#'
-#'
-#' gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") +facet_wrap(~type, ncol=3) +void()
-#'
-#'
-gganatogram <- function(data = NULL, outline = TRUE, fillOutline='lightgray', organism="human", sex='male', fill='colour') {
-    if ( organism == 'human' ) {
-        if( sex == 'male' ) {
-            anatogram <- gganatogram::hgMale_list
-        #} else if (sex == 'female') {
-        #    anatogram <- NULL
-        }
-    }
-    if (outline) {
-        p <- ggplot2::ggplot(anatogram[['human_male_outline']], ggplot2::aes(x=x, y = -y)) +
-            ggplot2::geom_polygon(fill=fillOutline, colour='black', size=0.2)
-    } else if (outline == FALSE) {
-        p <- ggplot2::ggplot(anatogram[['human_male_outline']], ggplot2::aes(x=x, y = -y))
-    }
-    for (Norgan in 1:nrow(data)){
-        mapOrgans <-  anatogram[names(anatogram) %in% data[Norgan,]$organ]
-        mapOrgans <- lapply(mapOrgans, function(x) {
-            dataOrgan <- data[Norgan,]
-            x$value <- dataOrgan[match(x$id, dataOrgan$organ),]$value
-            x$type <- dataOrgan[match(x$id, dataOrgan$organ),]$type
-            x
-        })
-        for (i in 1:length(mapOrgans)) {
+gganatogram <- function(
+    data = NULL,
+    outline = TRUE,
+    fillOutline = 'lightgray',
+    organism = "human",
+    sex = 'male',
+    fill = 'colour',
+    anatogram = NULL) {
 
-            if (fill == 'colour' || fill == "color") {
-                organColour <- data[Norgan,]$colour
-                p <- p + ggpolypath::geom_polypath(data=mapOrgans[[i]][complete.cases(mapOrgans[[i]]),],  fill=organColour, colour="black", size=0.2)
 
-            } else if (fill == 'value') {
-                p <- p + ggpolypath::geom_polypath(data=mapOrgans[[i]][complete.cases(mapOrgans[[i]]),],  ggplot2::aes(fill=value), colour="black", size=0.2)
-
-            } else {
-                p <- p + ggpolypath::geom_polypath(data=mapOrgans[[i]][complete.cases(mapOrgans[[i]]),], colour="black", size=0.2)
+    if (is.null(anatogram)) {
+        if (organism == 'human') {
+            if (sex == 'male') {
+                anatogram <- gganatogram::hgMale_list
+                anatogram$outline <- anatogram$human_male_outline
             }
         }
+    }
+    if (is.null(anatogram)) {
+        stop("Defaults for organism not present. anatogram must be specified")
+    }
+
+    nd <-  names(anatogram)
+    out_in <- "outline" %in% nd
+    if (out_in) {
+        outliner <- anatogram$outline
+    } else {
+        keep = grepl("outline", nd)
+        if (!any(keep) && outline) {
+            stop("No outline is present in anatogram")
+            outline <- FALSE
+        }
+        if (sum(keep) > 1) {
+            warning("Multiple outlines detected, keeping first")
+            outliner = anatogram[[which(keep)[1]]]
+        }
+    }
+
+    p <- ggplot2::ggplot(outliner,
+                         ggplot2::aes(x = x, y = -y))
+    if (outline) {
+        p <- p + ggplot2::geom_polygon(fill = fillOutline,
+                                       colour = 'black',
+                                       size = 0.2)
+    }
+
+    make_color = function(x) {
+        with_u = "colour" %in% names(x)
+        without_u = "color" %in% names(x)
+
+        if (with_u & !without_u) {
+            x$color = x$colour
+        }
+        if (!with_u & without_u) {
+            x$colour = x$color
+        }
+        x
+    }
+
+    if (!is.null(data) && nrow(data) > 0) {
+        for (Norgan in 1:nrow(data)){
+            mapOrgans <-  anatogram[names(anatogram) %in% data[Norgan,]$organ]
+            mapOrgans <- lapply(mapOrgans, function(x) {
+                dataOrgan <- data[Norgan,]
+                x$value <- dataOrgan[match(x$id, dataOrgan$organ),]$value
+                x$type <- dataOrgan[match(x$id, dataOrgan$organ),]$type
+                x
+            })
+            for (i in 1:length(mapOrgans)) {
+                dat = mapOrgans[[i]]
+                dat = make_color(dat)
+                dat = dat[stats::complete.cases(dat), ]
+                if (fill == 'colour' || fill == "color") {
+                    organColour <- data[Norgan, ]$colour
+                    p <-
+                        p + ggpolypath::geom_polypath(
+                            data = dat,
+                            fill = organColour,
+                            colour = "black",
+                            size = 0.2
+                        )
+
+                } else if (fill == 'value') {
+                    p <-
+                        p + ggpolypath::geom_polypath(
+                            data = dat,
+                            ggplot2::aes(fill = value),
+                            colour = "black",
+                            size = 0.2
+                        )
+
+                } else {
+                    p <-
+                        p + ggpolypath::geom_polypath(
+                            data = dat,
+                            colour = "black",
+                            size = 0.2)
+                }
+            }
+        }
+    } else {
+        # warning("No data to plot")
+        return(p)
     }
     p
 }
