@@ -1,13 +1,20 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-------------------------------------------------------------------------
-
 gganatogram
 -----------
 
-Create anatogram images for different organisms. <br/> For now only human male is available. <br/> This package uses the tissue coordinates from the figure in ArrayExpress Expression Atlas. <br/> <https://www.ebi.ac.uk/gxa/home> <br/> <https://github.com/ebi-gene-expression-group/anatomogram> <br/>
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/muschellij2/gganatogram?branch=master&svg=true)](https://ci.appveyor.com/project/muschellij2/gganatogram)
+[![Travis build
+status](https://travis-ci.com/muschellij2/gganatogram.svg?branch=master)](https://travis-ci.com/muschellij2/gganatogram)
 
-More plot examples can be found at <https://jespermaag.github.io/blog/2018/gganatogram/>
+Create anatogram images for different organisms. <br/> For now only
+human male is available. <br/> This package uses the tissue coordinates
+from the figure in ArrayExpress Expression Atlas. <br/>
+<https://www.ebi.ac.uk/gxa/home> <br/>
+<https://github.com/ebi-gene-expression-group/anatomogram> <br/>
+
+More plot examples can be found at
+<https://jespermaag.github.io/blog/2018/gganatogram/>
 
 Install
 -------
@@ -29,9 +36,18 @@ library(ggplot2)
 library(ggpolypath)
 library(gganatogram)
 library(dplyr)
+#> 
+#> Attaching package: 'dplyr'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     filter, lag
+#> The following objects are masked from 'package:base':
+#> 
+#>     intersect, setdiff, setequal, union
 ```
 
-In order to use the function gganatogram, you need to have a data frame with organ, colour, and value if you want to.
+In order to use the function gganatogram, you need to have a data frame
+with organ, colour, and value if you want to.
 
 ``` r
 organPlot <- data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver", "stomach", "colon"), 
@@ -50,7 +66,8 @@ organPlot <- data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver
 #> 6   stomach      digestion orange     5
 ```
 
-Using the function gganatogram with the filling the organs based on colour.
+Using the function gganatogram with the filling the organs based on
+colour.
 
 ``` r
 gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="colour")
@@ -58,7 +75,8 @@ gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male',
 
 ![](figure/organPlot-1.svg)
 
-Of course, we can use the ggplot themes and functions to adjust the plots
+Of course, we can use the ggplot themes and functions to adjust the
+plots
 
 ``` r
 gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + 
@@ -120,8 +138,9 @@ scale_fill_gradient(low = "white", high = "red")
 
 ![](figure/organPlotValue-1.svg)
 
-We can also use facet\_wrap to compare groups.
-First create add two data frames together with different values and the conditions in the type column
+We can also use facet\_wrap to compare groups.  
+First create add two data frames together with different values and the
+conditions in the type column
 
 ``` r
 compareGroups <- rbind(data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver", "stomach", "colon"), 
