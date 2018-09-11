@@ -1,8 +1,15 @@
 Package: gganatogram
-Title: Create anatograms of various species
+Title: Create Anatograms of Various Species
 Version: 0.0.0.9000
-Authors@R: person("Jesper", "Maag", email = "jespermaag@gmail.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: c(person("Jesper", "Maag", email = "jespermaag@gmail.com", 
+    role = c("aut", "cre")),
+    person("John", "Muschelli", email = "muschellij2@gmail.com", 
+    role = c("ctb"))
+    )
+Description: Create anatograms, tool that enables the user to visualize 
+    data sets directly on representations of a body of various species.
+    These are commonly used to graphically explore large-scale
+    human gene expression data.
 Depends: R (>= 3.4.0)
 License: What license is it under?
 Encoding: UTF-8

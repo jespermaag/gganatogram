@@ -26,14 +26,14 @@ gganatogram(fillOutline='#a6bddb', organism='human', sex='male', fill="colour")
 #To add organs, create a data frame with specified tissues
 
 
-organPlot <- data.frame(organ = c("heart", "leukocyte", "nerve", "brain", 
-     "liver", "stomach", "colon"), 
- type = c("circulation", "circulation", 
-     "nervous system", "nervous system", "digestion", "digestion", 
-     "digestion"), 
- colour = c("red", "red", "purple", "purple", "orange", 
-     "orange", "orange"), 
- value = c(10, 5, 1, 8, 2, 5, 5), 
+organPlot <- data.frame(organ = c("heart", "leukocyte", "nerve", "brain",
+     "liver", "stomach", "colon"),
+ type = c("circulation", "circulation",
+     "nervous system", "nervous system", "digestion", "digestion",
+     "digestion"),
+ colour = c("red", "red", "purple", "purple", "orange",
+     "orange", "orange"),
+ value = c(10, 5, 1, 8, 2, 5, 5),
  stringsAsFactors=F)
 
 
@@ -53,12 +53,12 @@ organPlot \%>\%
  gganatogram(fillOutline='#a6bddb', organism='human', sex='male', fill="value") +
  theme_void() +
  scale_fill_gradient(low = "white", high = "red")
- 
+
 gganatogram(data=oraganPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") +
 facet_wrap(~type)
 
 #Use hgMale_key to find all tissues to plot
-
+hgMale_key = gganatogram::hgMale_key
 head(hgMale_key)
 gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + theme_void()
 
