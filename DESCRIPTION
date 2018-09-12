@@ -20,5 +20,6 @@ Imports:
     ggplot2,
     stats
 Suggests:
-    dplyr
+    dplyr,
+    testthat
 RoxygenNote: 6.1.0.9000
