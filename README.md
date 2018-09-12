@@ -4,7 +4,9 @@ gganatogram
 
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/jespermaag/gganatogram?branch=master&svg=true)](https://ci.appveyor.com/project/jespermaag/gganatogram) [![Travis build status](https://travis-ci.com/jespermaag/gganatogram.svg?branch=master)](https://travis-ci.com/jespermaag/gganatogram)
 
-Create anatogram images for different organisms. <br/> For now only human male is available. <br/> This package uses the tissue coordinates from the figure in Expression Atlas. <br/> <https://www.ebi.ac.uk/gxa/home> <br/> <https://github.com/ebi-gene-expression-group/anatomogram> <br/>
+Create anatogram images for different organisms. <br/> For now only human male is available. <br/> This package uses the tissue coordinates from the figure in Expression Atlas. <https://www.ebi.ac.uk/gxa/home> <br/> <https://github.com/ebi-gene-expression-group/anatomogram> <br/>
+
+If you use gganatogram please cite Expression Atlas as well <br/> [Petryszak et al. 2015](https://academic.oup.com/nar/article/44/D1/D746/2502589) Petryszak, Robert, Maria Keays, Y. Amy Tang, Nuno A. Fonseca, Elisabet Barrera, Tony Burdett, Anja Füllgrabe et al. "Expression Atlas update—an integrated database of gene and protein expression in humans, animals and plants." Nucleic acids research 44, no. D1 (2015): D746-D752.
 
 More plot examples can be found at <https://jespermaag.github.io/blog/2018/gganatogram/>
 
@@ -21,24 +23,12 @@ devtools::install_github("jespermaag/gganatogram")
 Usage
 -----
 
-This package requires `ggplot2` and `ggpolypath`
+This package requires `ggplot2` and `ggpolypath` which loads when loading the package
 
 ``` r
 
 library(gganatogram)
-#> Loading required package: ggpolypath
-#> Loading required package: ggplot2
-#> Warning: package 'ggplot2' was built under R version 3.4.4
 library(dplyr)
-#> Warning: package 'dplyr' was built under R version 3.4.4
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
 ```
 
 In order to use the function gganatogram, you need to have a data frame with organ, colour, and value if you want to.
@@ -167,7 +157,72 @@ You can also split the tissues into types while retaining the outline
 ``` r
 gganatogram(data=hgMale_key, outline = T, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") +
 facet_wrap(~type, ncol=4) +
-theme_classic()
+theme_void()
 ```
 
 ![](figure/maleOrgans-1.svg)
+
+Added female option
+-------------------
+
+All female tissues
+
+``` r
+hgFemale_key$organ
+#>  [1] "pancreas"                  "liver"                    
+#>  [3] "colon"                     "bone_marrow"              
+#>  [5] "urinary_bladder"           "stomach"                  
+#>  [7] "duodenum"                  "esophagus"                
+#>  [9] "gall_bladder"              "spleen"                   
+#> [11] "small_intestine"           "placenta"                 
+#> [13] "endometrium"               "vagina"                   
+#> [15] "aorta"                     "gastroesophageal_junction"
+#> [17] "caecum"                    "appendix"                 
+#> [19] "ileum"                     "left_atrium"              
+#> [21] "left_ventricle"            "pulmonary_valve"          
+#> [23] "mitral_valve"              "diaphragm"                
+#> [25] "bone"                      "cartilage"                
+#> [27] "throat"                    "rectum"                   
+#> [29] "nasal_septum"              "nasal_pharynx"            
+#> [31] "cerebellum"                "cerebellar_hemisphere"    
+#> [33] "prefrontal_cortex"         "frontal_cortex"           
+#> [35] "nose"                      "temporal_lobe"            
+#> [37] "cerebral_cortex"           "kidney"                   
+#> [39] "renal_cortex"              "coronary_artery"          
+#> [41] "tricuspid_valve"           "skin"                     
+#> [43] "adipose_tissue"            "heart"                    
+#> [45] "smooth_muscle"             "brain"                    
+#> [47] "lymph_node"                "skeletal_muscle"          
+#> [49] "ovary"                     "leukocyte"                
+#> [51] "fallopian_tube"            "uterus"                   
+#> [53] "uterine_cervix"            "nerve"                    
+#> [55] "atrial_appendage"          "ectocervix"               
+#> [57] "hippocampus"               "pleura"                   
+#> [59] "bronchus"                  "trachea"                  
+#> [61] "lung"                      "tonsil"
+gganatogram(data=hgFemale_key, outline = T, fillOutline='#a6bddb', organism='human', sex='female', fill="colour")  +theme_void()
+```
+
+![](figure/female-1.svg)
+
+You can also split the tissues into types while retaining the outline
+
+``` r
+gganatogram(data=hgFemale_key, outline = T, fillOutline='#a6bddb', organism='human', sex='female', fill="colour") +
+facet_wrap(~type, ncol=4) +
+theme_void()
+```
+
+![](figure/femaleOrgans-1.svg)
+
+To display the female repdoductive system with outline.
+
+``` r
+hgFemale_key %>%
+    dplyr::filter(type=='reproductive') %>%
+    gganatogram( outline = T, fillOutline='#a6bddb', organism='human', sex='female', fill="colour")  +
+    theme_void()  +
+    coord_cartesian(xlim = c(30, 75), ylim = c(-110, -80))
+```
+
+![](figure/femaleRep-1.svg)
