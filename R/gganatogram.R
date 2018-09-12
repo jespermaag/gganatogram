@@ -103,6 +103,11 @@ gganatogram <- function(
             if (sex == 'male') {
                 anatogram <- gganatogram::hgMale_list
                 anatogram$outline <- anatogram$human_male_outline
+                anatogram$fillFigure <- anatogram$fillFigure
+            } else if ( sex == 'female') {
+                anatogram <- gganatogram::hgFemale_list
+                anatogram$outline <- anatogram$outline
+                anatogram$fillFigure <- anatogram$fillFigure
             }
         }
     }
@@ -126,10 +131,11 @@ gganatogram <- function(
         }
     }
 
-    p <- ggplot2::ggplot(outliner,
+    p <- ggplot2::ggplot(anatogram$fillFigure,
                          ggplot2::aes(x = x, y = -y))
     if (outline) {
-        p <- p + ggplot2::geom_polygon(fill = fillOutline,
+        p <- p + ggplot2::geom_polygon( fill=fillOutline )
+        p <- p + ggpolypath::geom_polypath(data = outliner, aes(group = group),fill = fillOutline,
                                        colour = 'black',
                                        size = 0.2)
     }
