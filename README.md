@@ -2,19 +2,11 @@
 gganatogram
 -----------
 
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/muschellij2/gganatogram?branch=master&svg=true)](https://ci.appveyor.com/project/muschellij2/gganatogram)
-[![Travis build
-status](https://travis-ci.com/muschellij2/gganatogram.svg?branch=master)](https://travis-ci.com/muschellij2/gganatogram)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/jespermaag/gganatogram?branch=master&svg=true)](https://ci.appveyor.com/project/jespermaag/gganatogram) [![Travis build status](https://travis-ci.com/jespermaag/gganatogram.svg?branch=master)](https://travis-ci.com/jespermaag/gganatogram)
 
-Create anatogram images for different organisms. <br/> For now only
-human male is available. <br/> This package uses the tissue coordinates
-from the figure in ArrayExpress Expression Atlas. <br/>
-<https://www.ebi.ac.uk/gxa/home> <br/>
-<https://github.com/ebi-gene-expression-group/anatomogram> <br/>
+Create anatogram images for different organisms. <br/> For now only human male is available. <br/> This package uses the tissue coordinates from the figure in Expression Atlas. <br/> <https://www.ebi.ac.uk/gxa/home> <br/> <https://github.com/ebi-gene-expression-group/anatomogram> <br/>
 
-More plot examples can be found at
-<https://jespermaag.github.io/blog/2018/gganatogram/>
+More plot examples can be found at <https://jespermaag.github.io/blog/2018/gganatogram/>
 
 Install
 -------
@@ -32,10 +24,13 @@ Usage
 This package requires `ggplot2` and `ggpolypath`
 
 ``` r
-library(ggplot2)
-library(ggpolypath)
+
 library(gganatogram)
+#> Loading required package: ggpolypath
+#> Loading required package: ggplot2
+#> Warning: package 'ggplot2' was built under R version 3.4.4
 library(dplyr)
+#> Warning: package 'dplyr' was built under R version 3.4.4
 #> 
 #> Attaching package: 'dplyr'
 #> The following objects are masked from 'package:stats':
@@ -46,8 +41,7 @@ library(dplyr)
 #>     intersect, setdiff, setequal, union
 ```
 
-In order to use the function gganatogram, you need to have a data frame
-with organ, colour, and value if you want to.
+In order to use the function gganatogram, you need to have a data frame with organ, colour, and value if you want to.
 
 ``` r
 organPlot <- data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver", "stomach", "colon"), 
@@ -66,8 +60,7 @@ organPlot <- data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver
 #> 6   stomach      digestion orange     5
 ```
 
-Using the function gganatogram with the filling the organs based on
-colour.
+Using the function gganatogram with the filling the organs based on colour.
 
 ``` r
 gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="colour")
@@ -75,8 +68,7 @@ gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male',
 
 ![](figure/organPlot-1.svg)
 
-Of course, we can use the ggplot themes and functions to adjust the
-plots
+Of course, we can use the ggplot themes and functions to adjust the plots
 
 ``` r
 gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + 
@@ -89,29 +81,35 @@ We can also plot all tissues available using hgMale\_key
 
 ``` r
 hgMale_key$organ
-#>  [1] "bone marrow"               "frontal cortex"           
-#>  [3] "prefrontal cortex"         "gastroesophageal junction"
-#>  [5] "caecum"                    "ileum"                    
-#>  [7] "rectum"                    "nose"                     
-#>  [9] "tongue"                    "penis"                    
-#> [11] "nasal pharynx"             "spinal cord"              
-#> [13] "throat"                    "diaphragm"                
-#> [15] "liver"                     "stomach"                  
-#> [17] "spleen"                    "duodenum"                 
-#> [19] "gall bladder"              "pancreas"                 
-#> [21] "colon"                     "small intestine"          
-#> [23] "appendix"                  "urinary bladder"          
-#> [25] "bone"                      "cartilage"                
-#> [27] "esophagus"                 "skin"                     
-#> [29] "brain"                     "heart"                    
-#> [31] "lymph_node"                "skeletal_muscle"          
-#> [33] "leukocyte"                 "temporal_lobe"            
-#> [35] "atrial_appendage"          "coronary_artery"          
-#> [37] "hippocampus"               "vas_deferens"             
-#> [39] "seminal_vesicle"           "epididymis"               
-#> [41] "tonsil"                    "lung"                     
-#> [43] "trachea"                   "bronchus"                 
-#> [45] "nerve"                     "kidney"
+#>  [1] "bone_marrow"               "frontal_cortex"           
+#>  [3] "prefrontal_cortex"         "aorta"                    
+#>  [5] "gastroesophageal_junction" "left_ventricle"           
+#>  [7] "caecum"                    "ileum"                    
+#>  [9] "rectum"                    "nose"                     
+#> [11] "tongue"                    "left_atrium"              
+#> [13] "pulmonary_valve"           "mitral_valve"             
+#> [15] "penis"                     "nasal_pharynx"            
+#> [17] "spinal_cord"               "throat"                   
+#> [19] "tricuspid_valve"           "diaphragm"                
+#> [21] "liver"                     "stomach"                  
+#> [23] "spleen"                    "duodenum"                 
+#> [25] "gall_bladder"              "pancreas"                 
+#> [27] "colon"                     "small_intestine"          
+#> [29] "appendix"                  "smooth_muscle"            
+#> [31] "urinary_bladder"           "bone"                     
+#> [33] "cartilage"                 "esophagus"                
+#> [35] "skin"                      "pleura"                   
+#> [37] "brain"                     "heart"                    
+#> [39] "lymph_node"                "adipose_tissue"           
+#> [41] "skeletal_muscle"           "leukocyte"                
+#> [43] "temporal_lobe"             "atrial_appendage"         
+#> [45] "coronary_artery"           "hippocampus"              
+#> [47] "vas_deferens"              "seminal_vesicle"          
+#> [49] "epididymis"                "tonsil"                   
+#> [51] "lung"                      "trachea"                  
+#> [53] "bronchus"                  "nerve"                    
+#> [55] "cerebellum"                "cerebellar_hemisphere"    
+#> [57] "kidney"                    "renal_cortex"
 gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") +theme_void()
 ```
 
@@ -124,6 +122,7 @@ organPlot %>%
     dplyr::filter(type %in% c('circulation', 'nervous system')) %>%
 gganatogram(outline=F, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + 
 theme_void()
+#> Warning: package 'bindrcpp' was built under R version 3.4.4
 ```
 
 ![](figure/organPlotSubset-1.svg)
@@ -138,9 +137,8 @@ scale_fill_gradient(low = "white", high = "red")
 
 ![](figure/organPlotValue-1.svg)
 
-We can also use facet\_wrap to compare groups.  
-First create add two data frames together with different values and the
-conditions in the type column
+We can also use facet\_wrap to compare groups.
+First create add two data frames together with different values and the conditions in the type column
 
 ``` r
 compareGroups <- rbind(data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver", "stomach", "colon"), 
@@ -163,3 +161,13 @@ scale_fill_gradient(low = "white", high = "red")
 ```
 
 ![](figure/Condition-1.svg)
+
+You can also split the tissues into types while retaining the outline
+
+``` r
+gganatogram(data=hgMale_key, outline = T, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") +
+facet_wrap(~type, ncol=4) +
+theme_classic()
+```
+
+![](figure/maleOrgans-1.svg)

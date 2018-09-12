@@ -56,8 +56,7 @@ devtools::install_github("jespermaag/gganatogram")
 This package requires `ggplot2` and `ggpolypath`
 
 ```{r,eval=TRUE}
-library(ggplot2)
-library(ggpolypath)
+
 library(gganatogram)
 library(dplyr)
 ```
@@ -130,5 +129,13 @@ gganatogram(data=compareGroups, fillOutline='#a6bddb', organism='human', sex='ma
 theme_void() +
 facet_wrap(~type) +
 scale_fill_gradient(low = "white", high = "red") 
+
+ ```
+
+You can also split the tissues into types while retaining the outline 
+```{r, eval=TRUE, maleOrgans, fig.width = 10, dpi = 200}
+gganatogram(data=hgMale_key, outline = T, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") +
+facet_wrap(~type, ncol=4) +
+theme_classic()
 
  ```
