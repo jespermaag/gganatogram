@@ -112,7 +112,6 @@ organPlot %>%
     dplyr::filter(type %in% c('circulation', 'nervous system')) %>%
 gganatogram(outline=F, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + 
 theme_void()
-#> Warning: package 'bindrcpp' was built under R version 3.4.4
 ```
 
 ![](figure/organPlotSubset-1.svg)
