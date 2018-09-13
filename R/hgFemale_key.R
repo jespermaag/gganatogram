@@ -1,6 +1,6 @@
-#' @title Color Key for Human Male
+#' @title Color Key for Human Female
 #'
-#' @description A \code{data.frame} with the data to plot the human male.
+#' @description A \code{data.frame} with the data to plot the human female.
 #'
 #' @format A \code{data.frame} with 4 columns, which are:
 #' \describe{
@@ -10,12 +10,12 @@
 #' \item{colour}{color to highlight of the data}
 #' \item{value}{the value to fill the data in an example}
 #' }
-"hgMale_key"
+"hgFemale_key"
 
 
-#' @title Plotting Coordinates for Human Male
+#' @title Plotting Coordinates for Human Female
 #'
-#' @description A \code{list} with the coordinate data to plot the human male.
+#' @description A \code{list} with the coordinate data to plot the human female.
 #'
 #' @format A \code{list} with 340 elements columns, each of which are
 #' a \code{data.frame} with 5 columns:
@@ -27,4 +27,4 @@
 #' \item{y}{coordinates in x-dimension, duplicated for ease of use}
 #' \item{group}{group ...}
 #' }
-"hgMale_list"
+"hgFemale_list"

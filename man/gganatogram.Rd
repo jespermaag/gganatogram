@@ -5,8 +5,7 @@
 \title{gganatogram}
 \usage{
 gganatogram(data = NULL, outline = TRUE, fillOutline = "lightgray",
-  organism = "human", sex = "male", fill = "colour",
-  anatogram = NULL)
+  organism = "human", sex = "male", fill = "colour", anatogram = NULL)
 }
 \arguments{
 \item{data}{The main data frame consisting of what organs to plot,
