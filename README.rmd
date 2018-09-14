@@ -36,9 +36,12 @@ if (requireNamespace("git2r")) {
 
 Create anatogram images for different organisms.  <br/>
 For now only human male is available.  <br/>
-This package uses the tissue coordinates from the figure in ArrayExpress Expression Atlas.  <br/>
-[https://www.ebi.ac.uk/gxa/home](https://www.ebi.ac.uk/gxa/home)  <br/>
+This package uses the tissue coordinates from the figure in Expression Atlas. [https://www.ebi.ac.uk/gxa/home](https://www.ebi.ac.uk/gxa/home)  <br/>
 [https://github.com/ebi-gene-expression-group/anatomogram](https://github.com/ebi-gene-expression-group/anatomogram)  <br/>
+
+If you use gganatogram please cite Expression Atlas as well. <br/>
+[Petryszak et al. 2015](https://academic.oup.com/nar/article/44/D1/D746/2502589) <br/>
+Petryszak, Robert, Maria Keays, Y. Amy Tang, Nuno A. Fonseca, Elisabet Barrera, Tony Burdett, Anja Füllgrabe et al. "Expression Atlas update—an integrated database of gene and protein expression in humans, animals and plants." Nucleic acids research 44, no. D1 (2015): D746-D752.
 
 More plot examples can be found at [https://jespermaag.github.io/blog/2018/gganatogram/](https://jespermaag.github.io/blog/2018/gganatogram/)
 
@@ -53,11 +56,10 @@ devtools::install_github("jespermaag/gganatogram")
 
 ## Usage
 
-This package requires `ggplot2` and `ggpolypath`
+This package requires `ggplot2` and `ggpolypath` which loads when loading the package
 
-```{r,eval=TRUE}
-library(ggplot2)
-library(ggpolypath)
+```{r,eval=TRUE, message=FALSE}
+
 library(gganatogram)
 library(dplyr)
 ```
@@ -130,5 +132,38 @@ gganatogram(data=compareGroups, fillOutline='#a6bddb', organism='human', sex='ma
 theme_void() +
 facet_wrap(~type) +
 scale_fill_gradient(low = "white", high = "red") 
+
+ ```
+
+You can also split the tissues into types while retaining the outline 
+```{r, eval=TRUE, maleOrgans, fig.width = 10, fig.height = 8,dpi = 200}
+gganatogram(data=hgMale_key, outline = T, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") +
+facet_wrap(~type, ncol=4) +
+theme_void()
+
+ ```
+
+## Added female option
+All female tissues
+```{r, eval=TRUE, female, fig.width = 3,  dpi = 200}
+hgFemale_key$organ
+gganatogram(data=hgFemale_key, outline = T, fillOutline='#a6bddb', organism='human', sex='female', fill="colour")  +theme_void()
+ ```
+
+You can also split the tissues into types while retaining the outline 
+```{r, eval=TRUE, femaleOrgans, fig.width = 10, fig.height = 8, dpi = 200}
+gganatogram(data=hgFemale_key, outline = T, fillOutline='#a6bddb', organism='human', sex='female', fill="colour") +
+facet_wrap(~type, ncol=4) +
+theme_void()
+
+ ```
+
+To display the female repdoductive system with outline.
+```{r, eval=TRUE, femaleRep, fig.width = 6,  dpi = 200}
+hgFemale_key %>%
+    dplyr::filter(type=='reproductive') %>%
+    gganatogram( outline = T, fillOutline='#a6bddb', organism='human', sex='female', fill="colour")  +
+    theme_void()  +
+    coord_cartesian(xlim = c(30, 75), ylim = c(-110, -80))
 
  ```

@@ -4,4 +4,5 @@
 ^\.Rproj\.user$
 ^README\.Rmd$
 ^figure$
+^data-raw$
 
