@@ -112,7 +112,6 @@ organPlot %>%
     dplyr::filter(type %in% c('circulation', 'nervous system')) %>%
 gganatogram(outline=F, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + 
 theme_void()
-#> Warning: package 'bindrcpp' was built under R version 3.4.4
 ```
 
 ![](figure/organPlotSubset-1.svg)
@@ -199,7 +198,8 @@ hgFemale_key$organ
 #> [55] "atrial_appendage"          "ectocervix"               
 #> [57] "hippocampus"               "pleura"                   
 #> [59] "bronchus"                  "trachea"                  
-#> [61] "lung"                      "tonsil"
+#> [61] "lung"                      "tonsil"                   
+#> [63] "spinal_cord"
 gganatogram(data=hgFemale_key, outline = T, fillOutline='#a6bddb', organism='human', sex='female', fill="colour")  +theme_void()
 ```
 
