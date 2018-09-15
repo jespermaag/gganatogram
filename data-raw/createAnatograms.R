@@ -291,17 +291,68 @@ mmMale_key <- data.frame(organ = unique(names(mmMale_list)),
 mmMale_key$type <- allAnatomy[match(mmMale_key$organ, allAnatomy$organ),]$type
 mmMale_key$type[is.na(mmMale_key$type)] <- 'other'
 mmMale_key$value <- runif(nrow(mmMale_key), 0, 20)
+mmMale_key[mmMale_key$organ %in% c('jejunum') ,]$type <- 'digestion'
 mmMale_key[mmMale_key$organ %in% c('peripheral_nervous_system', 'sciatic_nerve', 'trigeminal_nerve'),]$type <- 'nervous_system'
 mmMale_key[mmMale_key$organ %in% c('circulatory_system', 'blood_vessel'),]$type <- 'circulation'
 mmMale_key$colour <- allAnatomy[match(mmMale_key$type, allAnatomy$type),]$colour
 
-mmMale_key <- mmMale_key[!mmMale_key$organ %in% c('UBERON_0000947', 'submandibular_gland', 'parotid_gland', 'white_adipose_tissue', 'path9'),]
+mmMale_key <- mmMale_key[!mmMale_key$organ %in% c('UBERON_0000947', 'submandibular_gland', 'parotid_gland', 'white_adipose_tissue', 'path9', 'LAYER_OUTLINE', 'outline'),]
 
 
 
 
-names(mmMale_list) <- gsub('-.*', '', names(mmMale_list))
-names(mmMale_list) <- gsub(' ', '_', names(mmMale_list))
+
+
+#####
+#Mouse female
+#####
+
+mmFemale <- read.table('mus_musculus.female_coords.tsv', sep='\t', stringsAsFactors=F, quote = "" )
+mmFemale[,1][mmFemale[,1] %in% 'title5002'] <- 'peripheral_nervous_system'
+mmFemale_list <- list()
+#mmFemale == ""
+for (i in 1:nrow(mmFemale)) {
+    df <- extractCoords(mmFemale$V2[i], mmFemale$V1[i],  mmFemale$V3[i])
+
+    mmFemale_list[[i]] <- extractCoords(mmFemale$V2[i], mmFemale$V1[i],  mmFemale$V3[i])
+    mmFemale_list[[i]]$id <- gsub(' ', '_', mmFemale_list[[i]]$id)
+    
+    names(mmFemale_list)[i] <-  paste0(mmFemale$V1[i],'-', i)
+}
+names(mmFemale_list) <- gsub('-.*', '', names(mmFemale_list))
+names(mmFemale_list) <- gsub(' ', '_', names(mmFemale_list))
+#names(mmFemale_list) <- gsub('title5002', 'peripheral_nervous_system', names(mmFemale_list) )
+#mmFemale_list[['seminal_vesicle']] <- mmFemale_list[['seminal_vesicle']][mmFemale_list[['seminal_vesicle']]$y >100,] 
+#for (i in 1:length(mmFemale_list[grep('skin', names(mmFemale_list))])) {
+#    mmFemale_list[grep('skin', names(mmFemale_list))][[i]]$group <- i 
+#}
+#test <- mmFemale_list[['lymph_node']]
+
+
+mmFemale_list[['outline']] <- do.call(rbind, mmFemale_list[grep('skin', names(mmFemale_list))])
+mmFemale_list[['outline']]  <- mmFemale_list[['outline']][complete.cases(mmFemale_list[['outline']]),]
+mmFemale_key <- data.frame(organ = unique(names(mmFemale_list)),
+                    colour = "grey", stringsAsFactors = FALSE)
+mmFemale_key$type <- mmMale_key[match(mmFemale_key$organ, mmMale_key$organ),]$type
+mmFemale_key$type[is.na(mmFemale_key$type)] <- 'other'
+mmFemale_key$value <- runif(nrow(mmFemale_key), 0, 20)
+mmFemale_key[mmFemale_key$organ %in% c('jejunum') ,]$type <- 'digestion'
+
+mmFemale_key[mmFemale_key$organ %in% c('peripheral_nervous_system', 'sciatic_nerve', 'trigeminal_nerve'),]$type <- 'nervous_system'
+mmFemale_key[mmFemale_key$organ %in% c('circulatory_system', 'blood_vessel'),]$type <- 'circulation'
+mmFemale_key[mmFemale_key$organ %in% c('reproductive_system', 'mammary_gland', 'uterus', 'vagina'),]$type <- 'reproductive'
+
+mmFemale_key$colour <- allAnatomy[match(mmFemale_key$type, allAnatomy$type),]$colour
+
+mmFemale_key <- mmFemale_key[!mmFemale_key$organ %in% c('UBERON_0000947', 'submandibular_gland', 'parotid_gland', 'white_adipose_tissue', 'path9', 'LAYER_OUTLINE', 'outline'),]
+
+
+mmMale_list[['urinary_bladder']] <- mmFemale_list[['urinary_bladder']]
+mmMale_list[['urinary_bladder']]$group <- '100_2'
+
+
+
+
 
 
 library(devtools)
@@ -313,10 +364,13 @@ library(roxygen2)
 devtools::use_data(pkg = "gganatogram", hgMale_key, overwrite=TRUE)
 devtools::use_data(pkg = "gganatogram", hgFemale_key, overwrite=TRUE)
 devtools::use_data(pkg = "gganatogram", mmMale_key, overwrite=TRUE)
+devtools::use_data(pkg = "gganatogram", mmFemale_key, overwrite=TRUE)
 #hgMale_list <- humanList
 devtools::use_data(pkg = "gganatogram", hgMale_list, overwrite= TRUE)
 devtools::use_data(pkg = "gganatogram", hgFemale_list, overwrite= TRUE)
 devtools::use_data(pkg = "gganatogram", mmMale_list, overwrite=TRUE)
+devtools::use_data(pkg = "gganatogram", mmFemale_list, overwrite=TRUE)
+
 
 document('gganatogram')
 install('gganatogram')
@@ -327,6 +381,7 @@ install('gganatogram')
 gganatogram(data=hgFemale_key, outline = T, fillOutline='#a6bddb', organism='human', sex='female', fill="colour") +facet_wrap(~type, ncol=4) +theme_classic()
 gganatogram(data=hgMale_key, outline = T, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") +facet_wrap(~type, ncol=4) +theme_classic()
 gganatogram(data=mmMale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='male', fill="colour") +facet_wrap(~type, ncol=4) +theme_classic()
+gganatogram(data=mmFemale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='female', fill="colour") +facet_wrap(~type, ncol=4) +theme_classic()
 
 
 hgFemale_key %>%
@@ -335,11 +390,11 @@ hgFemale_key %>%
     mutate(type = organ) %>%
     gganatogram( outline=F, fillOutline='#a6bddb', organism='human', sex='female', fill="colour")  +theme_classic() 
 
-mmMale_key %>%
-    dplyr::filter(type =='nervous_system') %>%
-    dplyr::filter(!organ %in% c('path9', 'seminal_vesicle')) %>%
+mmFemale_key %>%
+    dplyr::filter(type =='digestion') %>%
+    #dplyr::filter(!organ %in% c('path9', 'seminal_vesicle')) %>%
     mutate(type = organ) %>%
-    gganatogram( outline=F, fillOutline='#a6bddb', organism='mouse', sex='male', fill="colour")  +theme_classic() +facet_wrap(~type)
+    gganatogram( outline=F, fillOutline='#a6bddb', organism='mouse', sex='female', fill="colour")  +theme_classic() +facet_wrap(~type)
 
 mmMale_list[['seminal_vesicle']]
 

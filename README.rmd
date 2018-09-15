@@ -182,7 +182,7 @@ hgFemale_key %>%
 # Added  mouse
 
 ## Male
-```{r, eval=TRUE, maleMouse}
+```{r, eval=TRUE, maleMouse, figwidth = 3, dpi = 50}
 mmMale_key$organ
 gganatogram(data=mmMale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='male', fill="colour")  +theme_void()  
 
@@ -194,7 +194,7 @@ gganatogram(data=mmMale_key, outline = T, fillOutline='#a6bddb', organism='mouse
 ```
 
 ## Female
-```{r, eval=TRUE, femaleMouse}
+```{r, eval=TRUE, femaleMouse, figwidth = 3, dpi = 50}
 mmFemale_key$organ
 gganatogram(data=mmFemale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='female', fill="colour")  +theme_void()  
 
