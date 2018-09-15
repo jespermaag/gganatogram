@@ -114,6 +114,10 @@ gganatogram <- function(
                 anatogram <- gganatogram::mmMale_list
                 anatogram$outline <- anatogram$outline
                 anatogram$fillFigure <- anatogram$LAYER_OUTLINE
+            } else if ( sex == 'female') {
+                anatogram <- gganatogram::mmFemale_list
+                anatogram$outline <- anatogram$outline
+                anatogram$fillFigure <- anatogram$LAYER_OUTLINE
             }
         }
     }

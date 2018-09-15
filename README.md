@@ -35,11 +35,18 @@ Available organisms
 
 ``` r
 library(gridExtra)
+#> Warning: package 'gridExtra' was built under R version 3.4.1
+#> 
+#> Attaching package: 'gridExtra'
+#> The following object is masked from 'package:dplyr':
+#> 
+#>     combine
 hgMale <- gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + theme_void()
 hgFemale <- gganatogram(data=hgFemale_key, fillOutline='#a6bddb', organism='human', sex='female', fill="colour") + theme_void()
 mmMale <- gganatogram(data=mmMale_key, fillOutline='#a6bddb', organism='mouse', sex='male', fill="colour") + theme_void()
+mmFemale <- gganatogram(data=mmFemale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='female', fill="colour")  +theme_void()  
 
-grid.arrange(hgMale, hgFemale, mmMale, ncol=3)
+grid.arrange(hgMale, hgFemale, mmMale, mmFemale, ncol=4)
 ```
 
 ![](figure/AllSpeciesPlot-1.svg)
@@ -125,6 +132,7 @@ organPlot %>%
     dplyr::filter(type %in% c('circulation', 'nervous system')) %>%
 gganatogram(outline=F, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + 
 theme_void()
+#> Warning: package 'bindrcpp' was built under R version 3.4.4
 ```
 
 ![](figure/organPlotSubset-1.svg)
@@ -240,8 +248,11 @@ hgFemale_key %>%
 
 ![](figure/femaleRep-1.svg)
 
-Added male mouse
-================
+Added mouse
+===========
+
+Male
+----
 
 ``` r
 mmMale_key$organ
@@ -267,8 +278,7 @@ mmMale_key$organ
 #> [39] "vas_deferens"              "epididymis"               
 #> [41] "testis"                    "urinary_bladder"          
 #> [43] "thymus"                    "peripheral_nervous_system"
-#> [45] "eye"                       "LAYER_OUTLINE"            
-#> [47] "outline"
+#> [45] "eye"
 gganatogram(data=mmMale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='male', fill="colour")  +theme_void()  
 ```
 
@@ -280,3 +290,44 @@ gganatogram(data=mmMale_key, outline = T, fillOutline='#a6bddb', organism='mouse
 ```
 
 ![](figure/maleMouseOrgan-1.svg)
+
+Feale
+-----
+
+``` r
+mmFemale_key$organ
+#>  [1] "aorta"                     "circulatory_system"       
+#>  [3] "brown_adipose_tissue"      "stomach"                  
+#>  [5] "duodenum"                  "pancreas"                 
+#>  [7] "spleen"                    "adrenal_gland"            
+#>  [9] "kidney"                    "colon"                    
+#> [11] "small_intestine"           "caecum"                   
+#> [13] "jejunum"                   "ileum"                    
+#> [15] "esophagus"                 "gall_bladder"             
+#> [17] "vagina"                    "uterus"                   
+#> [19] "urinary_bladder"           "tongue"                   
+#> [21] "Peyer's_patch"             "femur"                    
+#> [23] "bone_marrow"               "cartilage"                
+#> [25] "quadriceps_femoris"        "skeletal_muscle"          
+#> [27] "spinal_cord"               "diaphragm"                
+#> [29] "hindlimb"                  "trigeminal_nerve"         
+#> [31] "eye"                       "intestinal_mucosa"        
+#> [33] "brain"                     "heart"                    
+#> [35] "liver"                     "sciatic_nerve"            
+#> [37] "blood_vessel"              "skin"                     
+#> [39] "mammary_gland"             "title8178"                
+#> [41] "reproductive_system"       "lymph_node"               
+#> [43] "thymus"                    "thyroid_gland"            
+#> [45] "lung"                      "peripheral_nervous_system"
+#> [47] "trachea"
+gganatogram(data=mmFemale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='female', fill="colour")  +theme_void()  
+```
+
+![](figure/femaleMouse-1.svg)
+
+``` r
+
+gganatogram(data=mmFemale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='female', fill="colour")  +theme_void()+facet_wrap(~type, ncol=4)
+```
+
+![](figure/femaleMouseOrgan-1.svg)
