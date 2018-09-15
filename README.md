@@ -35,12 +35,6 @@ Available organisms
 
 ``` r
 library(gridExtra)
-#> Warning: package 'gridExtra' was built under R version 3.4.1
-#> 
-#> Attaching package: 'gridExtra'
-#> The following object is masked from 'package:dplyr':
-#> 
-#>     combine
 hgMale <- gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + theme_void()
 hgFemale <- gganatogram(data=hgFemale_key, fillOutline='#a6bddb', organism='human', sex='female', fill="colour") + theme_void()
 mmMale <- gganatogram(data=mmMale_key, fillOutline='#a6bddb', organism='mouse', sex='male', fill="colour") + theme_void()
@@ -132,7 +126,6 @@ organPlot %>%
     dplyr::filter(type %in% c('circulation', 'nervous system')) %>%
 gganatogram(outline=F, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + 
 theme_void()
-#> Warning: package 'bindrcpp' was built under R version 3.4.4
 ```
 
 ![](figure/organPlotSubset-1.svg)
@@ -291,8 +284,8 @@ gganatogram(data=mmMale_key, outline = T, fillOutline='#a6bddb', organism='mouse
 
 ![](figure/maleMouseOrgan-1.svg)
 
-Feale
------
+Female
+------
 
 ``` r
 mmFemale_key$organ
