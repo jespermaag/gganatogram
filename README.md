@@ -228,7 +228,7 @@ theme_void()
 
 ![](figure/femaleOrgans-1.svg)
 
-To display the female repdoductive system with outline.
+To display the female reproductive system with outline.
 
 ``` r
 hgFemale_key %>%
