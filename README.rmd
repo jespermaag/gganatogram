@@ -168,7 +168,7 @@ theme_void()
 
  ```
 
-To display the female repdoductive system with outline.
+To display the female reproductive system with outline.
 ```{r, eval=TRUE, femaleRep, fig.width = 6,  dpi = 200}
 hgFemale_key %>%
     dplyr::filter(type=='reproductive') %>%
