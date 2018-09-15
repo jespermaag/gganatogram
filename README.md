@@ -269,14 +269,14 @@ mmMale_key$organ
 #> [43] "thymus"                    "peripheral_nervous_system"
 #> [45] "eye"                       "LAYER_OUTLINE"            
 #> [47] "outline"
-gganatogram(data=mmMale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='male', fill="colour")  +theme_void() +facet_wrap(~type, ncol=4) 
+gganatogram(data=mmMale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='male', fill="colour")  +theme_void()  
 ```
 
 ![](figure/maleMouse-1.svg)
 
 ``` r
 
-gganatogram(data=mmMale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='male', fill="colour")  +theme_void()
+gganatogram(data=mmMale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='male', fill="colour")  +theme_void()+facet_wrap(~type, ncol=4)
 ```
 
 ![](figure/maleMouseOrgan-1.svg)
