@@ -27,7 +27,7 @@ extractCoords <- function(coords, name, transMatrix) {
     } else if (grep('translate', transMatrix)) {
         transForm <- gsub('translate\\(|\\)', '', transMatrix)
         transForm <- as.numeric(strsplit(transForm, ",")[[1]])
-         if(name =='leukocyte' & transForm[1]==4.5230265) {
+         if(name =='leukocyte' & transForm[1]==103.63591) {
             transForm <- c(103.63591+4.5230265,-47.577078+11.586659)
         }
         anatCoord$x <-  anatCoord$X1 + transForm[1]
@@ -35,7 +35,7 @@ extractCoords <- function(coords, name, transMatrix) {
     }
     #anatCoord <- anatCoord[complete.cases(anatCoord),]
     if (name == 'bronchus') {
-        if (max(anatCoord$x, na.rm=T) >100 ) {
+        if (min(anatCoord$y, na.rm=T) <25 ) {
             anatCoord$x <- NA
             anatCoord$y <- NA
         }
@@ -49,6 +49,19 @@ extractCoords <- function(coords, name, transMatrix) {
             anatCoord$x <- NA
             anatCoord$y <- NA
     }
+
+    lastVal <- 0
+    anatCoord$group <- 1
+    for (j in 1:length(which(is.na(anatCoord$y)))) {
+        curVal <- which(is.na(anatCoord$y))[j]
+        anatCoord[c(lastVal:curVal),]$group <- paste0(i, '_', j)
+        if (j < length(which(is.na(anatCoord$y)))) {
+            lastVal <- curVal + 1
+        } else if (j == length(which(is.na(anatCoord$y))) ) {
+            anatCoord[c(curVal:length(anatCoord$y)),]$group <- paste0(i, '_',j+1) 
+        }
+    }
+
     return(anatCoord)
 }
 
@@ -65,6 +78,10 @@ for (i in 1:nrow(hsMale)) {
 
     hgMale_list[[i]] <- extractCoords(hsMale$V2[i], hsMale$V1[i],  hsMale$V3[i])
     hgMale_list[[i]]$id <- gsub(' ', '_', hgMale_list[[i]]$id)
+    if ( (unique(hgMale_list[[i]]$id) == 'leukocyte') & (min(hgMale_list[[i]]$x, na.rm=T)<15) ) {
+        hgMale_list[[i]]$x <- hgMale_list[[i]]$x-4.5230265
+        hgMale_list[[i]]$y <- hgMale_list[[i]]$y -11.586659
+    }
     names(hgMale_list)[i] <-  paste0(hsMale$V1[i],'-', i)
 }
 names(hgMale_list) <- gsub('-.*', '', names(hgMale_list))
@@ -99,6 +116,85 @@ for (i in 1:nrow(hsFemale)) {
 hgFemale_list[['fallopian_tube-96']]$y <- hgFemale_list[['fallopian_tube-96']]$y  +56.53891
 hgFemale_list[['fallopian_tube-96']]$x <- hgFemale_list[['fallopian_tube-96']]$x  + 4.7
 
+#####
+#TODO OVARY 
+#####
+library(DescTools)
+
+fall<- do.call(rbind, hgFemale_list[grep('fallopian_tube|uterus', names(hgFemale_list))])
+plot(fall$x, fall$y, ylim=c(80, 99))
+lines(fall$x, fall$y)  
+DrawEllipse(x=46.9, y=91, radius.x=1, radius.y=0.6, rot=20, col='red')
+DrawEllipse(x=58.5, y=91, radius.x=1, radius.y=0.6, rot=2, col='red')
+DrawEllipse(x=48.6, y=90.5, radius.x=0.1, radius.y=1.2, rot=20, col='red')
+DrawEllipse(x=56.8, y=90.5, radius.x=0.1, radius.y=1.2, rot=2, col='red')
+ hgFemale_list[['ovary-1']]<- data.frame(X1 = DrawEllipse(x=46.9, y=91, radius.x=1, radius.y=0.6, rot=20)$x,
+                X2 = DrawEllipse(x=46.9, y=91, radius.x=1, radius.y=0.6, rot=20)$y,
+                id ='ovary',
+                x =  DrawEllipse(x=46.9, y=91, radius.x=1, radius.y=0.6, rot=20)$x,
+                y =  DrawEllipse(x=46.9, y=91, radius.x=1, radius.y=0.6, rot=20)$y,
+                group = 'overy1',
+                stringsAsFactors = F)
+
+ hgFemale_list[['ovary-11']]<- data.frame(X1 = DrawEllipse(x=48.6, y=90.5, radius.x=0.1, radius.y=1.2, rot=20)$x,
+                X2 = DrawEllipse(x=48.6, y=90.5, radius.x=0.1, radius.y=1.2, rot=20)$y,
+                id ='ovary',
+                x =  DrawEllipse(x=48.6, y=90.5, radius.x=0.1, radius.y=1.2, rot=20)$x,
+                y =  DrawEllipse(x=48.6, y=90.5, radius.x=0.1, radius.y=1.2, rot=20)$y,
+                group = 'overy11',
+                stringsAsFactors = F)
+
+ hgFemale_list[['ovary-2']]<- data.frame(X1 = DrawEllipse(x=58.5, y=91, radius.x=1, radius.y=0.6, rot=2)$x,
+                X2 = DrawEllipse(x=58.5, y=91, radius.x=1, radius.y=0.6, rot=2)$y,
+                id ='ovary',
+                x =  DrawEllipse(x=58.5, y=91, radius.x=1, radius.y=0.6, rot=2)$x,
+                y =  DrawEllipse(x=58.5, y=91, radius.x=1, radius.y=0.6, rot=2)$y,
+                group = 'overy2',
+                stringsAsFactors = F)
+
+ hgFemale_list[['ovary-22']]<- data.frame(X1 = DrawEllipse(x=56.8, y=90.5, radius.x=0.1, radius.y=1.2, rot=2)$x,
+                X2 = DrawEllipse(x=56.8, y=90.5, radius.x=0.1, radius.y=1.2, rot=2)$y,
+                id ='ovary',
+                x =  DrawEllipse(x=56.8, y=90.5, radius.x=0.1, radius.y=1.2, rot=2)$x,
+                y =  DrawEllipse(x=56.8, y=90.5, radius.x=0.1, radius.y=1.2, rot=2)$y,
+                group = 'overy22',
+                stringsAsFactors = F)
+#lines(hgFemale_list[['ovary-1']]$x, -hgFemale_list[['ovary-1']]$y)
+#lines(test$x, -test$y)
+#test <- DrawEllipse(x=58.5, y=-91, radius.x=1, radius.y=0.6, rot=20)
+#lines(test$x, -test$y)
+
+#library(plotrix)
+#draw.ellipse(x= c(183.93817), y= c(-4.7179484), c(.899), c(0.833), border = 'red', lwd = 2, draw=F)
+#       id="UBERON_0000992"
+#       style="fill:none;stroke:none"
+#       inkscape:label="UBERON_0000992"
+#       transform="translate(-28.558744,-76.741038)">
+#      <title
+#         id="ovary">ovary</title>
+#      <path
+#         sodipodi:end="6.275538"
+#         sodipodi:start="0"
+#         transform="matrix(0.91474633,-0.40402864,0.43444822,0.90069681,0,0)"
+#         d="M -3.7252197,183.93817 A 0.99272877,0.83321977 0 0 1 -4.7160505,184.77139 0.99272877,0.83321977 0 0 1 -5.7106699,183.94136 0.99272877,0.83321977 0 0 1 -4.7236422,183.10497 0.99272877,0.83321977 0 0 1 -3.7252487,183.9318 L -4.7179484,183.93817 Z"
+#         sodipodi:ry="0.83321977"
+#         sodipodi:rx="0.99272877"
+#         sodipodi:cy="183.93817"
+#         sodipodi:cx="-4.7179484"
+#         id="path18952"
+#         sodipodi:type="arc" />
+#      <path
+#         sodipodi:type="arc"
+#         id="path18954"
+#         sodipodi:cx="-148.18413"
+#         sodipodi:cy="-112.90377"
+#         sodipodi:rx="0.97524083"
+#         sodipodi:ry="0.85279381"
+#         d="M -147.20889,-112.90377 A 0.97524083,0.85279381 0 0 1 -148.18226,-112.05098 0.97524083,0.85279381 0 0 1 -149.15936,-112.90051 0.97524083,0.85279381 0 0 1 -148.18972,-113.75655 0.97524083,0.85279381 0 0 1 -147.20892,-112.91029 L -148.18413,-112.90377 Z"
+#         transform="matrix(-0.90007703,-0.43573081,0.41100361,-0.91163372,0,0)"
+#         sodipodi:start="0"
+#         sodipodi:end="6.275538" />
+
 names(hgFemale_list) <- gsub('-.*', '', names(hgFemale_list))
 names(hgFemale_list) <- gsub(' ', '_', names(hgFemale_list))
 names(hgFemale_list) [names(hgFemale_list) %in% 'bladder'] <- 'urinary_bladder'
@@ -119,7 +215,8 @@ hgFemale_list[['fillFigure']]$group <- 21
 #hgFemale_list[['fillFigure']] <- hgFemale_list[['fillFigure']][complete.cases(hgFemale_list[['fillFigure']]),]
 #hgFemale_list[['outline']] <- rbind(hgFemale_list[['outline']], femOut)
 hgFemale_list[['outline']] <- hgFemale_list[['outline']][complete.cases(hgFemale_list[['outline']]),]
-
+hgFemale_list[['spinal_cord']] <- hgMale_list[['spinal_cord']]
+hgFemale_list[['spinal_cord']]$x <- hgFemale_list[['spinal_cord']]$x -0.8
 #####
 #Fix male outline
 #####
@@ -162,6 +259,51 @@ hgFemale_key$value <- runif(nrow(hgFemale_key), 0, 20)
 #    gganatogram( outline=F, fillOutline='#a6bddb', organism='human', sex='female', fill="colour")  +theme_classic() + facet_wrap(~type)
 
 
+#####
+#Mouse male
+#####
+mmMale <- read.table('mus_musculus.male_coords.tsv', sep='\t', stringsAsFactors=F)
+mmMale_list <- list()
+for (i in 1:nrow(mmMale)) {
+    df <- extractCoords(mmMale$V2[i], mmMale$V1[i],  mmMale$V3[i])
+
+    mmMale_list[[i]] <- extractCoords(mmMale$V2[i], mmMale$V1[i],  mmMale$V3[i])
+    mmMale_list[[i]]$id <- gsub(' ', '_', mmMale_list[[i]]$id)
+    
+    names(mmMale_list)[i] <-  paste0(mmMale$V1[i],'-', i)
+}
+
+ 
+names(mmMale_list) <- gsub('-.*', '', names(mmMale_list))
+names(mmMale_list) <- gsub(' ', '_', names(mmMale_list))
+
+mmMale_list[['seminal_vesicle']] <- mmMale_list[['seminal_vesicle']][mmMale_list[['seminal_vesicle']]$y >100,] 
+#for (i in 1:length(mmMale_list[grep('skin', names(mmMale_list))])) {
+#    mmMale_list[grep('skin', names(mmMale_list))][[i]]$group <- i 
+#}
+test <- mmMale_list[['lymph_node']]
+
+
+mmMale_list[['outline']] <- do.call(rbind, mmMale_list[grep('skin', names(mmMale_list))])
+mmMale_list[['outline']]  <- mmMale_list[['outline']][complete.cases(mmMale_list[['outline']]),]
+mmMale_key <- data.frame(organ = unique(names(mmMale_list)),
+                    colour = "grey", stringsAsFactors = FALSE)
+mmMale_key$type <- allAnatomy[match(mmMale_key$organ, allAnatomy$organ),]$type
+mmMale_key$type[is.na(mmMale_key$type)] <- 'other'
+mmMale_key$value <- runif(nrow(mmMale_key), 0, 20)
+mmMale_key[mmMale_key$organ %in% c('peripheral_nervous_system', 'sciatic_nerve', 'trigeminal_nerve'),]$type <- 'nervous_system'
+mmMale_key[mmMale_key$organ %in% c('circulatory_system', 'blood_vessel'),]$type <- 'circulation'
+mmMale_key$colour <- allAnatomy[match(mmMale_key$type, allAnatomy$type),]$colour
+
+mmMale_key <- mmMale_key[!mmMale_key$organ %in% c('UBERON_0000947', 'submandibular_gland', 'parotid_gland', 'white_adipose_tissue', 'path9'),]
+
+
+
+
+names(mmMale_list) <- gsub('-.*', '', names(mmMale_list))
+names(mmMale_list) <- gsub(' ', '_', names(mmMale_list))
+
+
 library(devtools)
 library(roxygen2)
 
@@ -170,25 +312,36 @@ library(roxygen2)
 #hgMale_key$value <- runif(46, 0, 20)
 devtools::use_data(pkg = "gganatogram", hgMale_key, overwrite=TRUE)
 devtools::use_data(pkg = "gganatogram", hgFemale_key, overwrite=TRUE)
-
+devtools::use_data(pkg = "gganatogram", mmMale_key, overwrite=TRUE)
 #hgMale_list <- humanList
 devtools::use_data(pkg = "gganatogram", hgMale_list, overwrite= TRUE)
 devtools::use_data(pkg = "gganatogram", hgFemale_list, overwrite= TRUE)
+devtools::use_data(pkg = "gganatogram", mmMale_list, overwrite=TRUE)
+
 document('gganatogram')
 install('gganatogram')
 
+#gganatogram(data=hgFemale_key[hgFemale_key$type=='nervous_system',], outline = T, fillOutline='#a6bddb', organism='human', sex='female', fill="colour") +facet_wrap(~type, ncol=4) +theme_classic()
 
 
 gganatogram(data=hgFemale_key, outline = T, fillOutline='#a6bddb', organism='human', sex='female', fill="colour") +facet_wrap(~type, ncol=4) +theme_classic()
 gganatogram(data=hgMale_key, outline = T, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") +facet_wrap(~type, ncol=4) +theme_classic()
+gganatogram(data=mmMale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='male', fill="colour") +facet_wrap(~type, ncol=4) +theme_classic()
 
 
 hgFemale_key %>%
     dplyr::filter(type =='reproductive') %>%
     dplyr::filter(!organ =='path9') %>%
     mutate(type = organ) %>%
-    gganatogram( outline=F, fillOutline='#a6bddb', organism='human', sex='female', fill="colour")  +theme_classic() + facet_wrap(~type)
+    gganatogram( outline=F, fillOutline='#a6bddb', organism='human', sex='female', fill="colour")  +theme_classic() 
 
+mmMale_key %>%
+    dplyr::filter(type =='nervous_system') %>%
+    dplyr::filter(!organ %in% c('path9', 'seminal_vesicle')) %>%
+    mutate(type = organ) %>%
+    gganatogram( outline=F, fillOutline='#a6bddb', organism='mouse', sex='male', fill="colour")  +theme_classic() +facet_wrap(~type)
+
+mmMale_list[['seminal_vesicle']]
 
 library(rmarkdown)
 render('gganatogram/Readme.rmd')

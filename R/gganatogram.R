@@ -109,6 +109,12 @@ gganatogram <- function(
                 anatogram$outline <- anatogram$outline
                 anatogram$fillFigure <- anatogram$fillFigure
             }
+        } else if (organism == 'mouse') {
+            if (sex == 'male') {
+                anatogram <- gganatogram::mmMale_list
+                anatogram$outline <- anatogram$outline
+                anatogram$fillFigure <- anatogram$LAYER_OUTLINE
+            }
         }
     }
     if (is.null(anatogram)) {
@@ -162,36 +168,35 @@ gganatogram <- function(
                 x$type <- dataOrgan[match(x$id, dataOrgan$organ),]$type
                 x
             })
-            for (i in 1:length(mapOrgans)) {
-                dat = mapOrgans[[i]]
-                dat = make_color(dat)
-                dat = dat[stats::complete.cases(dat), ]
-                if (fill == 'colour' || fill == "color") {
-                    organColour <- data[Norgan, ]$colour
-                    p <-
-                        p + ggpolypath::geom_polypath(
-                            data = dat,
-                            fill = organColour,
-                            colour = "black",
-                            size = 0.2
-                        )
+            dat = do.call(rbind, mapOrgans)
+            dat = make_color(dat)
+            dat = dat[stats::complete.cases(dat), ]
+            if (fill == 'colour' || fill == "color") {
+                organColour <- data[Norgan, ]$colour
+                p <-
+                    p + ggpolypath::geom_polypath(
+                        data = dat,
+                        aes(group=group),
+                        fill = organColour,
+                        colour = "black",
+                        size = 0.2
+                    )
 
-                } else if (fill == 'value') {
-                    p <-
-                        p + ggpolypath::geom_polypath(
-                            data = dat,
-                            ggplot2::aes(fill = value),
-                            colour = "black",
-                            size = 0.2
-                        )
+            } else if (fill == 'value') {
+                p <-
+                    p + ggpolypath::geom_polypath(
+                        data = dat,
+                        ggplot2::aes(fill = value, group=group),
+                        colour = "black",
+                        size = 0.2
+                    )
 
-                } else {
-                    p <-
-                        p + ggpolypath::geom_polypath(
-                            data = dat,
-                            colour = "black",
-                            size = 0.2)
-                }
+            } else {
+                p <-
+                    p + ggpolypath::geom_polypath(
+                        data = dat,
+                        colour = "black",
+                        size = 0.2)
             }
         }
     } else {

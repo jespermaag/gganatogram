@@ -31,6 +31,19 @@ library(gganatogram)
 library(dplyr)
 ```
 
+Available organisms
+
+``` r
+library(gridExtra)
+hgMale <- gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + theme_void()
+hgFemale <- gganatogram(data=hgFemale_key, fillOutline='#a6bddb', organism='human', sex='female', fill="colour") + theme_void()
+mmMale <- gganatogram(data=mmMale_key, fillOutline='#a6bddb', organism='mouse', sex='male', fill="colour") + theme_void()
+
+grid.arrange(hgMale, hgFemale, mmMale, ncol=3)
+```
+
+![](figure/AllSpeciesPlot-1.svg)
+
 In order to use the function gganatogram, you need to have a data frame with organ, colour, and value if you want to.
 
 ``` r
@@ -226,3 +239,44 @@ hgFemale_key %>%
 ```
 
 ![](figure/femaleRep-1.svg)
+
+Added male mouse
+================
+
+``` r
+mmMale_key$organ
+#>  [1] "aorta"                     "brown_adipose_tissue"     
+#>  [3] "stomach"                   "duodenum"                 
+#>  [5] "pancreas"                  "spleen"                   
+#>  [7] "adrenal_gland"             "kidney"                   
+#>  [9] "colon"                     "small_intestine"          
+#> [11] "caecum"                    "jejunum"                  
+#> [13] "ileum"                     "esophagus"                
+#> [15] "gall_bladder"              "lymph_node"               
+#> [17] "seminal_vesicle"           "penis"                    
+#> [19] "femur"                     "bone_marrow"              
+#> [21] "cartilage"                 "quadriceps_femoris"       
+#> [23] "spinal_cord"               "lung"                     
+#> [25] "diaphragm"                 "trachea"                  
+#> [27] "hindlimb"                  "trigeminal_nerve"         
+#> [29] "sciatic_nerve"             "intestinal_mucosa"        
+#> [31] "liver"                     "heart"                    
+#> [33] "brain"                     "skeletal_muscle"          
+#> [35] "circulatory_system"        "blood_vessel"             
+#> [37] "skin"                      "prostate_gland"           
+#> [39] "vas_deferens"              "epididymis"               
+#> [41] "testis"                    "urinary_bladder"          
+#> [43] "thymus"                    "peripheral_nervous_system"
+#> [45] "eye"                       "LAYER_OUTLINE"            
+#> [47] "outline"
+gganatogram(data=mmMale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='male', fill="colour")  +theme_void() +facet_wrap(~type, ncol=4) 
+```
+
+![](figure/maleMouse-1.svg)
+
+``` r
+
+gganatogram(data=mmMale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='male', fill="colour")  +theme_void()
+```
+
+![](figure/maleMouseOrgan-1.svg)

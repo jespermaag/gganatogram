@@ -63,6 +63,16 @@ This package requires `ggplot2` and `ggpolypath` which loads when loading the pa
 library(gganatogram)
 library(dplyr)
 ```
+Available organisms 
+```{r, eval=TRUE, AllSpeciesPlot, fig.width = 10, dpi = 300}
+library(gridExtra)
+hgMale <- gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + theme_void()
+hgFemale <- gganatogram(data=hgFemale_key, fillOutline='#a6bddb', organism='human', sex='female', fill="colour") + theme_void()
+mmMale <- gganatogram(data=mmMale_key, fillOutline='#a6bddb', organism='mouse', sex='male', fill="colour") + theme_void()
+
+grid.arrange(hgMale, hgFemale, mmMale, ncol=3)
+ ```
+
 
 In order to use the function gganatogram, you need to have a data frame with
 organ, colour, and value if you want to.
@@ -167,3 +177,15 @@ hgFemale_key %>%
     coord_cartesian(xlim = c(30, 75), ylim = c(-110, -80))
 
  ```
+
+# Added male mouse
+```{r, eval=TRUE, maleMouse, figwidth = 3, dpi = 100}
+mmMale_key$organ
+gganatogram(data=mmMale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='male', fill="colour")  +theme_void() +facet_wrap(~type, ncol=4) 
+
+```
+
+```{r, eval=TRUE, maleMouseOrgan, figwidth = 10, figheight = 8, dpi = 200}
+
+gganatogram(data=mmMale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='male', fill="colour")  +theme_void()
+```
