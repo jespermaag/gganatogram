@@ -35,7 +35,6 @@ if (requireNamespace("git2r")) {
   
 
 Create anatogram images for different organisms.  <br/>
-For now only human male is available.  <br/>
 This package uses the tissue coordinates from the figure in Expression Atlas. [https://www.ebi.ac.uk/gxa/home](https://www.ebi.ac.uk/gxa/home)  <br/>
 [https://github.com/ebi-gene-expression-group/anatomogram](https://github.com/ebi-gene-expression-group/anatomogram)  <br/>
 
