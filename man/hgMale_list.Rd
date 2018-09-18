@@ -5,13 +5,14 @@
 \alias{hgMale_list}
 \title{Plotting Coordinates for Human Male}
 \format{A \code{list} with 340 elements columns, each of which are
-a \code{data.frame} with 5 columns:
+a \code{data.frame} with 6 columns:
 \describe{
 \item{X1}{coordinates in x-dimension}
 \item{X2}{coordinates in y-dimension}
 \item{id}{identifier of the region}
 \item{x}{coordinates in x-dimension, duplicated for ease of use}
 \item{y}{coordinates in x-dimension, duplicated for ease of use}
+\item{group}{polygon group to avoid linkage between polygons }
 }}
 \usage{
 hgMale_list

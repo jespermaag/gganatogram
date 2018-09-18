@@ -103,6 +103,21 @@ gganatogram <- function(
             if (sex == 'male') {
                 anatogram <- gganatogram::hgMale_list
                 anatogram$outline <- anatogram$human_male_outline
+                anatogram$fillFigure <- anatogram$fillFigure
+            } else if ( sex == 'female') {
+                anatogram <- gganatogram::hgFemale_list
+                anatogram$outline <- anatogram$outline
+                anatogram$fillFigure <- anatogram$fillFigure
+            }
+        } else if (organism == 'mouse') {
+            if (sex == 'male') {
+                anatogram <- gganatogram::mmMale_list
+                anatogram$outline <- anatogram$outline
+                anatogram$fillFigure <- anatogram$LAYER_OUTLINE
+            } else if ( sex == 'female') {
+                anatogram <- gganatogram::mmFemale_list
+                anatogram$outline <- anatogram$outline
+                anatogram$fillFigure <- anatogram$LAYER_OUTLINE
             }
         }
     }
@@ -126,10 +141,11 @@ gganatogram <- function(
         }
     }
 
-    p <- ggplot2::ggplot(outliner,
+    p <- ggplot2::ggplot(anatogram$fillFigure,
                          ggplot2::aes(x = x, y = -y))
     if (outline) {
-        p <- p + ggplot2::geom_polygon(fill = fillOutline,
+        p <- p + ggplot2::geom_polygon( fill=fillOutline )
+        p <- p + ggpolypath::geom_polypath(data = outliner, aes(group = group),fill = fillOutline,
                                        colour = 'black',
                                        size = 0.2)
     }
@@ -156,36 +172,35 @@ gganatogram <- function(
                 x$type <- dataOrgan[match(x$id, dataOrgan$organ),]$type
                 x
             })
-            for (i in 1:length(mapOrgans)) {
-                dat = mapOrgans[[i]]
-                dat = make_color(dat)
-                dat = dat[stats::complete.cases(dat), ]
-                if (fill == 'colour' || fill == "color") {
-                    organColour <- data[Norgan, ]$colour
-                    p <-
-                        p + ggpolypath::geom_polypath(
-                            data = dat,
-                            fill = organColour,
-                            colour = "black",
-                            size = 0.2
-                        )
+            dat = do.call(rbind, mapOrgans)
+            dat = make_color(dat)
+            dat = dat[stats::complete.cases(dat), ]
+            if (fill == 'colour' || fill == "color") {
+                organColour <- data[Norgan, ]$colour
+                p <-
+                    p + ggpolypath::geom_polypath(
+                        data = dat,
+                        aes(group=group),
+                        fill = organColour,
+                        colour = "black",
+                        size = 0.2
+                    )
 
-                } else if (fill == 'value') {
-                    p <-
-                        p + ggpolypath::geom_polypath(
-                            data = dat,
-                            ggplot2::aes(fill = value),
-                            colour = "black",
-                            size = 0.2
-                        )
+            } else if (fill == 'value') {
+                p <-
+                    p + ggpolypath::geom_polypath(
+                        data = dat,
+                        ggplot2::aes(fill = value, group=group),
+                        colour = "black",
+                        size = 0.2
+                    )
 
-                } else {
-                    p <-
-                        p + ggpolypath::geom_polypath(
-                            data = dat,
-                            colour = "black",
-                            size = 0.2)
-                }
+            } else {
+                p <-
+                    p + ggpolypath::geom_polypath(
+                        data = dat,
+                        colour = "black",
+                        size = 0.2)
             }
         }
     } else {
