@@ -97,7 +97,6 @@ gganatogram <- function(
     fill = 'colour',
     anatogram = NULL) {
 
-
     if (is.null(anatogram)) {
         if (organism == 'human') {
             if (sex == 'male') {
@@ -145,9 +144,11 @@ gganatogram <- function(
                          ggplot2::aes(x = x, y = -y))
     if (outline) {
         p <- p + ggplot2::geom_polygon( fill=fillOutline )
-        p <- p + ggpolypath::geom_polypath(data = outliner, aes(group = group),fill = fillOutline,
-                                       colour = 'black',
-                                       size = 0.2)
+        p <- p + ggpolypath::geom_polypath(
+            data = outliner, aes(group = group),
+            fill = fillOutline,
+            colour = 'black',
+            size = 0.2)
     }
 
     make_color = function(x) {
@@ -180,7 +181,7 @@ gganatogram <- function(
                 p <-
                     p + ggpolypath::geom_polypath(
                         data = dat,
-                        aes(group=group),
+                        aes(group = group),
                         fill = organColour,
                         colour = "black",
                         size = 0.2
