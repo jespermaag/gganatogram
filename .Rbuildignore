@@ -1,3 +1,4 @@
+^R/gg2\.R$
 ^\.travis\.yml$
 ^appveyor\.yml$
 ^.*\.Rproj$

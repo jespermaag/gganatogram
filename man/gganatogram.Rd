@@ -6,7 +6,7 @@
 \usage{
 gganatogram(data = NULL, outline = TRUE, fillOutline = "lightgray",
   organism = "human", sex = "male", fill = "colour",
-  anatogram = NULL)
+  anatogram = NULL, ggplot2_only = FALSE)
 }
 \arguments{
 \item{data}{The main data frame consisting of what organs to plot,
@@ -27,6 +27,9 @@ only \code{human} is accepted.}
 \item{anatogram}{A list, similar to \code{\link{hgMale_list}}
 that will create the outline and has the corresponding organ
 \code{data.frame}s in that list}
+
+\item{ggplot2_only}{If \code{TRUE}, will try to use only
+\code{ggplot2} functionality}
 }
 \description{
 This function plots anatograms of specified tissues, species, and sex .
