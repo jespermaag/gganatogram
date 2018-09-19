@@ -104,11 +104,11 @@ test_that("gganatogram",{
 
 
   ## plot all of the human female layers and check number
-  # should be 65, 63 tissues in key and background and outline
+  # should be 66, 64 tissues in key and background and outline
   hgFemale <- gganatogram(data=hgFemale_key,
     fillOutline='#a6bddb',
     organism='human', sex='female', fill="colour") + theme_void()
-  expect_equal(length(hgFemale$layers), 65)
+  expect_equal(length(hgFemale$layers), 66)
   # ninth layer should be "duodenum.2" as per hgFemale_key
   expect_equal(rownames(hgFemale$layers[[9]]$data[1])[[1]],
     "duodenum.2")
@@ -120,11 +120,11 @@ test_that("gganatogram",{
 
 
   ## plot all of the human male layers and check number
-  # 60 layers in key
+  # 61 layers in key
   hgMale <- gganatogram(data=hgMale_key,
     fillOutline='#a6bddb',
     organism='human', sex='male', fill="colour") + theme_void()
-  expect_equal(length(hgMale$layers), 62)
+  expect_equal(length(hgMale$layers), 63)
   # check some layers
   expect_equal(rownames(hgMale$layers[[9]]$data[1])[[1]],
     "caecum.2")

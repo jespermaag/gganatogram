@@ -2,26 +2,13 @@
 gganatogram
 -----------
 
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/muschellij2/gganatogram?branch=master&svg=true)](https://ci.appveyor.com/project/muschellij2/gganatogram)
-[![Travis build
-status](https://travis-ci.com/muschellij2/gganatogram.svg?branch=master)](https://travis-ci.com/muschellij2/gganatogram)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/jespermaag/gganatogram?branch=master&svg=true)](https://ci.appveyor.com/project/jespermaag/gganatogram) [![Travis build status](https://travis-ci.com/jespermaag/gganatogram.svg?branch=master)](https://travis-ci.com/jespermaag/gganatogram)
 
-Create anatogram images for different organisms. <br/> This package uses
-the tissue coordinates from the figure in Expression Atlas.
-<https://www.ebi.ac.uk/gxa/home> <br/>
-<https://github.com/ebi-gene-expression-group/anatomogram> <br/>
+Create anatogram images for different organisms. <br/> This package uses the tissue coordinates from the figure in Expression Atlas. <https://www.ebi.ac.uk/gxa/home> <br/> <https://github.com/ebi-gene-expression-group/anatomogram> <br/>
 
-If you use gganatogram please cite Expression Atlas as well. <br/>
-[Petryszak et
-al. 2015](https://academic.oup.com/nar/article/44/D1/D746/2502589) <br/>
-Petryszak, Robert, Maria Keays, Y. Amy Tang, Nuno A. Fonseca, Elisabet
-Barrera, Tony Burdett, Anja Füllgrabe et al. “Expression Atlas update—an
-integrated database of gene and protein expression in humans, animals
-and plants.” Nucleic acids research 44, no. D1 (2015): D746-D752.
+If you use gganatogram please cite Expression Atlas as well. <br/> [Petryszak et al. 2015](https://academic.oup.com/nar/article/44/D1/D746/2502589) <br/> Petryszak, Robert, Maria Keays, Y. Amy Tang, Nuno A. Fonseca, Elisabet Barrera, Tony Burdett, Anja Füllgrabe et al. "Expression Atlas update—an integrated database of gene and protein expression in humans, animals and plants." Nucleic acids research 44, no. D1 (2015): D746-D752.
 
-More plot examples can be found at
-<https://jespermaag.github.io/blog/2018/gganatogram/>
+More plot examples can be found at <https://jespermaag.github.io/blog/2018/gganatogram/>
 
 Install
 -------
@@ -36,8 +23,7 @@ devtools::install_github("jespermaag/gganatogram")
 Usage
 -----
 
-This package requires `ggplot2` and `ggpolypath` which loads when
-loading the package
+This package requires `ggplot2` and `ggpolypath` which loads when loading the package
 
 ``` r
 
@@ -49,6 +35,7 @@ Available organisms
 
 ``` r
 library(gridExtra)
+#> Warning: package 'gridExtra' was built under R version 3.4.1
 #> 
 #> Attaching package: 'gridExtra'
 #> The following object is masked from 'package:dplyr':
@@ -64,8 +51,7 @@ grid.arrange(hgMale, hgFemale, mmMale, mmFemale, ncol=4)
 
 ![](figure/AllSpeciesPlot-1.svg)
 
-In order to use the function gganatogram, you need to have a data frame
-with organ, colour, and value if you want to.
+In order to use the function gganatogram, you need to have a data frame with organ, colour, and value if you want to.
 
 ``` r
 organPlot <- data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver", "stomach", "colon"), 
@@ -84,8 +70,7 @@ organPlot <- data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver
 #> 6   stomach      digestion orange     5
 ```
 
-Using the function gganatogram with the filling the organs based on
-colour.
+Using the function gganatogram with the filling the organs based on colour.
 
 ``` r
 gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="colour")
@@ -93,8 +78,7 @@ gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male',
 
 ![](figure/organPlot-1.svg)
 
-Of course, we can use the ggplot themes and functions to adjust the
-plots
+Of course, we can use the ggplot themes and functions to adjust the plots
 
 ``` r
 gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + 
@@ -112,31 +96,32 @@ hgMale_key$organ
 #>  [5] "gastroesophageal_junction" "left_ventricle"           
 #>  [7] "caecum"                    "ileum"                    
 #>  [9] "rectum"                    "nose"                     
-#> [11] "tongue"                    "left_atrium"              
-#> [13] "pulmonary_valve"           "mitral_valve"             
-#> [15] "penis"                     "nasal_pharynx"            
-#> [17] "spinal_cord"               "throat"                   
-#> [19] "tricuspid_valve"           "diaphragm"                
-#> [21] "liver"                     "stomach"                  
-#> [23] "spleen"                    "duodenum"                 
-#> [25] "gall_bladder"              "pancreas"                 
-#> [27] "colon"                     "small_intestine"          
-#> [29] "appendix"                  "smooth_muscle"            
-#> [31] "urinary_bladder"           "bone"                     
-#> [33] "cartilage"                 "esophagus"                
-#> [35] "skin"                      "pleura"                   
-#> [37] "brain"                     "heart"                    
-#> [39] "lymph_node"                "adipose_tissue"           
-#> [41] "skeletal_muscle"           "leukocyte"                
-#> [43] "temporal_lobe"             "atrial_appendage"         
-#> [45] "coronary_artery"           "hippocampus"              
-#> [47] "vas_deferens"              "seminal_vesicle"          
-#> [49] "epididymis"                "tonsil"                   
-#> [51] "lung"                      "trachea"                  
-#> [53] "bronchus"                  "nerve"                    
-#> [55] "cerebellum"                "cerebellar_hemisphere"    
-#> [57] "kidney"                    "renal_cortex"             
-#> [59] "testis"                    "prostate"
+#> [11] "breast"                    "tongue"                   
+#> [13] "left_atrium"               "pulmonary_valve"          
+#> [15] "mitral_valve"              "penis"                    
+#> [17] "nasal_pharynx"             "spinal_cord"              
+#> [19] "throat"                    "tricuspid_valve"          
+#> [21] "diaphragm"                 "liver"                    
+#> [23] "stomach"                   "spleen"                   
+#> [25] "duodenum"                  "gall_bladder"             
+#> [27] "pancreas"                  "colon"                    
+#> [29] "small_intestine"           "appendix"                 
+#> [31] "smooth_muscle"             "urinary_bladder"          
+#> [33] "bone"                      "cartilage"                
+#> [35] "esophagus"                 "skin"                     
+#> [37] "pleura"                    "brain"                    
+#> [39] "heart"                     "lymph_node"               
+#> [41] "adipose_tissue"            "skeletal_muscle"          
+#> [43] "leukocyte"                 "temporal_lobe"            
+#> [45] "atrial_appendage"          "coronary_artery"          
+#> [47] "hippocampus"               "vas_deferens"             
+#> [49] "seminal_vesicle"           "epididymis"               
+#> [51] "tonsil"                    "lung"                     
+#> [53] "trachea"                   "bronchus"                 
+#> [55] "nerve"                     "cerebellum"               
+#> [57] "cerebellar_hemisphere"     "kidney"                   
+#> [59] "renal_cortex"              "testis"                   
+#> [61] "prostate"
 gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") +theme_void()
 ```
 
@@ -149,6 +134,7 @@ organPlot %>%
     dplyr::filter(type %in% c('circulation', 'nervous system')) %>%
 gganatogram(outline=F, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + 
 theme_void()
+#> Warning: package 'bindrcpp' was built under R version 3.4.4
 ```
 
 ![](figure/organPlotSubset-1.svg)
@@ -163,9 +149,8 @@ scale_fill_gradient(low = "white", high = "red")
 
 ![](figure/organPlotValue-1.svg)
 
-We can also use facet\_wrap to compare groups.  
-First create add two data frames together with different values and the
-conditions in the type column
+We can also use facet\_wrap to compare groups.
+First create add two data frames together with different values and the conditions in the type column
 
 ``` r
 compareGroups <- rbind(data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver", "stomach", "colon"), 
@@ -237,7 +222,7 @@ hgFemale_key$organ
 #> [57] "hippocampus"               "pleura"                   
 #> [59] "bronchus"                  "trachea"                  
 #> [61] "lung"                      "tonsil"                   
-#> [63] "spinal_cord"
+#> [63] "breast"                    "spinal_cord"
 gganatogram(data=hgFemale_key, outline = T, fillOutline='#a6bddb', organism='human', sex='female', fill="colour")  +theme_void()
 ```
 
