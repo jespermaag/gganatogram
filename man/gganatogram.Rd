@@ -41,6 +41,9 @@ sex='male', fill="colour")
 gganatogram(fillOutline='#a6bddb', organism='human',
 sex='female', fill="colour")
 
+gganatogram(fillOutline='#a6bddb', organism='mouse',
+sex='Male', fill="colour")
+
 
 #To add organs, create a data frame with specified tissues
 

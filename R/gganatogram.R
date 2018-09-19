@@ -31,6 +31,9 @@
 #' gganatogram(fillOutline='#a6bddb', organism='human',
 #' sex='female', fill="colour")
 #'
+#' gganatogram(fillOutline='#a6bddb', organism='mouse',
+#' sex='Male', fill="colour")
+#'
 #'
 #' #To add organs, create a data frame with specified tissues
 #'
@@ -105,9 +108,9 @@ gganatogram <- function(
         organism = match.arg(
             organism,
             choices = c("human", "mouse"))
+        sex = tolower(sex)
+        sex = match.arg(sex, choices = c("male", "female"))
         if (organism == 'human') {
-            sex = tolower(sex)
-            sex = match.arg(sex, choices = c("male", "female"))
             if (sex == 'male') {
                 anatogram <- gganatogram::hgMale_list
                 anatogram$outline <- anatogram$human_male_outline
