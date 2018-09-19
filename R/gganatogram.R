@@ -28,6 +28,12 @@
 #' gganatogram(fillOutline='#a6bddb', organism='human',
 #' sex='male', fill="colour")
 #'
+#' gganatogram(fillOutline='#a6bddb', organism='human',
+#' sex='female', fill="colour")
+#'
+#' gganatogram(fillOutline='#a6bddb', organism='mouse',
+#' sex='Male', fill="colour")
+#'
 #'
 #' #To add organs, create a data frame with specified tissues
 #'
@@ -97,8 +103,13 @@ gganatogram <- function(
     fill = 'colour',
     anatogram = NULL) {
 
-
     if (is.null(anatogram)) {
+        organism = tolower(organism)
+        organism = match.arg(
+            organism,
+            choices = c("human", "mouse"))
+        sex = tolower(sex)
+        sex = match.arg(sex, choices = c("male", "female"))
         if (organism == 'human') {
             if (sex == 'male') {
                 anatogram <- gganatogram::hgMale_list
@@ -145,9 +156,11 @@ gganatogram <- function(
                          ggplot2::aes(x = x, y = -y))
     if (outline) {
         p <- p + ggplot2::geom_polygon( fill=fillOutline )
-        p <- p + ggpolypath::geom_polypath(data = outliner, aes(group = group),fill = fillOutline,
-                                       colour = 'black',
-                                       size = 0.2)
+        p <- p + ggpolypath::geom_polypath(
+            data = outliner, aes(group = group),
+            fill = fillOutline,
+            colour = 'black',
+            size = 0.2)
     }
 
     make_color = function(x) {
@@ -180,7 +193,7 @@ gganatogram <- function(
                 p <-
                     p + ggpolypath::geom_polypath(
                         data = dat,
-                        aes(group=group),
+                        aes(group = group),
                         fill = organColour,
                         colour = "black",
                         size = 0.2

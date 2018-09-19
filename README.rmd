@@ -27,7 +27,6 @@ if (requireNamespace("git2r")) {
 } else {
   gh_user = "jespermaag"
 }
-
 ```
 
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/`r gh_user`/gganatogram?branch=master&svg=true)](https://ci.appveyor.com/project/`r gh_user`/gganatogram)
