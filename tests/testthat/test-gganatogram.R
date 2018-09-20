@@ -128,9 +128,9 @@ test_that("gganatogram",{
   # check some layers
   expect_equal(rownames(hgMale$layers[[9]]$data[1])[[1]],
     "caecum.2")
-  expect_equal(rownames(hgMale$layers[[62]]$data[1])[[1]],
+  expect_equal(rownames(hgMale$layers[[63]]$data[1])[[1]],
     "prostate.1")
-  expect_equal(rownames(hgMale$layers[[19]]$data[1])[[1]],
+  expect_equal(rownames(hgMale$layers[[20]]$data[1])[[1]],
     "spinal_cord.2")
 
   # plot all of the mouse female layers and check number
