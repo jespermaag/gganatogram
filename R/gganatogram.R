@@ -14,6 +14,8 @@
 #' @param anatogram A list, similar to \code{\link{hgMale_list}}
 #' that will create the outline and has the corresponding organ
 #' \code{data.frame}s in that list
+#' @param ggplot2_only If \code{TRUE}, will try to use only
+#' \code{ggplot2} functionality
 #'
 #' @keywords anatogram tissues organs
 #' @export
@@ -101,37 +103,13 @@ gganatogram <- function(
     organism = "human",
     sex = 'male',
     fill = 'colour',
-    anatogram = NULL) {
+    anatogram = NULL,
+    ggplot2_only = FALSE) {
 
-    if (is.null(anatogram)) {
-        organism = tolower(organism)
-        organism = match.arg(
-            organism,
-            choices = c("human", "mouse"))
-        sex = tolower(sex)
-        sex = match.arg(sex, choices = c("male", "female"))
-        if (organism == 'human') {
-            if (sex == 'male') {
-                anatogram <- gganatogram::hgMale_list
-                anatogram$outline <- anatogram$human_male_outline
-                anatogram$fillFigure <- anatogram$fillFigure
-            } else if ( sex == 'female') {
-                anatogram <- gganatogram::hgFemale_list
-                anatogram$outline <- anatogram$outline
-                anatogram$fillFigure <- anatogram$fillFigure
-            }
-        } else if (organism == 'mouse') {
-            if (sex == 'male') {
-                anatogram <- gganatogram::mmMale_list
-                anatogram$outline <- anatogram$outline
-                anatogram$fillFigure <- anatogram$LAYER_OUTLINE
-            } else if ( sex == 'female') {
-                anatogram <- gganatogram::mmFemale_list
-                anatogram$outline <- anatogram$outline
-                anatogram$fillFigure <- anatogram$LAYER_OUTLINE
-            }
-        }
-    }
+    anatogram = get_anatogram(
+        anatogram = anatogram,
+        organism = organism,
+        sex = sex)
     if (is.null(anatogram)) {
         stop("Defaults for organism not present. anatogram must be specified")
     }
@@ -152,15 +130,29 @@ gganatogram <- function(
         }
     }
 
+    path_func = ggpolypath::geom_polypath
+    poly_func = ggpolypath::geom_polypath
+    if (ggplot2_only) {
+        path_func = ggplot2::geom_path
+        poly_func = ggplot2::geom_polygon
+    }
+
     p <- ggplot2::ggplot(anatogram$fillFigure,
                          ggplot2::aes(x = x, y = -y))
     if (outline) {
         p <- p + ggplot2::geom_polygon( fill=fillOutline )
-        p <- p + ggpolypath::geom_polypath(
-            data = outliner, aes(group = group),
-            fill = fillOutline,
-            colour = 'black',
-            size = 0.2)
+        if (ggplot2_only) {
+            p <- p + path_func(
+                data = outliner, aes(group = group),
+                colour = 'black',
+                size = 0.2)
+        } else {
+            p <- p + path_func(
+                data = outliner, aes(group = group),
+                fill = fillOutline,
+                colour = 'black',
+                size = 0.2)
+        }
     }
 
     make_color = function(x) {
@@ -191,7 +183,7 @@ gganatogram <- function(
             if (fill == 'colour' || fill == "color") {
                 organColour <- data[Norgan, ]$colour
                 p <-
-                    p + ggpolypath::geom_polypath(
+                    p + poly_func(
                         data = dat,
                         aes(group = group),
                         fill = organColour,
@@ -201,7 +193,7 @@ gganatogram <- function(
 
             } else if (fill == 'value') {
                 p <-
-                    p + ggpolypath::geom_polypath(
+                    p + poly_func(
                         data = dat,
                         ggplot2::aes(fill = value, group=group),
                         colour = "black",
@@ -210,7 +202,7 @@ gganatogram <- function(
 
             } else {
                 p <-
-                    p + ggpolypath::geom_polypath(
+                    p + path_func(
                         data = dat,
                         colour = "black",
                         size = 0.2)
