@@ -113,7 +113,7 @@ test_that("gganatogram",{
   expect_equal(rownames(hgFemale$layers[[9]]$data[1])[[1]],
     "duodenum.2")
   # check some other layers
-  expect_equal(rownames(hgFemale$layers[[65]]$data[1])[[1]],
+  expect_equal(rownames(hgFemale$layers[[66]]$data[1])[[1]],
     "spinal_cord.2")
   expect_equal(rownames(hgFemale$layers[[54]]$data[1])[[1]],
     "uterus.2")
