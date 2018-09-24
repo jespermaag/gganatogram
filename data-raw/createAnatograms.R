@@ -122,11 +122,8 @@ hgFemale_list[['fallopian_tube-96']]$x <- hgFemale_list[['fallopian_tube-96']]$x
 library(DescTools)
 
 fall<- do.call(rbind, hgFemale_list[grep('fallopian_tube|uterus', names(hgFemale_list))])
-plot(fall$x, fall$y)
+plot(fall$x, fall$y, ylim=c(80, 99))
 lines(fall$x, fall$y)  
-
-
-
 DrawEllipse(x=46.9, y=91, radius.x=1, radius.y=0.6, rot=20, col='red')
 DrawEllipse(x=58.5, y=91, radius.x=1, radius.y=0.6, rot=2, col='red')
 DrawEllipse(x=48.6, y=90.5, radius.x=0.1, radius.y=1.2, rot=20, col='red')
@@ -162,21 +159,6 @@ DrawEllipse(x=56.8, y=90.5, radius.x=0.1, radius.y=1.2, rot=2, col='red')
                 y =  DrawEllipse(x=56.8, y=90.5, radius.x=0.1, radius.y=1.2, rot=2)$y,
                 group = 'overy22',
                 stringsAsFactors = F)
-
-
-fall<- do.call(rbind, hgFemale_list[grep('outline', names(hgFemale_list))])
-breast1 <- DrawEllipse(x=43.5, y=47, radius.x=5, radius.y=5, col='red')
-breast1 <- data.frame(x = breast1$x, y = breast1$y)
-hgFemale_list[['breast-1']] <- data.frame(X1 = breast1$x, X2 = breast1$y, id='breast', x = breast1$x, y = breast1$y, group = 'breast1', stringsAsFactors = F)
-breast2 <- DrawEllipse(x=62, y=47, radius.x=5, radius.y=5, col='red')
-breast2 <- data.frame(x = breast2$x, y = breast2$y)
-hgFemale_list[['breast-2']] <- data.frame(X1 = breast2$x, X2 = breast2$y, id='breast', x = breast2$x, y = breast2$y, group = 'breast2', stringsAsFactors = F)
-
-
-gganatogram(data = NULL, outline = TRUE, fillOutline = "lightgray", organism = "human", sex = "female", fill = "colour", anatogram = NULL) +
-    geom_polygon(data = breast1, aes(x = x , y = -y), fill='red') +
-    geom_polygon(data = breast2, aes(x = x , y = -y), fill='red')
-
 #lines(hgFemale_list[['ovary-1']]$x, -hgFemale_list[['ovary-1']]$y)
 #lines(test$x, -test$y)
 #test <- DrawEllipse(x=58.5, y=-91, radius.x=1, radius.y=0.6, rot=20)

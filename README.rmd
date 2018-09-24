@@ -31,8 +31,7 @@ if (requireNamespace("git2r")) {
 
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/`r gh_user`/gganatogram?branch=master&svg=true)](https://ci.appveyor.com/project/`r gh_user`/gganatogram)
 [![Travis build status](https://travis-ci.com/`r gh_user`/gganatogram.svg?branch=master)](https://travis-ci.com/`r gh_user`/gganatogram)  
-[![DOI](https://zenodo.org/badge/147976052.svg)](https://zenodo.org/badge/latestdoi/147976052)
-
+  
 
 Create anatogram images for different organisms.  <br/>
 This package uses the tissue coordinates from the figure in Expression Atlas. [https://www.ebi.ac.uk/gxa/home](https://www.ebi.ac.uk/gxa/home)  <br/>
