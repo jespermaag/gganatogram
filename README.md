@@ -7,9 +7,16 @@ gganatogram
 
 Create anatogram images for different organisms. <br/> This package uses the tissue coordinates from the figure in Expression Atlas. <https://www.ebi.ac.uk/gxa/home> <br/> <https://github.com/ebi-gene-expression-group/anatomogram> <br/>
 
+Citation
+--------
+
+#### Maag JLV. gganatogram: An R package for modular visualisation of anatograms and tissues based on ggplot2 [version 1; referees: awaiting peer review]. F1000Research 2018, 7:1576 (doi: 10.12688/f1000research.16409.1)
+https://f1000research.com/articles/7-1576/v1
+
+
 If you use gganatogram please cite Expression Atlas as well. <br/> [Petryszak et al. 2015](https://academic.oup.com/nar/article/44/D1/D746/2502589) <br/> Petryszak, Robert, Maria Keays, Y. Amy Tang, Nuno A. Fonseca, Elisabet Barrera, Tony Burdett, Anja Füllgrabe et al. "Expression Atlas update—an integrated database of gene and protein expression in humans, animals and plants." Nucleic acids research 44, no. D1 (2015): D746-D752.
 
-More plot examples can be found at <https://jespermaag.github.io/blog/2018/gganatogram/>
+
 
 Install
 -------
@@ -24,8 +31,9 @@ devtools::install_github("jespermaag/gganatogram")
 Usage
 -----
 
-This package requires `ggplot2` and `ggpolypath` which loads when loading the package
+This package requires `ggplot2` and `ggpolypath` which loads when loading the package.
 
+More plot examples can be found at <https://jespermaag.github.io/blog/2018/gganatogram/>
 ``` r
 
 library(gganatogram)
