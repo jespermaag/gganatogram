@@ -2,11 +2,15 @@
 gganatogram
 -----------
 
+<<<<<<< HEAD
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/git@github.com:jespermaag/gganatogram?branch=master&svg=true)](https://ci.appveyor.com/project/git@github.com:jespermaag/gganatogram)
 [![Travis build
 status](https://travis-ci.com/git@github.com:jespermaag/gganatogram.svg?branch=master)](https://travis-ci.com/git@github.com:jespermaag/gganatogram)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1434233.svg)](https://doi.org/10.5281/zenodo.1434233)
+=======
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/jespermaag/gganatogram?branch=master&svg=true)](https://ci.appveyor.com/project/jespermaag/gganatogram) [![Travis build status](https://travis-ci.com/jespermaag/gganatogram.svg?branch=master)](https://travis-ci.com/jespermaag/gganatogram) [![DOI](https://zenodo.org/badge/147976052.svg)](https://zenodo.org/badge/latestdoi/147976052)
+
 >>>>>>> f4b49c0a8a8b2bb2edeee1ffc4eeff608b93d6ed
 
 Create anatogram images for different organisms. <br/> This package uses
@@ -16,6 +20,7 @@ the tissue coordinates from the figure in Expression Atlas.
 
 Citation
 --------
+<<<<<<< HEAD
 
 #### Maag JLV. gganatogram: An R package for modular visualisation of anatograms and tissues based on ggplot2 \[version 1; referees: awaiting peer review\]. F1000Research 2018, 7:1576 (doi: 10.12688/f1000research.16409.1)
 
@@ -51,6 +56,16 @@ and plants.” Nucleic acids research 44, no. D1 (2015): D746-D752.
 
 More plot examples can be found at
 <https://jespermaag.github.io/blog/2018/gganatogram/>
+=======
+
+#### Maag JLV. gganatogram: An R package for modular visualisation of anatograms and tissues based on ggplot2 [version 1; referees: awaiting peer review]. F1000Research 2018, 7:1576 (doi: 10.12688/f1000research.16409.1)
+https://f1000research.com/articles/7-1576/v1
+
+
+If you use gganatogram please cite Expression Atlas as well. <br/> [Petryszak et al. 2015](https://academic.oup.com/nar/article/44/D1/D746/2502589) <br/> Petryszak, Robert, Maria Keays, Y. Amy Tang, Nuno A. Fonseca, Elisabet Barrera, Tony Burdett, Anja Füllgrabe et al. "Expression Atlas update—an integrated database of gene and protein expression in humans, animals and plants." Nucleic acids research 44, no. D1 (2015): D746-D752.
+
+
+>>>>>>> f4b49c0a8a8b2bb2edeee1ffc4eeff608b93d6ed
 
 Install
 -------
@@ -65,9 +80,14 @@ devtools::install_github("jespermaag/gganatogram")
 Usage
 -----
 
+<<<<<<< HEAD
 This package requires `ggplot2` and `ggpolypath` which loads when
 loading the package
+=======
+This package requires `ggplot2` and `ggpolypath` which loads when loading the package.
+>>>>>>> f4b49c0a8a8b2bb2edeee1ffc4eeff608b93d6ed
 
+More plot examples can be found at <https://jespermaag.github.io/blog/2018/gganatogram/>
 ``` r
 
 library(gganatogram)
