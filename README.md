@@ -2,13 +2,54 @@
 gganatogram
 -----------
 
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/jespermaag/gganatogram?branch=master&svg=true)](https://ci.appveyor.com/project/jespermaag/gganatogram) [![Travis build status](https://travis-ci.com/jespermaag/gganatogram.svg?branch=master)](https://travis-ci.com/jespermaag/gganatogram)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/git@github.com:jespermaag/gganatogram?branch=master&svg=true)](https://ci.appveyor.com/project/git@github.com:jespermaag/gganatogram)
+[![Travis build
+status](https://travis-ci.com/git@github.com:jespermaag/gganatogram.svg?branch=master)](https://travis-ci.com/git@github.com:jespermaag/gganatogram)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1434233.svg)](https://doi.org/10.5281/zenodo.1434233)
 
-Create anatogram images for different organisms. <br/> This package uses the tissue coordinates from the figure in Expression Atlas. <https://www.ebi.ac.uk/gxa/home> <br/> <https://github.com/ebi-gene-expression-group/anatomogram> <br/>
+Create anatogram images for different organisms. <br/> This package uses
+the tissue coordinates from the figure in Expression Atlas.
+<https://www.ebi.ac.uk/gxa/home> <br/>
+<https://github.com/ebi-gene-expression-group/anatomogram> <br/>
 
-If you use gganatogram please cite Expression Atlas as well. <br/> [Petryszak et al. 2015](https://academic.oup.com/nar/article/44/D1/D746/2502589) <br/> Petryszak, Robert, Maria Keays, Y. Amy Tang, Nuno A. Fonseca, Elisabet Barrera, Tony Burdett, Anja Füllgrabe et al. "Expression Atlas update—an integrated database of gene and protein expression in humans, animals and plants." Nucleic acids research 44, no. D1 (2015): D746-D752.
+Citation
+--------
 
-More plot examples can be found at <https://jespermaag.github.io/blog/2018/gganatogram/>
+#### Maag JLV. gganatogram: An R package for modular visualisation of anatograms and tissues based on ggplot2 \[version 1; referees: awaiting peer review\]. F1000Research 2018, 7:1576 (doi: 10.12688/f1000research.16409.1)
+
+<https://f1000research.com/articles/7-1576/v1>
+
+``` r
+citation("gganatogram")
+#> 
+#> Maag J (2018). "gganatogram: An R package for modular
+#> visualisation of anatograms and tissues based on ggplot2."
+#> _f1000research_. Version 1: Awaiting peer review, <URL:
+#> https://f1000research.com/articles/7-1576/v1>.
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Article{,
+#>     title = {gganatogram:  An R package for modular visualisation of anatograms and tissues based on ggplot2},
+#>     author = {Jesper Maag},
+#>     journal = {f1000research},
+#>     year = {2018},
+#>     note = {Version 1: Awaiting peer review},
+#>     url = {https://f1000research.com/articles/7-1576/v1},
+#>   }
+```
+
+If you use gganatogram please cite Expression Atlas as well. <br/>
+[Petryszak et
+al. 2015](https://academic.oup.com/nar/article/44/D1/D746/2502589) <br/>
+Petryszak, Robert, Maria Keays, Y. Amy Tang, Nuno A. Fonseca, Elisabet
+Barrera, Tony Burdett, Anja Füllgrabe et al. “Expression Atlas update—an
+integrated database of gene and protein expression in humans, animals
+and plants.” Nucleic acids research 44, no. D1 (2015): D746-D752.
+
+More plot examples can be found at
+<https://jespermaag.github.io/blog/2018/gganatogram/>
 
 Install
 -------
@@ -23,19 +64,20 @@ devtools::install_github("jespermaag/gganatogram")
 Usage
 -----
 
-This package requires `ggplot2` and `ggpolypath` which loads when loading the package
+This package requires `ggplot2` and `ggpolypath` which loads when
+loading the package
 
 ``` r
 
 library(gganatogram)
 library(dplyr)
+#> Warning: package 'dplyr' was built under R version 3.5.1
 ```
 
 Available organisms
 
 ``` r
 library(gridExtra)
-#> Warning: package 'gridExtra' was built under R version 3.4.1
 #> 
 #> Attaching package: 'gridExtra'
 #> The following object is masked from 'package:dplyr':
@@ -51,7 +93,8 @@ grid.arrange(hgMale, hgFemale, mmMale, mmFemale, ncol=4)
 
 ![](figure/AllSpeciesPlot-1.svg)
 
-In order to use the function gganatogram, you need to have a data frame with organ, colour, and value if you want to.
+In order to use the function gganatogram, you need to have a data frame
+with organ, colour, and value if you want to.
 
 ``` r
 organPlot <- data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver", "stomach", "colon"), 
@@ -70,7 +113,8 @@ organPlot <- data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver
 #> 6   stomach      digestion orange     5
 ```
 
-Using the function gganatogram with the filling the organs based on colour.
+Using the function gganatogram with the filling the organs based on
+colour.
 
 ``` r
 gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="colour")
@@ -78,7 +122,8 @@ gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male',
 
 ![](figure/organPlot-1.svg)
 
-Of course, we can use the ggplot themes and functions to adjust the plots
+Of course, we can use the ggplot themes and functions to adjust the
+plots
 
 ``` r
 gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + 
@@ -134,7 +179,6 @@ organPlot %>%
     dplyr::filter(type %in% c('circulation', 'nervous system')) %>%
 gganatogram(outline=F, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + 
 theme_void()
-#> Warning: package 'bindrcpp' was built under R version 3.4.4
 ```
 
 ![](figure/organPlotSubset-1.svg)
@@ -149,8 +193,9 @@ scale_fill_gradient(low = "white", high = "red")
 
 ![](figure/organPlotValue-1.svg)
 
-We can also use facet\_wrap to compare groups.
-First create add two data frames together with different values and the conditions in the type column
+We can also use facet\_wrap to compare groups.  
+First create add two data frames together with different values and the
+conditions in the type column
 
 ``` r
 compareGroups <- rbind(data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver", "stomach", "colon"), 

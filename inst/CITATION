@@ -1,0 +1,7 @@
+bibentry(bibtype = "Article",
+         title = "gganatogram:  An R package for modular visualisation of anatograms and tissues based on ggplot2",
+         author = c(person("Jesper", "Maag")),
+         journal = "f1000research",
+         year = 2018,
+         note = "Version 1: Awaiting peer review",
+         url = "https://f1000research.com/articles/7-1576/v1")

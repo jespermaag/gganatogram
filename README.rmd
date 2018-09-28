@@ -30,12 +30,21 @@ if (requireNamespace("git2r")) {
 ```
 
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/`r gh_user`/gganatogram?branch=master&svg=true)](https://ci.appveyor.com/project/`r gh_user`/gganatogram)
-[![Travis build status](https://travis-ci.com/`r gh_user`/gganatogram.svg?branch=master)](https://travis-ci.com/`r gh_user`/gganatogram)  
+[![Travis build status](https://travis-ci.com/`r gh_user`/gganatogram.svg?branch=master)](https://travis-ci.com/`r gh_user`/gganatogram)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1434233.svg)](https://doi.org/10.5281/zenodo.1434233)
   
 
 Create anatogram images for different organisms.  <br/>
 This package uses the tissue coordinates from the figure in Expression Atlas. [https://www.ebi.ac.uk/gxa/home](https://www.ebi.ac.uk/gxa/home)  <br/>
 [https://github.com/ebi-gene-expression-group/anatomogram](https://github.com/ebi-gene-expression-group/anatomogram)  <br/>
+
+## Citation
+#### Maag JLV. gganatogram: An R package for modular visualisation of anatograms and tissues based on ggplot2 [version 1; referees: awaiting peer review]. F1000Research 2018, 7:1576 (doi: 10.12688/f1000research.16409.1)
+https://f1000research.com/articles/7-1576/v1
+
+```{r}
+citation("gganatogram")
+```
 
 If you use gganatogram please cite Expression Atlas as well. <br/>
 [Petryszak et al. 2015](https://academic.oup.com/nar/article/44/D1/D746/2502589) <br/>
