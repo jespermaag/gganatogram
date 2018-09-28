@@ -7,6 +7,7 @@ status](https://ci.appveyor.com/api/projects/status/github/git@github.com:jesper
 [![Travis build
 status](https://travis-ci.com/git@github.com:jespermaag/gganatogram.svg?branch=master)](https://travis-ci.com/git@github.com:jespermaag/gganatogram)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1434233.svg)](https://doi.org/10.5281/zenodo.1434233)
+>>>>>>> f4b49c0a8a8b2bb2edeee1ffc4eeff608b93d6ed
 
 Create anatogram images for different organisms. <br/> This package uses
 the tissue coordinates from the figure in Expression Atlas.
