@@ -29,8 +29,8 @@ if (requireNamespace("git2r")) {
 }
 ```
 
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/`r gh_user`/gganatogram?branch=master&svg=true)](https://ci.appveyor.com/project/`r gh_user`/gganatogram)
-[![Travis build status](https://travis-ci.com/`r gh_user`/gganatogram.svg?branch=master)](https://travis-ci.com/`r gh_user`/gganatogram)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/jespermaag/gganatogram?branch=master&svg=true)](https://ci.appveyor.com/project/`r gh_user`/gganatogram)
+[![Travis build status](https://travis-ci.com/jespermaag/gganatogram.svg?branch=master)](https://travis-ci.com/`r gh_user`/gganatogram)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1434233.svg)](https://doi.org/10.5281/zenodo.1434233)
   
 

@@ -3,9 +3,9 @@ gganatogram
 -----------
 
 [![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/git@github.com:jespermaag/gganatogram?branch=master&svg=true)](https://ci.appveyor.com/project/git@github.com:jespermaag/gganatogram)
+status](https://ci.appveyor.com/api/projects/status/github/jespermaag/gganatogram?branch=master&svg=true)](https://ci.appveyor.com/project/git@github.com:jespermaag/gganatogram)
 [![Travis build
-status](https://travis-ci.com/git@github.com:jespermaag/gganatogram.svg?branch=master)](https://travis-ci.com/git@github.com:jespermaag/gganatogram)
+status](https://travis-ci.com/jespermaag/gganatogram.svg?branch=master)](https://travis-ci.com/git@github.com:jespermaag/gganatogram)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1434233.svg)](https://doi.org/10.5281/zenodo.1434233)
 
 Create anatogram images for different organisms. <br/> This package uses
@@ -71,12 +71,18 @@ loading the package
 
 library(gganatogram)
 library(dplyr)
+#> Warning: package 'dplyr' was built under R version 3.5.1
 ```
 
 Available organisms
 
 ``` r
 library(gridExtra)
+#> 
+#> Attaching package: 'gridExtra'
+#> The following object is masked from 'package:dplyr':
+#> 
+#>     combine
 hgMale <- gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + theme_void()
 hgFemale <- gganatogram(data=hgFemale_key, fillOutline='#a6bddb', organism='human', sex='female', fill="colour") + theme_void()
 mmMale <- gganatogram(data=mmMale_key, fillOutline='#a6bddb', organism='mouse', sex='male', fill="colour") + theme_void()
