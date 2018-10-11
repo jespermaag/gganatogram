@@ -108,14 +108,14 @@ test_that("gganatogram",{
   hgFemale <- gganatogram(data=hgFemale_key,
     fillOutline='#a6bddb',
     organism='human', sex='female', fill="colour") + theme_void()
-  expect_equal(length(hgFemale$layers), 66)
+  expect_equal(length(hgFemale$layers), 72)
   # ninth layer should be "duodenum.2" as per hgFemale_key
   expect_equal(rownames(hgFemale$layers[[9]]$data[1])[[1]],
     "duodenum.2")
   # check some other layers
-  expect_equal(rownames(hgFemale$layers[[66]]$data[1])[[1]],
+  expect_equal(rownames(hgFemale$layers[[72]]$data[1])[[1]],
     "spinal_cord.2")
-  expect_equal(rownames(hgFemale$layers[[54]]$data[1])[[1]],
+  expect_equal(rownames(hgFemale$layers[[59]]$data[1])[[1]],
     "uterus.2")
 
 
@@ -124,13 +124,13 @@ test_that("gganatogram",{
   hgMale <- gganatogram(data=hgMale_key,
     fillOutline='#a6bddb',
     organism='human', sex='male', fill="colour") + theme_void()
-  expect_equal(length(hgMale$layers), 63)
+  expect_equal(length(hgMale$layers), 70)
   # check some layers
-  expect_equal(rownames(hgMale$layers[[9]]$data[1])[[1]],
+  expect_equal(rownames(hgMale$layers[[11]]$data[1])[[1]],
     "caecum.2")
-  expect_equal(rownames(hgMale$layers[[63]]$data[1])[[1]],
+  expect_equal(rownames(hgMale$layers[[70]]$data[1])[[1]],
     "prostate.1")
-  expect_equal(rownames(hgMale$layers[[20]]$data[1])[[1]],
+  expect_equal(rownames(hgMale$layers[[22]]$data[1])[[1]],
     "spinal_cord.2")
 
   # plot all of the mouse female layers and check number

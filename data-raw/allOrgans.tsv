@@ -1,0 +1,68 @@
+thyroid gland	hormone
+bone marrow	other
+frontal cortex	nerve
+prefrontal cortex	nerve
+pituitary gland	hormone
+aorta	circulation
+gastroesophageal junction	digestion
+left ventricle	circulation
+caecum	digestion
+ileum	digestion
+rectum	digestion
+nose	other
+breast	other
+tongue	digestion
+left atrium	circulation
+pulmonary valve	circulation
+mitral valve	circulation
+penis	reproductive
+nasal pharynx	other
+spinal cord	nerve
+throat	digestion
+tricuspid valve	other
+diaphragm	respiratory
+liver	digestion
+stomach	digestion
+spleen	digestion
+duodenum	digestion
+gall bladder	digestion
+pancreas	digestion
+colon	digestion
+small intestine	digestion
+appendix	other
+smooth muscle	other
+urinary bladder	digestion
+bone	other
+cartilage	other
+esophagus	digestion
+salivary gland	hormone
+parotid gland	hormone
+submandibular gland	hormone
+skin	other
+pleura	other
+brain	nerve
+heart	circulation
+adrenal_gland	hormone
+lymph_node	circulation
+adipose_tissue	other
+skeletal_muscle	other
+leukocyte	circulation
+temporal_lobe	nerve
+atrial_appendage	other
+coronary_artery	circulation
+hippocampus	nerve
+vas_deferens	nerve
+seminal_vesicle	reproductive
+epididymis	reproductive
+tonsil	digestion
+lung	respiratory
+amygdala	nerve
+trachea	digestion
+bronchus	respiratory
+nerve	nerve
+cerebellum	nerve
+cerebellar_hemisphere	nerve
+kidney	digestion
+renal_cortex	digestion
+testis	reproductive
+prostate	reproductive
