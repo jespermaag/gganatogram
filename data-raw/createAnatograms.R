@@ -114,14 +114,14 @@ names(hgMale_list) <- gsub(' ', '_', names(hgMale_list) )
 
 
 allAnatomy <- read.table('allOrgans.tsv', sep='\t', stringsAsFactors=F)
-organColour <- data.frame(type = c('circulation', 'nerve', 'digestion', 'respiratory', 'hormone','other', 'reproductive'),
-                            colour = c('red', 'purple', 'orange', 'steelblue', 'yellow', '#41ab5d', '#d95f02'), stringsAsFactors=F)
+organColour <- data.frame(type = c('circulation', 'nerve', 'digestion', 'respiratory','other', 'reproductive'),
+                            colour = c('red', 'purple', 'orange', 'steelblue',  '#41ab5d', '#d95f02'), stringsAsFactors=F)
 allAnatomy$colour <- organColour[match(allAnatomy$V2, organColour$type),]$colour
 colnames(allAnatomy) <- c('organ', 'type', 'colour')
 allAnatomy[allAnatomy$type=='nerve',]$type <- 'nervous_system'
 allAnatomy$organ <- gsub(' ', '_', allAnatomy$organ)
 #allAnatomy <- allAnatomy[! allAnatomy$organ %in% c('amygdala','pituitary gland'),]
-#allAnatomy <- allAnatomy[!allAnatomy$type %in% 'hormone',]
+#allAnatomy <- allAnatomy[!allAnatomy$type %in% 'other',]
 hgMale_key <- allAnatomy
 hgMale_key$value <- runif(nrow(hgMale_key), 0, 20)
 
@@ -284,7 +284,7 @@ hgFemale_key$type <- allAnatomy[match(hgFemale_key$organ, allAnatomy$organ),]$ty
 hgFemale_key <- hgFemale_key[!hgFemale_key$organ %in% c('LAYER_OUTLINE', 'outline', 'fillFigure', 'amygdala'),]
 hgFemale_key$colour[is.na(hgFemale_key$colour)]  <- '#d95f02'
 hgFemale_key$type[is.na(hgFemale_key$type)]  <- 'reproductive'
-#hgFemale_key <- hgFemale_key[!hgFemale_key$type %in% 'hormone',]
+#hgFemale_key <- hgFemale_key[!hgFemale_key$type %in% 'other',]
 hgFemale_key[hgFemale_key$organ=='cerebral_cortex',]$type <- 'nervous_system'
 hgFemale_key[hgFemale_key$organ=='nasal_septum',]$type <- 'other'
 #hgFemale_key <- hgFemale_key[grep('gland', hgFemale_key$organ, invert=T),]
@@ -294,7 +294,7 @@ hgFemale_key <- hgFemale_key[!hgFemale_key$organ %in% c('path3584', 'path9'),]
 #gganatogram(data=hgFemale_key, outline = F, fillOutline='#a6bddb', organism='human', sex='female', fill="colour") +facet_wrap(~type, ncol=4) +theme_classic()
 
 #hgFemale_key %>%
-#    dplyr::filter(type =='hormone') %>%
+#    dplyr::filter(type =='other') %>%
 #    mutate(type = organ) %>%
 #    gganatogram( outline=F, fillOutline='#a6bddb', organism='human', sex='female', fill="colour") +facet_wrap(~type, ncol=4) +theme_classic()
 
@@ -428,14 +428,14 @@ install('gganatogram')
 #gganatogram(data=hgFemale_key[hgFemale_key$type=='nervous_system',], outline = T, fillOutline='#a6bddb', organism='human', sex='female', fill="colour") +facet_wrap(~type, ncol=4) +theme_classic()
 
 
-gganatogram(data=hgFemale_key, outline = T, fillOutline='#a6bddb', organism='human', sex='female', fill="colour") +facet_wrap(~type, ncol=4) +theme_classic()
-gganatogram(data=hgMale_key, outline = T, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") +facet_wrap(~type, ncol=4) +theme_classic()
+gganatogram(data=hgFemale_key, outline = T, fillOutline='#a6bddb', organism='human', sex='female', fill="colour") +facet_wrap(~type, ncol=3) +theme_classic()
+gganatogram(data=hgMale_key, outline = T, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") +facet_wrap(~type, ncol=3) +theme_classic()
 gganatogram(data=mmMale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='male', fill="colour") +facet_wrap(~type, ncol=4) +theme_classic()
 gganatogram(data=mmFemale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='female', fill="colour") +facet_wrap(~type, ncol=4) +theme_classic()
 
 
 hgMale_key %>%
-    dplyr::filter(type =='hormone') %>%
+    dplyr::filter(type =='other') %>%
     dplyr::filter(!organ =='path9') %>%
     mutate(type = organ) %>%
     gganatogram( outline=T, fillOutline='#a6bddb', organism='human', sex='male', fill="colour")  +theme_classic()+ facet_wrap(~type) 
