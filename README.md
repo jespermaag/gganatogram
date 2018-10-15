@@ -449,7 +449,11 @@ other_key[["bos_taurus"]]
 #> 26 UBERON_0014892 other #E5C494  3.461740
 #> 27 UBERON_0014892 other #B3B3B3 18.595027
 
-gganatogram(data=other_key[["bos_taurus"]], outline = T, fillOutline='white', organism="bos_taurus", sex='female', fill="colour")  +theme_void() +ggtitle("bos_taurus") + theme(plot.title = element_text(hjust=0.5)) + coord_fixed()
+gganatogram(data=other_key[["bos_taurus"]], outline = T, fillOutline='white', organism="bos_taurus", sex='female', fill="colour")  +
+        theme_void() +
+        ggtitle("bos_taurus") + 
+        theme(plot.title = element_text(hjust=0.5)) + 
+        coord_fixed()
 ```
 
 ![](figure/bosTaurus-1.svg)
@@ -460,17 +464,49 @@ Here is a way to loop through all the other organisms and plot their organs.
 library(gridExtra)
 plotList <- list()
 for (organism in names(other_key)) {
-    plotList[[organism]] <- gganatogram(data=other_key[[organism]], outline = T, fillOutline='white', organism=organism, sex='female', fill="colour")  +theme_void() +ggtitle(organism) + theme(plot.title = element_text(hjust=0.5, size=9)) + coord_fixed()
+    plotList[[organism]] <- gganatogram(data=other_key[[organism]], outline = T, fillOutline='white', organism=organism, sex='female', fill="colour")  +
+                theme_void() +
+                ggtitle(organism) + 
+                theme(plot.title = element_text(hjust=0.5, size=9)) + 
+                coord_fixed()
 }
 
-do.call(grid.arrange,  c(plotList[1:12], ncol=3))
+do.call(grid.arrange,  c(plotList[1:4], ncol=2))
 ```
 
 ![](figure/othersFirst12-1.svg)
 
 ``` r
 
-do.call(grid.arrange,  c(plotList[13:24], ncol=3))
+do.call(grid.arrange,  c(plotList[5:8], ncol=2))
 ```
 
 ![](figure/othersFirst12-2.svg)
+
+``` r
+
+do.call(grid.arrange,  c(plotList[9:12], ncol=2))
+```
+
+![](figure/othersFirst12-3.svg)
+
+``` r
+
+do.call(grid.arrange,  c(plotList[13:16], ncol=2))
+```
+
+![](figure/othersFirst12-4.svg)
+
+``` r
+
+do.call(grid.arrange,  c(plotList[17:20], ncol=2))
+```
+
+![](figure/othersFirst12-5.svg)
+
+``` r
+
+do.call(grid.arrange,  c(plotList[21:24], ncol=2))
+```
+
+![](figure/othersFirst12-6.svg)

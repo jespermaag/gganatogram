@@ -238,7 +238,11 @@ Unfortunately, I have not managed to add the correct names yet.
 ```{r,  eval=TRUE, bosTaurus}
 other_key[["bos_taurus"]]
 
-gganatogram(data=other_key[["bos_taurus"]], outline = T, fillOutline='white', organism="bos_taurus", sex='female', fill="colour")  +theme_void() +ggtitle("bos_taurus") + theme(plot.title = element_text(hjust=0.5)) + coord_fixed()
+gganatogram(data=other_key[["bos_taurus"]], outline = T, fillOutline='white', organism="bos_taurus", sex='female', fill="colour")  +
+        theme_void() +
+        ggtitle("bos_taurus") + 
+        theme(plot.title = element_text(hjust=0.5)) + 
+        coord_fixed()
 ```
 
 Here is a way to loop through all the other organisms and plot their organs.
@@ -247,10 +251,24 @@ Here is a way to loop through all the other organisms and plot their organs.
 library(gridExtra)
 plotList <- list()
 for (organism in names(other_key)) {
-    plotList[[organism]] <- gganatogram(data=other_key[[organism]], outline = T, fillOutline='white', organism=organism, sex='female', fill="colour")  +theme_void() +ggtitle(organism) + theme(plot.title = element_text(hjust=0.5, size=9)) + coord_fixed()
+    plotList[[organism]] <- gganatogram(data=other_key[[organism]], outline = T, fillOutline='white', organism=organism, sex='female', fill="colour")  +
+                theme_void() +
+                ggtitle(organism) + 
+                theme(plot.title = element_text(hjust=0.5, size=9)) + 
+                coord_fixed()
 }
 
-do.call(grid.arrange,  c(plotList[1:12], ncol=3))
+do.call(grid.arrange,  c(plotList[1:4], ncol=2))
 
-do.call(grid.arrange,  c(plotList[13:24], ncol=3))
+do.call(grid.arrange,  c(plotList[5:8], ncol=2))
+
+do.call(grid.arrange,  c(plotList[9:12], ncol=2))
+
+do.call(grid.arrange,  c(plotList[13:16], ncol=2))
+
+do.call(grid.arrange,  c(plotList[17:20], ncol=2))
+
+do.call(grid.arrange,  c(plotList[21:24], ncol=2))
+
+
 ```
