@@ -393,37 +393,6 @@ names(other_key)
 #> [22] "xenopus_tropicalis"                  
 #> [23] "zea_mays.flower_parts"               
 #> [24] "zea_mays.whole_plant"
-
-length(other_list)
-#> [1] 27
-names(other_list)
-#>  [1] "anolis_carolinensis"                 
-#>  [2] "arabidopsis_thaliana"                
-#>  [3] "bos_taurus"                          
-#>  [4] "brachypodium_distachyon.flower_parts"
-#>  [5] "brachypodium_distachyon.whole_plant" 
-#>  [6] "gallus_gallus"                       
-#>  [7] "homo_sapiens.brain"                  
-#>  [8] "hordeum_vulgare.flower_parts"        
-#>  [9] "hordeum_vulgare.whole_plant"         
-#> [10] "macaca_mulatta"                      
-#> [11] "monodelphis_domestica"               
-#> [12] "mus_musculus.brain"                  
-#> [13] "oryza_sativa.flower_parts"           
-#> [14] "oryza_sativa.whole_plant"            
-#> [15] "papio_anubis"                        
-#> [16] "rattus_norvegicus"                   
-#> [17] "solanum_lycopersicum.flower_parts"   
-#> [18] "solanum_lycopersicum.whole_plant"    
-#> [19] "solanum_tuberosum"                   
-#> [20] "sorghum_bicolor.flower_parts"        
-#> [21] "sorghum_bicolor.whole_plant"         
-#> [22] "tetraodon_nigroviridis"              
-#> [23] "triticum_aestivum.flower_parts"      
-#> [24] "triticum_aestivum.whole_plant"       
-#> [25] "xenopus_tropicalis"                  
-#> [26] "zea_mays.flower_parts"               
-#> [27] "zea_mays.whole_plant"
 ```
 
 To plot bos\_taurus use the following command. Unfortunately, I have not managed to add the correct names yet.

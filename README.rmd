@@ -227,9 +227,6 @@ Also, the organ names are so far a mix of UBERON and plant ids.
 length(other_key)
 names(other_key)
 
-length(other_list)
-names(other_list)
-
 ```
 
 To plot bos_taurus use the following command.
