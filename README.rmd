@@ -211,3 +211,46 @@ gganatogram(data=mmFemale_key, outline = T, fillOutline='#a6bddb', organism='mou
 
 gganatogram(data=mmFemale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='female', fill="colour")  +theme_void()+facet_wrap(~type, ncol=4)
 ```
+
+
+## Other organisms i.e. tier 2 organisms
+Expression atlas contains other organisms than human and mice, however, these are not as well anotated.  <br/>
+All the expression atlas anatograms can be found here https://ebi-gene-expression-group.github.io/anatomogram/   <br/>
+Unfortunately, I won't be able to add other organs to these since I'm neither an anatomist nor artist.    <br/>
+If anyone would like to add more organs, I would love for you to contribute.  <br/>
+  <br/>
+To create these plots, I have added two other objects other_key and other_list.  <br/>
+These are lists within lists, and to plot all the organs from an organisms use other_key[["organism"]] as data, and "organism" as organism.  <br/>
+Also, the organ names are so far a mix of UBERON and plant ids. 
+
+```{r}
+length(other_key)
+names(other_key)
+
+length(other_list)
+names(other_list)
+
+```
+
+To plot bos_taurus use the following command.
+Unfortunately, I have not managed to add the correct names yet.
+
+```{r,  eval=TRUE, bosTaurus}
+other_key[["bos_taurus"]]
+
+gganatogram(data=other_key[["bos_taurus"]], outline = T, fillOutline='white', organism="bos_taurus", sex='female', fill="colour")  +theme_void() +ggtitle("bos_taurus") + theme(plot.title = element_text(hjust=0.5)) + coord_fixed()
+```
+
+Here is a way to loop through all the other organisms and plot their organs.
+
+```{r, eval=TRUE, othersFirst12, figwidth = 12, figheight = 16, dpi = 200}
+library(gridExtra)
+plotList <- list()
+for (organism in names(other_key)) {
+    plotList[[organism]] <- gganatogram(data=other_key[[organism]], outline = T, fillOutline='white', organism=organism, sex='female', fill="colour")  +theme_void() +ggtitle(organism) + theme(plot.title = element_text(hjust=0.5, size=9)) + coord_fixed()
+}
+
+do.call(grid.arrange,  c(plotList[1:12], ncol=3))
+
+do.call(grid.arrange,  c(plotList[13:24], ncol=3))
+```

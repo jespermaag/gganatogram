@@ -207,7 +207,8 @@ gganatogram <- function(
                         colour = "black",
                         size = 0.2)
             }
-        }
+        } 
+        
     } else {
         # warning("No data to plot")
         return(p)

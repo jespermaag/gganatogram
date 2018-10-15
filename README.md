@@ -62,12 +62,6 @@ Available organisms
 
 ``` r
 library(gridExtra)
-#> Warning: package 'gridExtra' was built under R version 3.4.1
-#> 
-#> Attaching package: 'gridExtra'
-#> The following object is masked from 'package:dplyr':
-#> 
-#>     combine
 hgMale <- gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + theme_void()
 hgFemale <- gganatogram(data=hgFemale_key, fillOutline='#a6bddb', organism='human', sex='female', fill="colour") + theme_void()
 mmMale <- gganatogram(data=mmMale_key, fillOutline='#a6bddb', organism='mouse', sex='male', fill="colour") + theme_void()
@@ -164,7 +158,6 @@ organPlot %>%
     dplyr::filter(type %in% c('circulation', 'nervous system')) %>%
 gganatogram(outline=F, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + 
 theme_void()
-#> Warning: package 'bindrcpp' was built under R version 3.4.4
 ```
 
 ![](figure/organPlotSubset-1.svg)
@@ -366,3 +359,118 @@ gganatogram(data=mmFemale_key, outline = T, fillOutline='#a6bddb', organism='mou
 ```
 
 ![](figure/femaleMouseOrgan-1.svg)
+
+Other organisms i.e. tier 2 organisms
+-------------------------------------
+
+Expression atlas contains other organisms than human and mice, however, these are not as well anotated. <br/> All the expression atlas anatograms can be found here <https://ebi-gene-expression-group.github.io/anatomogram/> <br/> Unfortunately, I won't be able to add other organs to these since I'm neither an anatomist nor artist. <br/> If anyone would like to add more organs, I would love for you to contribute. <br/> <br/> To create these plots, I have added two other objects other\_key and other\_list. <br/> These are lists within lists, and to plot all the organs from an organisms use other\_key\[\["organism"\]\] as data, and "organism" as organism. <br/> Also, the organ names are so far a mix of UBERON and plant ids.
+
+``` r
+length(other_key)
+#> [1] 24
+names(other_key)
+#>  [1] "anolis_carolinensis"                 
+#>  [2] "arabidopsis_thaliana"                
+#>  [3] "bos_taurus"                          
+#>  [4] "brachypodium_distachyon.flower_parts"
+#>  [5] "brachypodium_distachyon.whole_plant" 
+#>  [6] "gallus_gallus"                       
+#>  [7] "hordeum_vulgare.flower_parts"        
+#>  [8] "hordeum_vulgare.whole_plant"         
+#>  [9] "macaca_mulatta"                      
+#> [10] "monodelphis_domestica"               
+#> [11] "oryza_sativa.flower_parts"           
+#> [12] "oryza_sativa.whole_plant"            
+#> [13] "papio_anubis"                        
+#> [14] "rattus_norvegicus"                   
+#> [15] "solanum_lycopersicum.flower_parts"   
+#> [16] "solanum_lycopersicum.whole_plant"    
+#> [17] "sorghum_bicolor.flower_parts"        
+#> [18] "sorghum_bicolor.whole_plant"         
+#> [19] "tetraodon_nigroviridis"              
+#> [20] "triticum_aestivum.flower_parts"      
+#> [21] "triticum_aestivum.whole_plant"       
+#> [22] "xenopus_tropicalis"                  
+#> [23] "zea_mays.flower_parts"               
+#> [24] "zea_mays.whole_plant"
+
+length(other_list)
+#> [1] 27
+names(other_list)
+#>  [1] "anolis_carolinensis"                 
+#>  [2] "arabidopsis_thaliana"                
+#>  [3] "bos_taurus"                          
+#>  [4] "brachypodium_distachyon.flower_parts"
+#>  [5] "brachypodium_distachyon.whole_plant" 
+#>  [6] "gallus_gallus"                       
+#>  [7] "homo_sapiens.brain"                  
+#>  [8] "hordeum_vulgare.flower_parts"        
+#>  [9] "hordeum_vulgare.whole_plant"         
+#> [10] "macaca_mulatta"                      
+#> [11] "monodelphis_domestica"               
+#> [12] "mus_musculus.brain"                  
+#> [13] "oryza_sativa.flower_parts"           
+#> [14] "oryza_sativa.whole_plant"            
+#> [15] "papio_anubis"                        
+#> [16] "rattus_norvegicus"                   
+#> [17] "solanum_lycopersicum.flower_parts"   
+#> [18] "solanum_lycopersicum.whole_plant"    
+#> [19] "solanum_tuberosum"                   
+#> [20] "sorghum_bicolor.flower_parts"        
+#> [21] "sorghum_bicolor.whole_plant"         
+#> [22] "tetraodon_nigroviridis"              
+#> [23] "triticum_aestivum.flower_parts"      
+#> [24] "triticum_aestivum.whole_plant"       
+#> [25] "xenopus_tropicalis"                  
+#> [26] "zea_mays.flower_parts"               
+#> [27] "zea_mays.whole_plant"
+```
+
+To plot bos\_taurus use the following command. Unfortunately, I have not managed to add the correct names yet.
+
+``` r
+other_key[["bos_taurus"]]
+#>             organ  type  colour     value
+#> 2        duodenum other #E41A1C 11.381132
+#> 3           brain other #377EB8  2.264810
+#> 4          kidney other #4DAF4A  4.131599
+#> 5            lung other #984EA3  3.182946
+#> 6           colon other #FF7F00  3.114481
+#> 7           heart other #FFFF33 13.141334
+#> 8           liver other #A65628 17.251310
+#> 9  pulmonary vein other #F781BF 13.414659
+#> 19 UBERON_0001013 other #999999 12.126515
+#> 20 UBERON_0001013 other #66C2A5  1.898023
+#> 21 UBERON_0001013 other #FC8D62 19.290389
+#> 22 UBERON_0014892 other #8DA0CB 10.994221
+#> 23 UBERON_0014892 other #E78AC3 16.761115
+#> 24 UBERON_0014892 other #A6D854  2.468627
+#> 25 UBERON_0014892 other #FFD92F  1.556285
+#> 26 UBERON_0014892 other #E5C494  3.461740
+#> 27 UBERON_0014892 other #B3B3B3 18.595027
+
+gganatogram(data=other_key[["bos_taurus"]], outline = T, fillOutline='white', organism="bos_taurus", sex='female', fill="colour")  +theme_void() +ggtitle("bos_taurus") + theme(plot.title = element_text(hjust=0.5)) + coord_fixed()
+```
+
+![](figure/bosTaurus-1.svg)
+
+Here is a way to loop through all the other organisms and plot their organs.
+
+``` r
+library(gridExtra)
+plotList <- list()
+for (organism in names(other_key)) {
+    plotList[[organism]] <- gganatogram(data=other_key[[organism]], outline = T, fillOutline='white', organism=organism, sex='female', fill="colour")  +theme_void() +ggtitle(organism) + theme(plot.title = element_text(hjust=0.5, size=9)) + coord_fixed()
+}
+
+do.call(grid.arrange,  c(plotList[1:12], ncol=3))
+```
+
+![](figure/othersFirst12-1.svg)
+
+``` r
+
+do.call(grid.arrange,  c(plotList[13:24], ncol=3))
+```
+
+![](figure/othersFirst12-2.svg)

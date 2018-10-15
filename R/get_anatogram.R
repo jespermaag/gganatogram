@@ -22,7 +22,7 @@ get_anatogram = function(
     organism = tolower(organism)
     organism = match.arg(
       organism,
-      choices = c("human", "mouse"))
+      choices = c("human", "mouse", names(gganatogram::other_list)))
     sex = tolower(sex)
     sex = match.arg(sex, choices = c("male", "female"))
     if (organism == 'human') {
@@ -45,6 +45,19 @@ get_anatogram = function(
         anatogram$outline <- anatogram$outline
         anatogram$fillFigure <- anatogram$LAYER_OUTLINE
       }
+    } else if (organism %in% names(gganatogram::other_list) ) {
+        anatogram <- gganatogram::other_list[[organism]]
+        if (length(grep('outline', names(anatogram))) >=1) {
+          anatogram$outline <- do.call(rbind, anatogram[grep('outline', names(anatogram))])
+          anatogram$outline <- anatogram$outline[complete.cases(anatogram$outline),]
+        } else {
+          anatogram$outline <- do.call(rbind, anatogram[grep('LAYER_OUTLINE', names(anatogram))])
+          anatogram$outline <- anatogram$outline[complete.cases(anatogram$outline),]
+
+        }  
+        anatogram$fillFigure <- do.call(rbind, anatogram[grep('LAYER_OUTLINE', names(anatogram))])
+        #anatogram$fillFigure <- anatogram$fillFigure[complete.cases(anatogram$fillFigure),]
+
     }
   }
   return(anatogram)
