@@ -38,7 +38,7 @@ Create anatogram images for different organisms.  <br/>
 This package uses the tissue coordinates from the figure in Expression Atlas. [https://www.ebi.ac.uk/gxa/home](https://www.ebi.ac.uk/gxa/home)  <br/>
 [https://github.com/ebi-gene-expression-group/anatomogram](https://github.com/ebi-gene-expression-group/anatomogram)  <br/>
 
-```{r, eval=TRUE, echo=FALSE, AllSpeciesCellPlotValueTop, dpi = 300}
+```{r, eval=TRUE, echo=FALSE, AllSpeciesCellPlotValueTop, fig.width = 8, fig.height = 8, dpi = 300}
 
 
 hgMale <- gganatogram(data=hgMale_key, fillOutline='#440154FF', organism='human', sex='male', fill="value") + theme_void() +  scale_fill_viridis()
