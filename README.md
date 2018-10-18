@@ -6,7 +6,9 @@ gganatogram
 
 Create anatogram images for different organisms. <br/> This package uses the tissue coordinates from the figure in Expression Atlas. <https://www.ebi.ac.uk/gxa/home> <br/> <https://github.com/ebi-gene-expression-group/anatomogram> <br/>
 
-![](figure/AllSpeciesCellPlotValueTop-1.svg)![](figure/AllSpeciesCellPlotValueTop-2.svg)
+![](figure/AllSpeciesCellPlotValueTop-1.svg)
+
+![](figure/CellPlotValueTop-1.svg)
 
 Citation
 --------

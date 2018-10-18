@@ -39,8 +39,6 @@ This package uses the tissue coordinates from the figure in Expression Atlas. [h
 [https://github.com/ebi-gene-expression-group/anatomogram](https://github.com/ebi-gene-expression-group/anatomogram)  <br/>
 
 ```{r, eval=TRUE, echo=FALSE, AllSpeciesCellPlotValueTop, fig.width = 8, fig.height = 8, dpi = 300}
-
-
 hgMale <- gganatogram(data=hgMale_key, fillOutline='#440154FF', organism='human', sex='male', fill="value") + theme_void() +  scale_fill_viridis()
 hgFemale <- gganatogram(data=hgFemale_key, fillOutline='#440154FF', organism='human', sex='female', fill="value") + theme_void() +  scale_fill_viridis()
 mmMale <- gganatogram(data=mmMale_key, fillOutline='#440154FF', organism='mouse', sex='male', fill="value") + theme_void() +  scale_fill_viridis()
@@ -48,7 +46,9 @@ mmFemale <- gganatogram(data=mmFemale_key, outline = T, fillOutline='#440154FF',
 
 grid.arrange(hgMale, hgFemale, mmMale, mmFemale, ncol=2)
 
+```
 
+```{r,  eval=TRUE, echo=FALSE, CellPlotValueTop, fig.width = 8, fig.height = 4, dpi = 300}
 p1 <- gganatogram(data=cell_key[['cell']], outline = T, fillOutline='steelblue', organism="cell", fill="colour")  +theme_void()  + coord_fixed()
 p2 <- gganatogram(data=cell_key[['cell']], outline = T, fillOutline='lightgray', organism="cell", fill="value")  +theme_void() + coord_fixed() +  scale_fill_viridis()
 
