@@ -38,6 +38,26 @@ Create anatogram images for different organisms.  <br/>
 This package uses the tissue coordinates from the figure in Expression Atlas. [https://www.ebi.ac.uk/gxa/home](https://www.ebi.ac.uk/gxa/home)  <br/>
 [https://github.com/ebi-gene-expression-group/anatomogram](https://github.com/ebi-gene-expression-group/anatomogram)  <br/>
 
+```{r, eval=TRUE, echo=FALSE, AllSpeciesCellPlotValueTop, dpi = 300}
+
+
+hgMale <- gganatogram(data=hgMale_key, fillOutline='#440154FF', organism='human', sex='male', fill="value") + theme_void() +  scale_fill_viridis()
+hgFemale <- gganatogram(data=hgFemale_key, fillOutline='#440154FF', organism='human', sex='female', fill="value") + theme_void() +  scale_fill_viridis()
+mmMale <- gganatogram(data=mmMale_key, fillOutline='#440154FF', organism='mouse', sex='male', fill="value") + theme_void() +  scale_fill_viridis()
+mmFemale <- gganatogram(data=mmFemale_key, outline = T, fillOutline='#440154FF', organism='mouse', sex='female', fill="value")  +theme_void()   +  scale_fill_viridis()
+
+grid.arrange(hgMale, hgFemale, mmMale, mmFemale, ncol=2)
+
+
+p1 <- gganatogram(data=cell_key[['cell']], outline = T, fillOutline='steelblue', organism="cell", fill="colour")  +theme_void()  + coord_fixed()
+p2 <- gganatogram(data=cell_key[['cell']], outline = T, fillOutline='lightgray', organism="cell", fill="value")  +theme_void() + coord_fixed() +  scale_fill_viridis()
+
+grid.arrange(p1, p2, ncol=2)
+ ```
+
+
+
+
 ## Citation
 #### Maag JLV. gganatogram: An R package for modular visualisation of anatograms and tissues based on ggplot2 [version 1; referees: awaiting peer review]. F1000Research 2018, 7:1576 (doi: 10.12688/f1000research.16409.1)
 https://f1000research.com/articles/7-1576/v1
@@ -50,6 +70,9 @@ If you use the tissue plots from gganatogram please cite Expression Atlas as wel
 [Petryszak et al. 2015](https://academic.oup.com/nar/article/44/D1/D746/2502589) <br/>
 If you use the main cell figure, please cite The Protein Atlas.  <br/>
 [Thul PJ et al. 2017](http://science.sciencemag.org/content/356/6340/eaal3321) <br/>
+
+
+
 
 More plot examples can be found at [https://jespermaag.github.io/blog/2018/gganatogram/](https://jespermaag.github.io/blog/2018/gganatogram/)
 
@@ -71,12 +94,12 @@ This package requires `ggplot2` and `ggpolypath` which loads when loading the pa
 library(gganatogram)
 library(dplyr)
 library(viridis)
+library(gridExtra)
 
 ```
 
 
 ```{r, eval=TRUE, AllSpeciesPlot, fig.width = 10, dpi = 300}
-library(gridExtra)
 hgMale <- gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + theme_void()
 hgFemale <- gganatogram(data=hgFemale_key, fillOutline='#a6bddb', organism='human', sex='female', fill="colour") + theme_void()
 mmMale <- gganatogram(data=mmMale_key, fillOutline='#a6bddb', organism='mouse', sex='male', fill="colour") + theme_void()
@@ -86,13 +109,14 @@ grid.arrange(hgMale, hgFemale, mmMale, mmFemale, ncol=4)
  ```
 
 ```{r, eval=TRUE, AllSpeciesPlotValue, fig.width = 10, dpi = 300}
-library(gridExtra)
+
+
 hgMale <- gganatogram(data=hgMale_key, fillOutline='#440154FF', organism='human', sex='male', fill="value") + theme_void() +  scale_fill_viridis()
 hgFemale <- gganatogram(data=hgFemale_key, fillOutline='#440154FF', organism='human', sex='female', fill="value") + theme_void() +  scale_fill_viridis()
 mmMale <- gganatogram(data=mmMale_key, fillOutline='#440154FF', organism='mouse', sex='male', fill="value") + theme_void() +  scale_fill_viridis()
 mmFemale <- gganatogram(data=mmFemale_key, outline = T, fillOutline='#440154FF', organism='mouse', sex='female', fill="value")  +theme_void()   +  scale_fill_viridis()
 
-grid.arrange(hgMale, hgFemale, mmMale, mmFemale, ncol=4)
+grid.arrange(hgMale, hgFemale, mmMale, mmFemale, ncol=2)
  ```
 
 In order to use the function gganatogram, you need to have a data frame with
@@ -242,10 +266,10 @@ To plot the whole cell with colours or values, use the following command.
 If you want to specify a background colour, you either have to remove the cytosol or change the colour of cytosol to the desired colour.
 
 ```{r}
-gganatogram(data=cell_key[['cell']], outline = T, fillOutline='steelblue', organism="cell", fill="colour")  +theme_void() +ggtitle('cell') + theme(plot.title = element_text(hjust=0.5, size=16)) + coord_fixed()
+gganatogram(data=cell_key[['cell']], outline = T, fillOutline='steelblue', organism="cell", fill="colour")  +theme_void()   + coord_fixed()
 
 
-gganatogram(data=cell_key[['cell']], outline = T, fillOutline='lightgray', organism="cell", fill="value")  +theme_void() +ggtitle('cell') + theme(plot.title = element_text(hjust=0.5, size=16)) + coord_fixed() +  scale_fill_viridis()
+gganatogram(data=cell_key[['cell']], outline = T, fillOutline='lightgray', organism="cell", fill="value")  +theme_void() +  coord_fixed() +  scale_fill_viridis()
 ```
 
 To see all the subsstructures individually, you can plot the data one at a time

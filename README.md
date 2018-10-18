@@ -6,6 +6,8 @@ gganatogram
 
 Create anatogram images for different organisms. <br/> This package uses the tissue coordinates from the figure in Expression Atlas. <https://www.ebi.ac.uk/gxa/home> <br/> <https://github.com/ebi-gene-expression-group/anatomogram> <br/>
 
+![](figure/AllSpeciesCellPlotValueTop-1.svg)![](figure/AllSpeciesCellPlotValueTop-2.svg)
+
 Citation
 --------
 
@@ -57,10 +59,10 @@ This package requires `ggplot2` and `ggpolypath` which loads when loading the pa
 library(gganatogram)
 library(dplyr)
 library(viridis)
+library(gridExtra)
 ```
 
 ``` r
-library(gridExtra)
 hgMale <- gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + theme_void()
 hgFemale <- gganatogram(data=hgFemale_key, fillOutline='#a6bddb', organism='human', sex='female', fill="colour") + theme_void()
 mmMale <- gganatogram(data=mmMale_key, fillOutline='#a6bddb', organism='mouse', sex='male', fill="colour") + theme_void()
@@ -72,13 +74,14 @@ grid.arrange(hgMale, hgFemale, mmMale, mmFemale, ncol=4)
 ![](figure/AllSpeciesPlot-1.svg)
 
 ``` r
-library(gridExtra)
+
+
 hgMale <- gganatogram(data=hgMale_key, fillOutline='#440154FF', organism='human', sex='male', fill="value") + theme_void() +  scale_fill_viridis()
 hgFemale <- gganatogram(data=hgFemale_key, fillOutline='#440154FF', organism='human', sex='female', fill="value") + theme_void() +  scale_fill_viridis()
 mmMale <- gganatogram(data=mmMale_key, fillOutline='#440154FF', organism='mouse', sex='male', fill="value") + theme_void() +  scale_fill_viridis()
 mmFemale <- gganatogram(data=mmFemale_key, outline = T, fillOutline='#440154FF', organism='mouse', sex='female', fill="value")  +theme_void()   +  scale_fill_viridis()
 
-grid.arrange(hgMale, hgFemale, mmMale, mmFemale, ncol=4)
+grid.arrange(hgMale, hgFemale, mmMale, mmFemale, ncol=2)
 ```
 
 ![](figure/AllSpeciesPlotValue-1.svg)
@@ -225,41 +228,41 @@ All female tissues
 
 ``` r
 hgFemale_key$organ
-#>  [1] "pancreas"                  "liver"                    
-#>  [3] "colon"                     "bone_marrow"              
-#>  [5] "urinary_bladder"           "stomach"                  
-#>  [7] "duodenum"                  "esophagus"                
-#>  [9] "gall_bladder"              "spleen"                   
-#> [11] "small_intestine"           "placenta"                 
-#> [13] "endometrium"               "vagina"                   
-#> [15] "aorta"                     "pituitary_gland"          
-#> [17] "gastroesophageal_junction" "caecum"                   
-#> [19] "appendix"                  "ileum"                    
-#> [21] "left_atrium"               "left_ventricle"           
-#> [23] "pulmonary_valve"           "mitral_valve"             
-#> [25] "diaphragm"                 "bone"                     
-#> [27] "cartilage"                 "throat"                   
-#> [29] "rectum"                    "nasal_septum"             
-#> [31] "nasal_pharynx"             "cerebellum"               
-#> [33] "cerebellar_hemisphere"     "prefrontal_cortex"        
-#> [35] "frontal_cortex"            "nose"                     
-#> [37] "temporal_lobe"             "cerebral_cortex"          
-#> [39] "kidney"                    "renal_cortex"             
-#> [41] "coronary_artery"           "tricuspid_valve"          
-#> [43] "thyroid_gland"             "skin"                     
-#> [45] "parotid_gland"             "adipose_tissue"           
-#> [47] "heart"                     "smooth_muscle"            
-#> [49] "brain"                     "adrenal_gland"            
-#> [51] "lymph_node"                "skeletal_muscle"          
-#> [53] "ovary"                     "leukocyte"                
-#> [55] "salivary_gland"            "fallopian_tube"           
-#> [57] "uterus"                    "uterine_cervix"           
-#> [59] "nerve"                     "atrial_appendage"         
-#> [61] "ectocervix"                "hippocampus"              
-#> [63] "pleura"                    "bronchus"                 
-#> [65] "trachea"                   "lung"                     
-#> [67] "tonsil"                    "submandibular_gland"      
-#> [69] "breast"                    "spinal_cord"
+#>  [1] "atrial_appendage"          "ectocervix"               
+#>  [3] "hippocampus"               "pleura"                   
+#>  [5] "bronchus"                  "trachea"                  
+#>  [7] "lung"                      "tonsil"                   
+#>  [9] "submandibular_gland"       "breast"                   
+#> [11] "spinal_cord"               "pancreas"                 
+#> [13] "liver"                     "colon"                    
+#> [15] "bone_marrow"               "urinary_bladder"          
+#> [17] "stomach"                   "duodenum"                 
+#> [19] "esophagus"                 "gall_bladder"             
+#> [21] "spleen"                    "small_intestine"          
+#> [23] "placenta"                  "endometrium"              
+#> [25] "vagina"                    "aorta"                    
+#> [27] "pituitary_gland"           "gastroesophageal_junction"
+#> [29] "caecum"                    "appendix"                 
+#> [31] "ileum"                     "left_atrium"              
+#> [33] "left_ventricle"            "pulmonary_valve"          
+#> [35] "mitral_valve"              "diaphragm"                
+#> [37] "bone"                      "cartilage"                
+#> [39] "throat"                    "rectum"                   
+#> [41] "nasal_septum"              "nasal_pharynx"            
+#> [43] "cerebellum"                "cerebellar_hemisphere"    
+#> [45] "prefrontal_cortex"         "frontal_cortex"           
+#> [47] "nose"                      "temporal_lobe"            
+#> [49] "cerebral_cortex"           "kidney"                   
+#> [51] "renal_cortex"              "coronary_artery"          
+#> [53] "tricuspid_valve"           "thyroid_gland"            
+#> [55] "skin"                      "parotid_gland"            
+#> [57] "adipose_tissue"            "heart"                    
+#> [59] "smooth_muscle"             "brain"                    
+#> [61] "adrenal_gland"             "lymph_node"               
+#> [63] "skeletal_muscle"           "ovary"                    
+#> [65] "leukocyte"                 "salivary_gland"           
+#> [67] "fallopian_tube"            "uterus"                   
+#> [69] "uterine_cervix"            "nerve"
 gganatogram(data=hgFemale_key, outline = T, fillOutline='#a6bddb', organism='human', sex='female', fill="colour")  +theme_void()
 ```
 
@@ -413,7 +416,7 @@ cell_key
 To plot the whole cell with colours or values, use the following command. If you want to specify a background colour, you either have to remove the cytosol or change the colour of cytosol to the desired colour.
 
 ``` r
-gganatogram(data=cell_key[['cell']], outline = T, fillOutline='steelblue', organism="cell", fill="colour")  +theme_void() +ggtitle('cell') + theme(plot.title = element_text(hjust=0.5, size=16)) + coord_fixed()
+gganatogram(data=cell_key[['cell']], outline = T, fillOutline='steelblue', organism="cell", fill="colour")  +theme_void()   + coord_fixed()
 ```
 
 ![](figure/unnamed-chunk-9-1.svg)
@@ -421,7 +424,7 @@ gganatogram(data=cell_key[['cell']], outline = T, fillOutline='steelblue', organ
 ``` r
 
 
-gganatogram(data=cell_key[['cell']], outline = T, fillOutline='lightgray', organism="cell", fill="value")  +theme_void() +ggtitle('cell') + theme(plot.title = element_text(hjust=0.5, size=16)) + coord_fixed() +  scale_fill_viridis()
+gganatogram(data=cell_key[['cell']], outline = T, fillOutline='lightgray', organism="cell", fill="value")  +theme_void() +  coord_fixed() +  scale_fill_viridis()
 ```
 
 ![](figure/unnamed-chunk-9-2.svg)
