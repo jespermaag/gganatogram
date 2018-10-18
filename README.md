@@ -321,7 +321,7 @@ mmMale_key$organ
 #> [41] "testis"                    "urinary_bladder"          
 #> [43] "thymus"                    "peripheral_nervous_system"
 #> [45] "eye"
-gganatogram(data=mmMale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='male', fill="colour")  +theme_void()  
+gganatogram(data=mmMale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='male', fill="colour")  +theme_void()  +coord_fixed()
 ```
 
 ![](figure/maleMouse-1.svg)
@@ -362,7 +362,7 @@ mmFemale_key$organ
 #> [43] "thymus"                    "thyroid_gland"            
 #> [45] "lung"                      "peripheral_nervous_system"
 #> [47] "trachea"
-gganatogram(data=mmFemale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='female', fill="colour")  +theme_void()  
+gganatogram(data=mmFemale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='female', fill="colour")  +theme_void()    +coord_fixed()
 ```
 
 ![](figure/femaleMouse-1.svg)
