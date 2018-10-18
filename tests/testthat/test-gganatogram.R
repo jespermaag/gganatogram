@@ -111,12 +111,12 @@ test_that("gganatogram",{
   expect_equal(length(hgFemale$layers), 72)
   # ninth layer should be "duodenum.2" as per hgFemale_key
   expect_equal(rownames(hgFemale$layers[[9]]$data[1])[[1]],
-    "duodenum.2")
+    "lung.2")
   # check some other layers
   expect_equal(rownames(hgFemale$layers[[72]]$data[1])[[1]],
-    "spinal_cord.2")
+    "nerve.2")
   expect_equal(rownames(hgFemale$layers[[59]]$data[1])[[1]],
-    "uterus.2")
+    "adipose_tissue.2")
 
 
   ## plot all of the human male layers and check number
