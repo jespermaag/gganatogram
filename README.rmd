@@ -46,9 +46,10 @@ https://f1000research.com/articles/7-1576/v1
 citation("gganatogram")
 ```
 
-If you use gganatogram please cite Expression Atlas as well. <br/>
+If you use the tissue plots from gganatogram please cite Expression Atlas as well. <br/>
 [Petryszak et al. 2015](https://academic.oup.com/nar/article/44/D1/D746/2502589) <br/>
-Petryszak, Robert, Maria Keays, Y. Amy Tang, Nuno A. Fonseca, Elisabet Barrera, Tony Burdett, Anja Füllgrabe et al. "Expression Atlas update—an integrated database of gene and protein expression in humans, animals and plants." Nucleic acids research 44, no. D1 (2015): D746-D752.
+If you use the main cell figure, please cite The Protein Atlas.  <br/>
+[Thul PJ et al. 2017](http://science.sciencemag.org/content/356/6340/eaal3321) <br/>
 
 More plot examples can be found at [https://jespermaag.github.io/blog/2018/gganatogram/](https://jespermaag.github.io/blog/2018/gganatogram/)
 
@@ -69,8 +70,11 @@ This package requires `ggplot2` and `ggpolypath` which loads when loading the pa
 
 library(gganatogram)
 library(dplyr)
+library(viridis)
+
 ```
-Available organisms 
+
+
 ```{r, eval=TRUE, AllSpeciesPlot, fig.width = 10, dpi = 300}
 library(gridExtra)
 hgMale <- gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + theme_void()
@@ -81,6 +85,15 @@ mmFemale <- gganatogram(data=mmFemale_key, outline = T, fillOutline='#a6bddb', o
 grid.arrange(hgMale, hgFemale, mmMale, mmFemale, ncol=4)
  ```
 
+```{r, eval=TRUE, AllSpeciesPlotValue, fig.width = 10, dpi = 300}
+library(gridExtra)
+hgMale <- gganatogram(data=hgMale_key, fillOutline='#440154FF', organism='human', sex='male', fill="value") + theme_void() +  scale_fill_viridis()
+hgFemale <- gganatogram(data=hgFemale_key, fillOutline='#440154FF', organism='human', sex='female', fill="value") + theme_void() +  scale_fill_viridis()
+mmMale <- gganatogram(data=mmMale_key, fillOutline='#440154FF', organism='mouse', sex='male', fill="value") + theme_void() +  scale_fill_viridis()
+mmFemale <- gganatogram(data=mmFemale_key, outline = T, fillOutline='#440154FF', organism='mouse', sex='female', fill="value")  +theme_void()   +  scale_fill_viridis()
+
+grid.arrange(hgMale, hgFemale, mmMale, mmFemale, ncol=4)
+ ```
 
 In order to use the function gganatogram, you need to have a data frame with
 organ, colour, and value if you want to.
@@ -106,7 +119,8 @@ gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male',
 theme_void()
 ```
 
-We can also plot all tissues available using hgMale_key
+We can also plot all tissues available using hgMale_key 
+
 ```{r, eval=TRUE, organPlotAll, fig.width = 3, dpi = 100}
 hgMale_key$organ
 gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") +theme_void()
@@ -210,6 +224,50 @@ gganatogram(data=mmFemale_key, outline = T, fillOutline='#a6bddb', organism='mou
 ```{r, eval=TRUE, femaleMouseOrgan, figwidth = 10, figheight = 8, dpi = 200}
 
 gganatogram(data=mmFemale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='female', fill="colour")  +theme_void()+facet_wrap(~type, ncol=4)
+```
+
+
+## Cellular structures 
+I have now included cellular substructures, using the cell.svg from the Protein Atlas.
+If you use the main cell figure (hopefully more will be added), please cite [Thul PJ et al. 2017](http://science.sciencemag.org/content/356/6340/eaal3321) <br/>
+
+The cellular data can be access using cell_key
+
+```{r}
+length(cell_key)
+cell_key
+```
+
+To plot the whole cell with colours or values, use the following command.
+If you want to specify a background colour, you either have to remove the cytosol or change the colour of cytosol to the desired colour.
+
+```{r}
+gganatogram(data=cell_key[['cell']], outline = T, fillOutline='steelblue', organism="cell", fill="colour")  +theme_void() +ggtitle('cell') + theme(plot.title = element_text(hjust=0.5, size=16)) + coord_fixed()
+
+
+gganatogram(data=cell_key[['cell']], outline = T, fillOutline='lightgray', organism="cell", fill="value")  +theme_void() +ggtitle('cell') + theme(plot.title = element_text(hjust=0.5, size=16)) + coord_fixed() +  scale_fill_viridis()
+```
+
+To see all the subsstructures individually, you can plot the data one at a time
+
+```{r}
+figureList <- list()
+for (i in 1:nrow(cell_key[['cell']])) {
+    figureList[[i]] <- gganatogram(data=cell_key[['cell']][i,], outline = T, fillOutline='steelblue', organism="cell", fill="colour")  +theme_void() +ggtitle(cell_key[['cell']][i,]$organ) + theme(plot.title = element_text(hjust=0.5, size=16)) + coord_fixed()
+}
+
+do.call(grid.arrange,  c(figureList[1:4], ncol=2))
+
+do.call(grid.arrange,  c(figureList[5:8], ncol=2))
+
+do.call(grid.arrange,  c(figureList[9:12], ncol=2))
+
+do.call(grid.arrange,  c(figureList[13:16], ncol=2))
+
+do.call(grid.arrange,  c(figureList[17:20], ncol=2))
+
+do.call(grid.arrange,  c(figureList[21:24], ncol=2))
+
 ```
 
 

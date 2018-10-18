@@ -1,6 +1,6 @@
 Package: gganatogram
 Title: Create Anatograms of Various Species
-Version: 1.1.0
+Version: 1.1.1
 Authors@R: c(person("Jesper", "Maag", email = "jespermaag@gmail.com", 
     role = c("aut", "cre")),
     person("John", "Muschelli", email = "muschellij2@gmail.com", 

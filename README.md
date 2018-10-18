@@ -33,7 +33,7 @@ citation("gganatogram")
 #>   }
 ```
 
-If you use gganatogram please cite Expression Atlas as well. <br/> [Petryszak et al. 2015](https://academic.oup.com/nar/article/44/D1/D746/2502589) <br/> Petryszak, Robert, Maria Keays, Y. Amy Tang, Nuno A. Fonseca, Elisabet Barrera, Tony Burdett, Anja Füllgrabe et al. "Expression Atlas update—an integrated database of gene and protein expression in humans, animals and plants." Nucleic acids research 44, no. D1 (2015): D746-D752.
+If you use the tissue plots from gganatogram please cite Expression Atlas as well. <br/> [Petryszak et al. 2015](https://academic.oup.com/nar/article/44/D1/D746/2502589) <br/> If you use the main cell figure, please cite The Protein Atlas. <br/> [Thul PJ et al. 2017](http://science.sciencemag.org/content/356/6340/eaal3321) <br/>
 
 More plot examples can be found at <https://jespermaag.github.io/blog/2018/gganatogram/>
 
@@ -56,9 +56,8 @@ This package requires `ggplot2` and `ggpolypath` which loads when loading the pa
 
 library(gganatogram)
 library(dplyr)
+library(viridis)
 ```
-
-Available organisms
 
 ``` r
 library(gridExtra)
@@ -71,6 +70,18 @@ grid.arrange(hgMale, hgFemale, mmMale, mmFemale, ncol=4)
 ```
 
 ![](figure/AllSpeciesPlot-1.svg)
+
+``` r
+library(gridExtra)
+hgMale <- gganatogram(data=hgMale_key, fillOutline='#440154FF', organism='human', sex='male', fill="value") + theme_void() +  scale_fill_viridis()
+hgFemale <- gganatogram(data=hgFemale_key, fillOutline='#440154FF', organism='human', sex='female', fill="value") + theme_void() +  scale_fill_viridis()
+mmMale <- gganatogram(data=mmMale_key, fillOutline='#440154FF', organism='mouse', sex='male', fill="value") + theme_void() +  scale_fill_viridis()
+mmFemale <- gganatogram(data=mmFemale_key, outline = T, fillOutline='#440154FF', organism='mouse', sex='female', fill="value")  +theme_void()   +  scale_fill_viridis()
+
+grid.arrange(hgMale, hgFemale, mmMale, mmFemale, ncol=4)
+```
+
+![](figure/AllSpeciesPlotValue-1.svg)
 
 In order to use the function gganatogram, you need to have a data frame with organ, colour, and value if you want to.
 
@@ -359,6 +370,109 @@ gganatogram(data=mmFemale_key, outline = T, fillOutline='#a6bddb', organism='mou
 ```
 
 ![](figure/femaleMouseOrgan-1.svg)
+
+Cellular structures
+-------------------
+
+I have now included cellular substructures, using the cell.svg from the Protein Atlas. If you use the main cell figure (hopefully more will be added), please cite [Thul PJ et al. 2017](http://science.sciencemag.org/content/356/6340/eaal3321) <br/>
+
+The cellular data can be access using cell\_key
+
+``` r
+length(cell_key)
+#> [1] 1
+cell_key
+#> $cell
+#>                            organ  type    colour       value
+#> 1                        cytosol other steelblue  2.07159434
+#> 4         intermediate_filaments other   #984EA3 14.89497057
+#> 6                actin_filaments other   #FFFF33  5.87440944
+#> 8           focal_adhesion_sites other   #F781BF  8.12483660
+#> 10 microtubule_organizing_center other   #66C2A5  8.67564889
+#> 12                    centrosome other   #8DA0CB  1.02852838
+#> 13                  microtubules other   #E78AC3  9.48882657
+#> 16              microtubule_ends other   #E5C494  4.80457195
+#> 18             secreted_proteins other   #8DD3C7  9.20191105
+#> 20                lipid_droplets other   #BEBADA  3.48903574
+#> 22                     lysosomes other   #80B1D3  3.73790434
+#> 24                   peroxisomes other   #B3DE69  6.79465458
+#> 26                     endosomes other   #D9D9D9 13.48636296
+#> 28         endoplasmic_reticulum other   #CCEBC5 11.36654344
+#> 30               golgi_apparatus other   #7FC97F 11.29225961
+#> 32                   nucleoplasm other   #FDC086  2.07964782
+#> 34              nuclear_membrane other   #386CB0  7.98595837
+#> 36                nuclear_bodies other   #BF5B17  0.05868359
+#> 38              nuclear_speckles other   #1B9E77  0.61672243
+#> 40                      nucleoli other   #7570B3 14.96900579
+#> 42     nucleoli_fibrillar_center other   #66A61E  8.72324527
+#> 44                rods_and_rings other   #A6761D  9.53194209
+#> 46                  mitochondria other   #A6CEE3  1.29396698
+#> 48               plasma_membrane other   #B2DF8A 13.45657571
+```
+
+To plot the whole cell with colours or values, use the following command. If you want to specify a background colour, you either have to remove the cytosol or change the colour of cytosol to the desired colour.
+
+``` r
+gganatogram(data=cell_key[['cell']], outline = T, fillOutline='steelblue', organism="cell", fill="colour")  +theme_void() +ggtitle('cell') + theme(plot.title = element_text(hjust=0.5, size=16)) + coord_fixed()
+```
+
+![](figure/unnamed-chunk-9-1.svg)
+
+``` r
+
+
+gganatogram(data=cell_key[['cell']], outline = T, fillOutline='lightgray', organism="cell", fill="value")  +theme_void() +ggtitle('cell') + theme(plot.title = element_text(hjust=0.5, size=16)) + coord_fixed() +  scale_fill_viridis()
+```
+
+![](figure/unnamed-chunk-9-2.svg)
+
+To see all the subsstructures individually, you can plot the data one at a time
+
+``` r
+figureList <- list()
+for (i in 1:nrow(cell_key[['cell']])) {
+    figureList[[i]] <- gganatogram(data=cell_key[['cell']][i,], outline = T, fillOutline='steelblue', organism="cell", fill="colour")  +theme_void() +ggtitle(cell_key[['cell']][i,]$organ) + theme(plot.title = element_text(hjust=0.5, size=16)) + coord_fixed()
+}
+
+do.call(grid.arrange,  c(figureList[1:4], ncol=2))
+```
+
+![](figure/unnamed-chunk-10-1.svg)
+
+``` r
+
+do.call(grid.arrange,  c(figureList[5:8], ncol=2))
+```
+
+![](figure/unnamed-chunk-10-2.svg)
+
+``` r
+
+do.call(grid.arrange,  c(figureList[9:12], ncol=2))
+```
+
+![](figure/unnamed-chunk-10-3.svg)
+
+``` r
+
+do.call(grid.arrange,  c(figureList[13:16], ncol=2))
+```
+
+![](figure/unnamed-chunk-10-4.svg)
+
+``` r
+
+do.call(grid.arrange,  c(figureList[17:20], ncol=2))
+```
+
+![](figure/unnamed-chunk-10-5.svg)
+
+``` r
+
+do.call(grid.arrange,  c(figureList[21:24], ncol=2))
+```
+
+![](figure/unnamed-chunk-10-6.svg)
 
 Other organisms i.e. tier 2 organisms
 -------------------------------------
