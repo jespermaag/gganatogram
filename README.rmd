@@ -108,7 +108,7 @@ mmFemale <- gganatogram(data=mmFemale_key, outline = T, fillOutline='#a6bddb', o
 grid.arrange(hgMale, hgFemale, mmMale, mmFemale, ncol=4)
  ```
 
-```{r, eval=TRUE, AllSpeciesPlotValue, fig.width = 10, dpi = 300}
+```{r, eval=TRUE, AllSpeciesPlotValue, fig.heigth = 6, dpi = 300}
 
 
 hgMale <- gganatogram(data=hgMale_key, fillOutline='#440154FF', organism='human', sex='male', fill="value") + theme_void() +  scale_fill_viridis()
