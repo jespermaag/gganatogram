@@ -411,19 +411,20 @@ library(roxygen2)
 #create("gganatogram")
 #hgMale_key <- allAnatomy
 #hgMale_key$value <- runif(46, 0, 20)
-devtools::use_data(pkg = "gganatogram", hgMale_key, overwrite=TRUE)
-devtools::use_data(pkg = "gganatogram", hgFemale_key, overwrite=TRUE)
-devtools::use_data(pkg = "gganatogram", mmMale_key, overwrite=TRUE)
-devtools::use_data(pkg = "gganatogram", mmFemale_key, overwrite=TRUE)
+hgFemale_key <- hgFemale_key[c(60:70,1:59),]
+devtools::use_data(pkg = "../gganatogram", hgMale_key, overwrite=TRUE)
+devtools::use_data(pkg = "../gganatogram", hgFemale_key, overwrite=TRUE)
+devtools::use_data(pkg = "../gganatogram", mmMale_key, overwrite=TRUE)
+devtools::use_data(pkg = "../gganatogram", mmFemale_key, overwrite=TRUE)
 #hgMale_list <- humanList
-devtools::use_data(pkg = "gganatogram", hgMale_list, overwrite= TRUE)
-devtools::use_data(pkg = "gganatogram", hgFemale_list, overwrite= TRUE)
-devtools::use_data(pkg = "gganatogram", mmMale_list, overwrite=TRUE)
-devtools::use_data(pkg = "gganatogram", mmFemale_list, overwrite=TRUE)
+devtools::use_data(pkg = "../gganatogram", hgMale_list, overwrite= TRUE)
+devtools::use_data(pkg = "../gganatogram", hgFemale_list, overwrite= TRUE)
+devtools::use_data(pkg = "../gganatogram", mmMale_list, overwrite=TRUE)
+devtools::use_data(pkg = "../gganatogram", mmFemale_list, overwrite=TRUE)
 
 
-document('gganatogram')
-install('gganatogram')
+document('../gganatogram')
+install('../gganatogram')
 
 #gganatogram(data=hgFemale_key[hgFemale_key$type=='nervous_system',], outline = T, fillOutline='#a6bddb', organism='human', sex='female', fill="colour") +facet_wrap(~type, ncol=4) +theme_classic()
 
@@ -433,6 +434,17 @@ gganatogram(data=hgMale_key, outline = T, fillOutline='#a6bddb', organism='human
 gganatogram(data=mmMale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='male', fill="colour") +facet_wrap(~type, ncol=4) +theme_classic()
 gganatogram(data=mmFemale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='female', fill="colour") +facet_wrap(~type, ncol=4) +theme_classic()
 
+
+hgFemale_key$value[c(54,49,69:70)] <- c(18,18,0, 5)
+
+hgMale <- gganatogram(data=hgMale_key, fillOutline='#440154FF', organism='human', sex='male', fill="value") + theme_void() +  scale_fill_viridis()
+hgFemale <- gganatogram(data=hgFemale_key, fillOutline='#440154FF', organism='human', sex='female', fill="value") + theme_void() +  scale_fill_viridis()
+mmMale <- gganatogram(data=mmMale_key, fillOutline='#440154FF', organism='mouse', sex='male', fill="value") + theme_void() +  scale_fill_viridis()
+mmFemale <- gganatogram(data=mmFemale_key, outline = T, fillOutline='#440154FF', organism='mouse', sex='female', fill="value")  +theme_void()   +  scale_fill_viridis()
+
+png('figure/HsMm_val.png', res=300, units='in', width=10, height=10)
+grid.arrange(hgMale, hgFemale, mmMale, mmFemale, ncol=2)
+dev.off()
 
 hgMale_key %>%
     dplyr::filter(type =='other') %>%

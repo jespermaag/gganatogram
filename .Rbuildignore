@@ -6,4 +6,6 @@
 ^README\.Rmd$
 ^figure$
 ^data-raw$
+^shiny$
+^cell$
 

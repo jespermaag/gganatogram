@@ -39,6 +39,7 @@ This package uses the tissue coordinates from the figure in Expression Atlas. [h
 [https://github.com/ebi-gene-expression-group/anatomogram](https://github.com/ebi-gene-expression-group/anatomogram)  <br/>
 
 ```{r, eval=TRUE, echo=FALSE, AllSpeciesCellPlotValueTop, fig.width = 8, fig.height = 8, dpi = 300}
+
 hgMale <- gganatogram(data=hgMale_key, fillOutline='#440154FF', organism='human', sex='male', fill="value") + theme_void() +  scale_fill_viridis()
 hgFemale <- gganatogram(data=hgFemale_key, fillOutline='#440154FF', organism='human', sex='female', fill="value") + theme_void() +  scale_fill_viridis()
 mmMale <- gganatogram(data=mmMale_key, fillOutline='#440154FF', organism='mouse', sex='male', fill="value") + theme_void() +  scale_fill_viridis()
@@ -59,7 +60,7 @@ grid.arrange(p1, p2, ncol=2)
 
 
 ## Citation
-#### Maag JLV. gganatogram: An R package for modular visualisation of anatograms and tissues based on ggplot2 [version 1; referees: awaiting peer review]. F1000Research 2018, 7:1576 (doi: 10.12688/f1000research.16409.1)
+#### Maag JLV. gganatogram: An R package for modular visualisation of anatograms and tissues based on ggplot2 [version 1; referees: 1 approved]. F1000Research 2018, 7:1576 (doi: 10.12688/f1000research.16409.1)
 https://f1000research.com/articles/7-1576/v1
 
 ```{r}
@@ -83,6 +84,18 @@ Install from github using devtools.
 ```{r,eval=FALSE}
 ## install from Github
 devtools::install_github("jespermaag/gganatogram")
+```
+
+## shiny 
+I have now included a shiny app for gganatogram.  <br/>
+An online version can be found at shinapps.io.   <br/>
+[https://jespermaag.shinyapps.io/gganatogram/](https://jespermaag.shinyapps.io/gganatogram/)  <br/>
+Unfortunately, there is a limit of 25h per month of app activity, so if you know R/Rstudio, please run it locally.  <br/>
+To run it locally, use the following command.
+
+```{r, eval=FALSE}
+library(shiny)
+runGitHub( "gganatogram", "jespermaag",  subdir = "shiny") 
 ```
 
 ## Usage

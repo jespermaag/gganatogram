@@ -13,7 +13,7 @@ Create anatogram images for different organisms. <br/> This package uses the tis
 Citation
 --------
 
-#### Maag JLV. gganatogram: An R package for modular visualisation of anatograms and tissues based on ggplot2 \[version 1; referees: awaiting peer review\]. F1000Research 2018, 7:1576 (doi: 10.12688/f1000research.16409.1)
+#### Maag JLV. gganatogram: An R package for modular visualisation of anatograms and tissues based on ggplot2 \[version 1; referees: 1 approved\]. F1000Research 2018, 7:1576 (doi: 10.12688/f1000research.16409.1)
 
 <https://f1000research.com/articles/7-1576/v1>
 
@@ -49,6 +49,16 @@ Install from github using devtools.
 ``` r
 ## install from Github
 devtools::install_github("jespermaag/gganatogram")
+```
+
+shiny
+-----
+
+I have now included a shiny app for gganatogram. <br/> An online version can be found at shinapps.io. <br/> <https://jespermaag.shinyapps.io/gganatogram/> <br/> Unfortunately, there is a limit of 25h per month of app activity, so if you know R/Rstudio, please run it locally. <br/> To run it locally, use the following command.
+
+``` r
+library(shiny)
+runGitHub( "gganatogram", "jespermaag",  subdir = "shiny") 
 ```
 
 Usage
@@ -421,7 +431,7 @@ To plot the whole cell with colours or values, use the following command. If you
 gganatogram(data=cell_key[['cell']], outline = T, fillOutline='steelblue', organism="cell", fill="colour")  +theme_void()   + coord_fixed()
 ```
 
-![](figure/unnamed-chunk-9-1.svg)
+![](figure/unnamed-chunk-10-1.svg)
 
 ``` r
 
@@ -429,7 +439,7 @@ gganatogram(data=cell_key[['cell']], outline = T, fillOutline='steelblue', organ
 gganatogram(data=cell_key[['cell']], outline = T, fillOutline='lightgray', organism="cell", fill="value")  +theme_void() +  coord_fixed() +  scale_fill_viridis()
 ```
 
-![](figure/unnamed-chunk-9-2.svg)
+![](figure/unnamed-chunk-10-2.svg)
 
 To see all the subsstructures individually, you can plot the data one at a time
 
@@ -442,42 +452,42 @@ for (i in 1:nrow(cell_key[['cell']])) {
 do.call(grid.arrange,  c(figureList[1:4], ncol=2))
 ```
 
-![](figure/unnamed-chunk-10-1.svg)
+![](figure/unnamed-chunk-11-1.svg)
 
 ``` r
 
 do.call(grid.arrange,  c(figureList[5:8], ncol=2))
 ```
 
-![](figure/unnamed-chunk-10-2.svg)
+![](figure/unnamed-chunk-11-2.svg)
 
 ``` r
 
 do.call(grid.arrange,  c(figureList[9:12], ncol=2))
 ```
 
-![](figure/unnamed-chunk-10-3.svg)
+![](figure/unnamed-chunk-11-3.svg)
 
 ``` r
 
 do.call(grid.arrange,  c(figureList[13:16], ncol=2))
 ```
 
-![](figure/unnamed-chunk-10-4.svg)
+![](figure/unnamed-chunk-11-4.svg)
 
 ``` r
 
 do.call(grid.arrange,  c(figureList[17:20], ncol=2))
 ```
 
-![](figure/unnamed-chunk-10-5.svg)
+![](figure/unnamed-chunk-11-5.svg)
 
 ``` r
 
 do.call(grid.arrange,  c(figureList[21:24], ncol=2))
 ```
 
-![](figure/unnamed-chunk-10-6.svg)
+![](figure/unnamed-chunk-11-6.svg)
 
 Other organisms i.e. tier 2 organisms
 -------------------------------------
