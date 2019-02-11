@@ -4,6 +4,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^README\.Rmd$
+^cran\-comments\.md$
 ^figure$
 ^data-raw$
 ^shiny$
