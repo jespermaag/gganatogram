@@ -18,6 +18,7 @@ Depends:
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
+LazyDataCompression: xz
 Imports:
     ggplot2,
     stats
