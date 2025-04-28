@@ -6,10 +6,10 @@ test_that("gganatogram",{
   # produces just an outline
   male_image <- gganatogram()
 
-  # male_image is a ggplot object and as such is a list of 9
+  # male_image is a ggplot object and as such is a list of 11
   expect_is(male_image,"ggplot")
   expect_equal(mode(male_image), "list")
-  expect_equal(length(male_image), 9)
+  expect_equal(length(male_image), 11)
   expect_equal(dim(male_image$data)[1], 1425)
   expect_equal(dim(male_image$data)[2], 6)
 
@@ -41,10 +41,10 @@ test_that("gganatogram",{
     sex='female',
     fill="colour")
 
-  # female_image is a ggplot object and as such is a list of 9
+  # female_image is a ggplot object and as such is a list of 11
   expect_is(female_image,"ggplot")
   expect_equal(mode(female_image), "list")
-  expect_equal(length(female_image), 9)
+  expect_equal(length(female_image), 11)
 
   # female_image should have some labels
   expect_equal(female_image$labels$x, "x")
@@ -75,10 +75,10 @@ test_that("gganatogram",{
     sex='male',
     fill="colour")
 
-  # male_image is a ggplot object and as such is a list of 9
+  # male_image is a ggplot object and as such is a list of 11
   expect_is(male_image,"ggplot")
   expect_equal(mode(male_image), "list")
-  expect_equal(length(male_image), 9)
+  expect_equal(length(male_image), 11)
 
   # male_image should have some labels
   expect_equal(male_image$labels$x, "x")

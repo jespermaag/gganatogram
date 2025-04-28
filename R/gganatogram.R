@@ -145,13 +145,13 @@ gganatogram <- function(
             p <- p + path_func(
                 data = outliner, aes(group = group),
                 colour = 'black',
-                size = 0.2)
+                linewidth = 0.2)
         } else {
             p <- p + path_func(
                 data = outliner, aes(group = group),
                 fill = fillOutline,
                 colour = 'black',
-                size = 0.2)
+                linewidth = 0.2)
         }
     }
 
@@ -188,7 +188,7 @@ gganatogram <- function(
                         aes(group = group),
                         fill = organColour,
                         colour = "black",
-                        size = 0.2
+                        linewidth = 0.2
                     )
 
             } else if (fill == 'value') {
@@ -197,7 +197,7 @@ gganatogram <- function(
                         data = dat,
                         ggplot2::aes(fill = value, group=group),
                         colour = "black",
-                        size = 0.2
+                        linewidth = 0.2
                     )
 
             } else {
@@ -205,10 +205,10 @@ gganatogram <- function(
                     p + path_func(
                         data = dat,
                         colour = "black",
-                        size = 0.2)
+                        linewidth = 0.2)
             }
-        } 
-        
+        }
+
     } else {
         # warning("No data to plot")
         return(p)
