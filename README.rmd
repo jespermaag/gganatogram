@@ -39,7 +39,9 @@ This package uses the tissue coordinates from the figure in Expression Atlas. [h
 [https://github.com/ebi-gene-expression-group/anatomogram](https://github.com/ebi-gene-expression-group/anatomogram)  <br/>
 
 ```{r, eval=TRUE, echo=FALSE, AllSpeciesCellPlotValueTop, fig.width = 8, fig.height = 8, dpi = 300}
-
+library(gganatogram)
+library(viridis)
+library(gridExtra)
 hgMale <- gganatogram(data=hgMale_key, fillOutline='#440154FF', organism='human', sex='male', fill="value") + theme_void() +  scale_fill_viridis()
 hgFemale <- gganatogram(data=hgFemale_key, fillOutline='#440154FF', organism='human', sex='female', fill="value") + theme_void() +  scale_fill_viridis()
 mmMale <- gganatogram(data=mmMale_key, fillOutline='#440154FF', organism='mouse', sex='male', fill="value") + theme_void() +  scale_fill_viridis()
@@ -54,7 +56,7 @@ p1 <- gganatogram(data=cell_key[['cell']], outline = T, fillOutline='steelblue',
 p2 <- gganatogram(data=cell_key[['cell']], outline = T, fillOutline='lightgray', organism="cell", fill="value")  +theme_void() + coord_fixed() +  scale_fill_viridis()
 
 grid.arrange(p1, p2, ncol=2)
- ```
+```
 
 
 
@@ -119,7 +121,7 @@ mmMale <- gganatogram(data=mmMale_key, fillOutline='#a6bddb', organism='mouse', 
 mmFemale <- gganatogram(data=mmFemale_key, outline = T, fillOutline='#a6bddb', organism='mouse', sex='female', fill="colour")  +theme_void()  
 
 grid.arrange(hgMale, hgFemale, mmMale, mmFemale, ncol=4)
- ```
+```
 
 ```{r, eval=TRUE, AllSpeciesPlotValue, fig.heigth = 6, dpi = 300}
 
@@ -130,7 +132,7 @@ mmMale <- gganatogram(data=mmMale_key, fillOutline='#440154FF', organism='mouse'
 mmFemale <- gganatogram(data=mmFemale_key, outline = T, fillOutline='#440154FF', organism='mouse', sex='female', fill="value")  +theme_void()   +  scale_fill_viridis()
 
 grid.arrange(hgMale, hgFemale, mmMale, mmFemale, ncol=2)
- ```
+```
 
 In order to use the function gganatogram, you need to have a data frame with
 organ, colour, and value if you want to.
@@ -143,12 +145,12 @@ organPlot <- data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver
  stringsAsFactors=F)
 
  head(organPlot)
- ```
+```
 
 Using the function gganatogram with the filling the organs based on colour.
 ```{r, eval=TRUE, organPlot, fig.width = 3, dpi = 100}
 gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="colour")
- ```
+```
 
 Of course, we can use the ggplot themes and functions to adjust the plots
 ```{r, eval=TRUE, organPlotvoid, fig.width = 3, dpi = 100}
@@ -161,7 +163,7 @@ We can also plot all tissues available using hgMale_key
 ```{r, eval=TRUE, organPlotAll, fig.width = 3, dpi = 100}
 hgMale_key$organ
 gganatogram(data=hgMale_key, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") +theme_void()
- ```
+```
 
 
 
@@ -171,7 +173,7 @@ organPlot %>%
     dplyr::filter(type %in% c('circulation', 'nervous system')) %>%
 gganatogram(outline=F, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + 
 theme_void()
- ```
+```
 
 
 We can fill the tissues based on the values given to each organ
@@ -179,7 +181,7 @@ We can fill the tissues based on the values given to each organ
 gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="value") + 
 theme_void() +
 scale_fill_gradient(low = "white", high = "red")
- ```
+```
 
  We can also use facet_wrap to compare groups.  
  First create add two data frames together with different values and the conditions in the type column
@@ -202,7 +204,7 @@ theme_void() +
 facet_wrap(~type) +
 scale_fill_gradient(low = "white", high = "red") 
 
- ```
+```
 
 You can also split the tissues into types while retaining the outline 
 ```{r, eval=TRUE, maleOrgans, fig.width = 10, fig.height = 8,dpi = 200}
@@ -210,14 +212,14 @@ gganatogram(data=hgMale_key, outline = T, fillOutline='#a6bddb', organism='human
 facet_wrap(~type, ncol=4) +
 theme_void()
 
- ```
+```
 
 ## Added female option
 All female tissues
 ```{r, eval=TRUE, female, fig.width = 3,  dpi = 200}
 hgFemale_key$organ
 gganatogram(data=hgFemale_key, outline = T, fillOutline='#a6bddb', organism='human', sex='female', fill="colour")  +theme_void()
- ```
+```
 
 You can also split the tissues into types while retaining the outline 
 ```{r, eval=TRUE, femaleOrgans, fig.width = 10, fig.height = 8, dpi = 200}
@@ -225,7 +227,7 @@ gganatogram(data=hgFemale_key, outline = T, fillOutline='#a6bddb', organism='hum
 facet_wrap(~type, ncol=4) +
 theme_void()
 
- ```
+```
 
 To display the female reproductive system with outline.
 ```{r, eval=TRUE, femaleRep, fig.width = 6,  dpi = 200}
@@ -235,7 +237,7 @@ hgFemale_key %>%
     theme_void()  +
     coord_cartesian(xlim = c(30, 75), ylim = c(-110, -80))
 
- ```
+```
 
 # Added  mouse
 
@@ -363,4 +365,25 @@ do.call(grid.arrange,  c(plotList[17:20], ncol=2))
 do.call(grid.arrange,  c(plotList[21:24], ncol=2))
 
 
+```
+
+# Added mouse brain
+```{r}
+mouse_brain_key <- data.frame(organ = names(gganatogram::other_list[['mus_musculus.brain']])[1:12], 
+          type = 'brain', 
+          colour = c("#7FC97F", "#BEAED4", "#FDC086", "#FFFF99", "#386CB0", "#F0027F", 
+                     "#BF5B17", "#666666", "#1B9E77", "#D95F02", "#7570B3", "#E7298A"),
+          value = rnorm(n =12, mean = 100, sd  =50))
+
+
+gganatogram(data=mouse_brain_key, outline = T, fillOutline='white', organism="mus_musculus.brain", sex='female', fill="colour") +
+  theme_void() 
+
+mouse_brain_key$type <- mouse_brain_key$organ
+
+
+
+gganatogram(data=mouse_brain_key, outline = T, fillOutline='white', organism="mus_musculus.brain", sex='female', fill="colour") +
+  theme_void() +
+  facet_wrap(~type)
 ```
