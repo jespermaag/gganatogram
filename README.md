@@ -1,17 +1,23 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-gganatogram
------------
 
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/jespermaag/gganatogram?branch=master&svg=true)](https://ci.appveyor.com/project/jespermaag/gganatogram) [![Travis build status](https://travis-ci.com/jespermaag/gganatogram.svg?branch=master)](https://travis-ci.com/jespermaag/gganatogram) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1477474.svg)](https://doi.org/10.5281/zenodo.1477474)
+## gganatogram
 
-Create anatogram images for different organisms. <br/> This package uses the tissue coordinates from the figure in Expression Atlas. <https://www.ebi.ac.uk/gxa/home> <br/> <https://github.com/ebi-gene-expression-group/anatomogram> <br/>
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/jespermaag/gganatogram?branch=master&svg=true)](https://ci.appveyor.com/project/jespermaag/gganatogram)
+[![Travis build
+status](https://travis-ci.com/jespermaag/gganatogram.svg?branch=master)](https://travis-ci.com/jespermaag/gganatogram)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1434233.svg)](https://doi.org/10.5281/zenodo.1434233)
+
+Create anatogram images for different organisms. <br/> This package uses
+the tissue coordinates from the figure in Expression Atlas.
+<https://www.ebi.ac.uk/gxa/home> <br/>
+<https://github.com/ebi-gene-expression-group/anatomogram> <br/>
 
 ![](figure/AllSpeciesCellPlotValueTop-1.svg)
 
 ![](figure/CellPlotValueTop-1.svg)
 
-Citation
---------
+## Citation
 
 #### Maag JLV. gganatogram: An R package for modular visualisation of anatograms and tissues based on ggplot2 \[version 1; referees: 1 approved\]. F1000Research 2018, 7:1576 (doi: 10.12688/f1000research.16409.1)
 
@@ -19,11 +25,12 @@ Citation
 
 ``` r
 citation("gganatogram")
+#> To cite package 'gganatogram' in publications use:
 #> 
-#> Maag J (2018). "gganatogram: An R package for modular
-#> visualisation of anatograms and tissues based on ggplot2."
-#> _f1000research_. Version 1: Awaiting peer review, <URL:
-#> https://f1000research.com/articles/7-1576/v1>.
+#>   Maag J (2018). "gganatogram: An R package for modular visualisation
+#>   of anatograms and tissues based on ggplot2." _f1000research_. Version
+#>   1: Awaiting peer review,
+#>   <https://f1000research.com/articles/7-1576/v1>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
@@ -37,12 +44,17 @@ citation("gganatogram")
 #>   }
 ```
 
-If you use the tissue plots from gganatogram please cite Expression Atlas as well. <br/> [Petryszak et al. 2015](https://academic.oup.com/nar/article/44/D1/D746/2502589) <br/> If you use the main cell figure, please cite The Protein Atlas. <br/> [Thul PJ et al. 2017](http://science.sciencemag.org/content/356/6340/eaal3321) <br/>
+If you use the tissue plots from gganatogram please cite Expression
+Atlas as well. <br/> [Petryszak et
+al. 2015](https://academic.oup.com/nar/article/44/D1/D746/2502589) <br/>
+If you use the main cell figure, please cite The Protein Atlas. <br/>
+[Thul PJ et
+al. 2017](http://science.sciencemag.org/content/356/6340/eaal3321) <br/>
 
-More plot examples can be found at <https://jespermaag.github.io/blog/2018/gganatogram/>
+More plot examples can be found at
+<https://jespermaag.github.io/blog/2018/gganatogram/>
 
-Install
--------
+## Install
 
 Install from github using devtools.
 
@@ -51,20 +63,24 @@ Install from github using devtools.
 devtools::install_github("jespermaag/gganatogram")
 ```
 
-shiny
------
+## shiny
 
-I have now included a shiny app for gganatogram. <br/> An online version can be found at shinapps.io. <br/> <https://jespermaag.shinyapps.io/gganatogram/> <br/> Unfortunately, there is a limit of 25h per month of app activity, so if you know R/Rstudio, please run it locally. <br/> To run it locally, use the following command.
+I have now included a shiny app for gganatogram. <br/> An online version
+can be found at shinapps.io. <br/>
+<https://jespermaag.shinyapps.io/gganatogram/> <br/> Unfortunately,
+there is a limit of 25h per month of app activity, so if you know
+R/Rstudio, please run it locally. <br/> To run it locally, use the
+following command.
 
 ``` r
 library(shiny)
 runGitHub( "gganatogram", "jespermaag",  subdir = "shiny") 
 ```
 
-Usage
------
+## Usage
 
-This package requires `ggplot2` and `ggpolypath` which loads when loading the package
+This package requires `ggplot2` and `ggpolypath` which loads when
+loading the package
 
 ``` r
 
@@ -98,7 +114,8 @@ grid.arrange(hgMale, hgFemale, mmMale, mmFemale, ncol=2)
 
 ![](figure/AllSpeciesPlotValue-1.svg)
 
-In order to use the function gganatogram, you need to have a data frame with organ, colour, and value if you want to.
+In order to use the function gganatogram, you need to have a data frame
+with organ, colour, and value if you want to.
 
 ``` r
 organPlot <- data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver", "stomach", "colon"), 
@@ -117,7 +134,8 @@ organPlot <- data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver
 #> 6   stomach      digestion orange     5
 ```
 
-Using the function gganatogram with the filling the organs based on colour.
+Using the function gganatogram with the filling the organs based on
+colour.
 
 ``` r
 gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="colour")
@@ -125,7 +143,8 @@ gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male',
 
 ![](figure/organPlot-1.svg)
 
-Of course, we can use the ggplot themes and functions to adjust the plots
+Of course, we can use the ggplot themes and functions to adjust the
+plots
 
 ``` r
 gganatogram(data=organPlot, fillOutline='#a6bddb', organism='human', sex='male', fill="colour") + 
@@ -134,7 +153,7 @@ theme_void()
 
 ![](figure/organPlotvoid-1.svg)
 
-We can also plot all tissues available using hgMale\_key
+We can also plot all tissues available using hgMale_key
 
 ``` r
 hgMale_key$organ
@@ -198,8 +217,9 @@ scale_fill_gradient(low = "white", high = "red")
 
 ![](figure/organPlotValue-1.svg)
 
-We can also use facet\_wrap to compare groups.
-First create add two data frames together with different values and the conditions in the type column
+We can also use facet_wrap to compare groups.  
+First create add two data frames together with different values and the
+conditions in the type column
 
 ``` r
 compareGroups <- rbind(data.frame(organ = c("heart", "leukocyte", "nerve", "brain", "liver", "stomach", "colon"), 
@@ -233,8 +253,7 @@ theme_void()
 
 ![](figure/maleOrgans-1.svg)
 
-Added female option
--------------------
+## Added female option
 
 All female tissues
 
@@ -302,11 +321,9 @@ hgFemale_key %>%
 
 ![](figure/femaleRep-1.svg)
 
-Added mouse
-===========
+# Added mouse
 
-Male
-----
+## Male
 
 ``` r
 mmMale_key$organ
@@ -345,8 +362,7 @@ gganatogram(data=mmMale_key, outline = T, fillOutline='#a6bddb', organism='mouse
 
 ![](figure/maleMouseOrgan-1.svg)
 
-Female
-------
+## Female
 
 ``` r
 mmFemale_key$organ
@@ -386,12 +402,14 @@ gganatogram(data=mmFemale_key, outline = T, fillOutline='#a6bddb', organism='mou
 
 ![](figure/femaleMouseOrgan-1.svg)
 
-Cellular structures
--------------------
+## Cellular structures
 
-I have now included cellular substructures, using the cell.svg from the Protein Atlas. If you use the main cell figure (hopefully more will be added), please cite [Thul PJ et al. 2017](http://science.sciencemag.org/content/356/6340/eaal3321) <br/>
+I have now included cellular substructures, using the cell.svg from the
+Protein Atlas. If you use the main cell figure (hopefully more will be
+added), please cite [Thul PJ et
+al. 2017](http://science.sciencemag.org/content/356/6340/eaal3321) <br/>
 
-The cellular data can be access using cell\_key
+The cellular data can be access using cell_key
 
 ``` r
 length(cell_key)
@@ -425,7 +443,10 @@ cell_key
 #> 48               plasma_membrane other   #B2DF8A 13.45657571
 ```
 
-To plot the whole cell with colours or values, use the following command. If you want to specify a background colour, you either have to remove the cytosol or change the colour of cytosol to the desired colour.
+To plot the whole cell with colours or values, use the following
+command. If you want to specify a background colour, you either have to
+remove the cytosol or change the colour of cytosol to the desired
+colour.
 
 ``` r
 gganatogram(data=cell_key[['cell']], outline = T, fillOutline='steelblue', organism="cell", fill="colour")  +theme_void()   + coord_fixed()
@@ -441,7 +462,8 @@ gganatogram(data=cell_key[['cell']], outline = T, fillOutline='lightgray', organ
 
 ![](figure/unnamed-chunk-10-2.svg)
 
-To see all the subsstructures individually, you can plot the data one at a time
+To see all the subsstructures individually, you can plot the data one at
+a time
 
 ``` r
 figureList <- list()
@@ -489,10 +511,20 @@ do.call(grid.arrange,  c(figureList[21:24], ncol=2))
 
 ![](figure/unnamed-chunk-11-6.svg)
 
-Other organisms i.e. tier 2 organisms
--------------------------------------
+## Other organisms i.e. tier 2 organisms
 
-Expression atlas contains other organisms than human and mice, however, these are not as well anotated. <br/> All the expression atlas anatograms can be found here <https://ebi-gene-expression-group.github.io/anatomogram/> <br/> Unfortunately, I won't be able to add other organs to these since I'm neither an anatomist nor artist. <br/> If anyone would like to add more organs, I would love for you to contribute. <br/> <br/> To create these plots, I have added two other objects other\_key and other\_list. <br/> These are lists within lists, and to plot all the organs from an organisms use other\_key\[\["organism"\]\] as data, and "organism" as organism. <br/> Also, the organ names are so far a mix of UBERON and plant ids.
+Expression atlas contains other organisms than human and mice, however,
+these are not as well anotated. <br/> All the expression atlas
+anatograms can be found here
+<https://ebi-gene-expression-group.github.io/anatomogram/> <br/>
+Unfortunately, I won’t be able to add other organs to these since I’m
+neither an anatomist nor artist. <br/> If anyone would like to add more
+organs, I would love for you to contribute. <br/> <br/> To create these
+plots, I have added two other objects other_key and other_list. <br/>
+These are lists within lists, and to plot all the organs from an
+organisms use other_key\[\[“organism”\]\] as data, and “organism” as
+organism. <br/> Also, the organ names are so far a mix of UBERON and
+plant ids.
 
 ``` r
 length(other_key)
@@ -524,7 +556,8 @@ names(other_key)
 #> [24] "zea_mays.whole_plant"
 ```
 
-To plot bos\_taurus use the following command. Unfortunately, I have not managed to add the correct names yet.
+To plot bos_taurus use the following command. Unfortunately, I have not
+managed to add the correct names yet.
 
 ``` r
 other_key[["bos_taurus"]]
@@ -556,7 +589,8 @@ gganatogram(data=other_key[["bos_taurus"]], outline = T, fillOutline='white', or
 
 ![](figure/bosTaurus-1.svg)
 
-Here is a way to loop through all the other organisms and plot their organs.
+Here is a way to loop through all the other organisms and plot their
+organs.
 
 ``` r
 library(gridExtra)
@@ -608,3 +642,32 @@ do.call(grid.arrange,  c(plotList[21:24], ncol=2))
 ```
 
 ![](figure/othersFirst12-6.svg)
+
+# Added mouse brain
+
+``` r
+mouse_brain_key <- data.frame(organ = names(gganatogram::other_list[['mus_musculus.brain']])[1:12], 
+          type = 'brain', 
+          colour = c("#7FC97F", "#BEAED4", "#FDC086", "#FFFF99", "#386CB0", "#F0027F", 
+                     "#BF5B17", "#666666", "#1B9E77", "#D95F02", "#7570B3", "#E7298A"),
+          value = rnorm(n =12, mean = 100, sd  =50))
+
+
+gganatogram(data=mouse_brain_key, outline = T, fillOutline='white', organism="mus_musculus.brain", sex='female', fill="colour") +
+  theme_void() 
+```
+
+![](figure/unnamed-chunk-13-1.svg)
+
+``` r
+
+mouse_brain_key$type <- mouse_brain_key$organ
+
+
+
+gganatogram(data=mouse_brain_key, outline = T, fillOutline='white', organism="mus_musculus.brain", sex='female', fill="colour") +
+  theme_void() +
+  facet_wrap(~type)
+```
+
+![](figure/unnamed-chunk-13-2.svg)
