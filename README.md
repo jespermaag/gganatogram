@@ -45,8 +45,8 @@ citation("gganatogram")
 ```
 
 If you use the tissue plots from gganatogram please cite Expression
-Atlas as well. <br/> [Petryszak et
-al. 2015](https://academic.oup.com/nar/article/44/D1/D746/2502589) <br/>
+Atlas as well. <br/> [Madrigal et
+al. 2026](https://academic.oup.com/nar/article/54/D1/D147/8376685) <br/>
 If you use the main cell figure, please cite The Protein Atlas. <br/>
 [Thul PJ et
 al. 2017](http://science.sciencemag.org/content/356/6340/eaal3321) <br/>
